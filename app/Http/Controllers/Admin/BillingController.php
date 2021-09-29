@@ -1,0 +1,150 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\billing;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Billings;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
+class BillingController extends Controller
+{
+
+    public function index()
+    {
+        //
+        $billingData = DB::table("billings")->get();
+        $subscribersData = DB::table("subscribers")->select('client_id', 'client_name')->get();
+
+        $timestamp = Carbon::now()->toDateString();
+        $year = Carbon::parse($timestamp)->year;
+        $month = Carbon::parse($timestamp)->month;
+
+        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
+        ->where('bill_month',"=",$month)
+        ->where('bill_year',"=",$year)
+        ->get();
+
+        $totalBilling = DB::table("billings")->select('bill_amount')->get();
+
+        $total_bill=0;
+
+        foreach ($totalBilling as $item) {
+            $total_bill=$total_bill+$item->bill_amount;
+        }
+
+        $total_this_month=0;
+        $paid_this_month=0;
+
+        foreach ($monthly_billing as $item) {
+
+            if($item->billing_status=="1")
+            {
+                $paid_this_month=$paid_this_month+$item->bill_amount;
+            }
+
+            $total_this_month=$total_this_month+$item->bill_amount;
+
+        }
+
+        return view('admin.billing', compact('billingData', 'subscribersData','total_bill','total_this_month','paid_this_month')); 
+    }
+
+    public function generate()
+    {
+        //
+        $timestamp = Carbon::now()->toDateString();
+        $year = Carbon::parse($timestamp)->year;
+        $month = Carbon::parse($timestamp)->month;
+
+        $subscriberData = DB::table("subscribers")->select('client_id', 'client_name')->get()->toArray();
+        $countSubscriber = DB::table("subscribers")->count();
+
+        if ($countSubscriber == 0) {
+            return redirect('admin/billing')->with('error', trans("অনুগ্রহ করে আগে গ্রাহক যোগ করুন।"));
+        } else {
+            foreach ($subscriberData as $item) {
+
+                $clientCount = DB::table("billings")
+                    ->where('client_id', "=", $item->client_id)
+                    ->where('bill_month', '=', $month)
+                    ->where('bill_year', '=', $year)
+                    ->count();
+
+                $bill = "150";
+
+                if ($clientCount === 0) {
+
+                    $subscriber = Billings::create([
+                        'client_id' => $item->client_id,
+                        'client_name' => $item->client_name,
+                        'bill_month' => $month,
+                        'bill_year' => $year,
+                        'bill_amount' => $bill,
+                        'billing_status' => false,
+                    ]);
+                }
+            }
+
+            return redirect('admin/billing')->with('success', trans("বিল জেনারেট সম্পন্ন হয়েছে।"));
+        }
+    }
+
+    public function update(Request $request)
+    {
+        //
+        $updated_by = auth()->user()->first_name . " " . auth()->user()->last_name;
+
+        $billing_status = $request->billing_status;
+        $updated_by = $updated_by;
+
+        $timestamp = Carbon::now()->toDateString();
+        $year = Carbon::parse($timestamp)->year;
+        $month = Carbon::parse($timestamp)->month;
+
+        $checkBill = DB::table("billings")
+            ->select('billing_status')
+            ->where('client_id', "=", $request->client_id)
+            ->where('bill_month', '=', $month)
+            ->where('bill_year', '=', $year)
+            ->first();
+
+        if ($checkBill->billing_status == "1") {
+            return redirect('admin/billing')->with('success', trans("বিল পুর্বেই আপডেট করা হয়েছে"));
+        } else {
+
+            $affectedRow = Billings::where('client_id', $request->client_id)
+                ->update(['billing_status' => $billing_status, "billing_date" => $timestamp, "updated_by" => $updated_by]);
+
+            if ($affectedRow == 1) {
+                return redirect('admin/billing')->with('success', trans("বিল আইডেট সম্পুর্ন হয়েছে"));
+            }
+        }
+
+
+        // //return response()->json($request->client_id,$request->billing_status);
+        // return response()->json(['Client_id'=>$request->client_id,"billing_status"=>$request->billing_status]);
+
+    }
+
+    public function show(billing $billing)
+    {
+        //
+    }
+
+    public function edit(billing $billing)
+    {
+        //
+    }
+
+    public function destroy(billing $billing)
+    {
+        //
+    }
+
+    public function getMonthName($month)
+    {
+    }
+}
