@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         date_default_timezone_set('Asia/Dhaka');
+        Builder::defaultStringLength(191);
     }
 }
