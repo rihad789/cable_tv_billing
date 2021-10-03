@@ -55,14 +55,14 @@
                             <td>  </td>
                                 @isset($memoData)
 
-                                <td>মোট পন্যের সংখ্যা</td>
-                                <td> {{ $memoData }} টি</td>
+                                <td class="font-weight-bold">মোট পন্যের সংখ্যা</td>
+                                <td class="font-weight-bold"> {{ $memoData }} টি</td>
 
                                 @endisset
 
                                 @isset($total_amount)
-                                <td>সর্বমোট মূল্য</td>
-                                <td> {{ $total_amount }} টাকা</td>
+                                <td class="font-weight-bold">সর্বমোট মূল্য</td>
+                                <td class="font-weight-bold"> {{ $total_amount }} টাকা</td>
 
                                 @endisset
 
