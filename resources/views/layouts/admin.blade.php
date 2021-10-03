@@ -21,11 +21,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-
 
     @yield('styles')
 </head>
@@ -36,11 +31,7 @@
 
         <nav id="sidebar" class="active">
             <div class="sidebar-header bg-lightblue">
-                <div class="logo">
-                    <a href="{{ url('admin') }}" class="simple-text">
-                        <img src="{{ asset('images/img/logo.png') }}">
-                    </a>
-                </div>
+
             </div>
 
             <ul class="list-unstyled components">
@@ -61,14 +52,22 @@
                 <li class="">
                     <a href="{{ url('admin/subscriber') }}">
                         <i class="ui address book icon"></i>
-                        <p>{{ __('গ্রাহক') }}</p>
+                        <p>{{ __('গ্রাহক লিষ্ট') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/billing') }}">
-                        <i class="money bill alternate outline icon"></i>
-                        <p>{{ __('বিলিং') }}</p>
+                        <i class="dollar sign icon"></i>
+                        <p>{{ __('ডিস বিলিং') }}</p>
+                    </a>
+                </li>
+
+                
+                <li class="">
+                    <a href="{{ url('admin/memo') }}">
+                        <i class="shopping basket icon"></i>
+                        <p>{{ __('কেনাকাটা') }}</p>
                     </a>
                 </li>
 

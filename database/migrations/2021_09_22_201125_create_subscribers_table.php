@@ -18,13 +18,14 @@ class CreateSubscribersTable extends Migration
             $table->string('client_id');
             $table->string('client_name');
             $table->string('client_father');
-            $table->string('area');
-            $table->string('vicinity');
+            $table->integer('area');
+            $table->integer('vicinity');
             $table->string('address');
             $table->string('initialization_date');
             $table->string('disconnection_date')->nullable();
             $table->string('mobile_no');
-            $table->string('locked_fund');
+            $table->integer('bill_amount');
+            $table->integer('locked_fund');
             $table->boolean('connection_status')->default(true);
             $table->timestamps();
         });

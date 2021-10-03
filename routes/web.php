@@ -46,15 +46,16 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('admin/subscriber', 'App\Http\Controllers\Admin\SubscriberController@index')->name('subscriber');
     Route::post('admin/subscriber/store', 'App\Http\Controllers\Admin\SubscriberController@store')->name('add_subscriber');
     Route::get('admin/subscriber/getVicinity/{id}', 'App\Http\Controllers\Admin\SubscriberController@getVicinity')->name('getVicinity');
+    Route::get('admin/subscriber/view/{id}', 'App\Http\Controllers\Admin\SubscriberController@view')->name('view');
 
 
     Route::get('admin/billing', 'App\Http\Controllers\Admin\BillingController@index')->name('billing');
     Route::get('admin/billing/generate', 'App\Http\Controllers\Admin\BillingController@generate')->name('generate');
     Route::post('admin/billing/update', 'App\Http\Controllers\Admin\BillingController@update')->name('update');
 
-    Route::get('admin/account', 'App\Http\Controllers\Admin\AccountController@index')->name('account');
-    Route::post('admin/account/store', 'App\Http\Controllers\Admin\AccountController@store')->name('store');
-    Route::get('admin/account/view/{id}', 'App\Http\Controllers\Admin\AccountController@view')->name('view');
+    Route::get('admin/memo', 'App\Http\Controllers\Admin\MemoController@index')->name('account');
+    Route::post('admin/memo/store', 'App\Http\Controllers\Admin\MemoController@store')->name('store');
+    Route::get('admin/memo/view/{id}', 'App\Http\Controllers\Admin\MemoController@view')->name('view');
 
     Route::get('admin/settings', 'App\Http\Controllers\Admin\SettingsController@index')->name('settings');
 

@@ -21,6 +21,7 @@ class Subscriber extends Model
         'address',
         'initialization_date',
         'mobile_no',
+        'bill_amount',
         'locked_fund',
         'connection_status'
     ];

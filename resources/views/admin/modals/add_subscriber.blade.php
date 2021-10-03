@@ -71,12 +71,12 @@
 
                 <div class="field">
                     <label>জামানত( ইংরেজিতে )</label>
-                    <input type="number" name="locked_fund" class="form-control" id="locked_fund" placeholder="জামানত">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="locked_fund" class="form-control" id="locked_fund" placeholder="জামানত">
                 </div>
 
                 <div class="field">
                     <label>বিলের পরিমান ( ইংরেজিতে )</label>
-                    <input type="number" name="bill_amount" class="form-control" id="bill_amount" placeholder="বিলের পরিমান">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="bill_amount" class="form-control" id="bill_amount" placeholder="বিলের পরিমান">
                 </div>
 
             </div>

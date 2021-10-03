@@ -7,11 +7,15 @@
             <div class="field">
                     <label for="">গ্রাহকের আইডি</label>
                     <input name="client_id" id="client_id" list="clients" autocomplete="off" placeholder="গ্রাহকের আইডি">
-                    <div list="clients">
-                        @foreach ($subscribersData as $val)
-                        <span>{{ $val->client_id }}</span>
-                        @endforeach
-                    </div>
+
+                    <datalist  id="clients">
+
+                    @foreach ($subscribersData as $val)
+                        <option value="{{ $val->client_id }}">
+                    @endforeach
+                
+                   </datalist> 
+
             </div>
 
             <div class="field">

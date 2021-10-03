@@ -73,6 +73,8 @@ class BillingController extends Controller
                     ->where('bill_year', '=', $year)
                     ->count();
 
+                $billAmount=DB::table("subscribers")->select("subscribers.bill_amount")->where('client_id', "=", $item->client_id) ->first();
+
                 $bill = "150";
 
                 if ($clientCount === 0) {
@@ -82,7 +84,7 @@ class BillingController extends Controller
                         'client_name' => $item->client_name,
                         'bill_month' => $month,
                         'bill_year' => $year,
-                        'bill_amount' => $bill,
+                        'bill_amount' => $billAmount->bill_amount,
                         'billing_status' => false,
                     ]);
                 }

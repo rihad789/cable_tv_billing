@@ -48,15 +48,14 @@
                                 <td>{{ $val->client_name }}</td>
                                 <td>{{ $val->initialization_date }}</td>
                                 <td>{{ $val->mobile_no }}</td>
+                                
                                 @if($val->connection_status=="1")
-                                <td class="text-primary">Active</td>
+                                <td class="text-primary">সংযোগ চালু আছে</td>
                                 @elseif($val->connection_status=="0")
-                                <td class="text-danger">Disabled</td>
+                                <td class="text-danger">সংযোগ বন্ধ আছে</td>
                                 @endif
                                 <td class="align-right">
-                                    <a href="{{ url('/admin/subscriber/view'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
-                                    <a href="{{ url('admin/subscriber/delete/'.$val->client_id) }}" onclick="return confirm('Are you sure you want to delete the user? It will revoke the user access')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                    <a href="{{ url('admin/subscriber/delete/'.$val->client_id) }}" onclick="return confirm('আপনি কি সত্যিই কল করতে চাচ্ছেন?')" class="ui circular basic icon button tiny"><i class="phone icon"></i></a>
+                                    <a href="{{ url('/admin/subscriber/view/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
                                 </td>
 
                             </tr>
@@ -79,9 +78,6 @@
 
 <script>
     $(document).ready(function() {
-
- 
- 
 
         $('#dataTables-example').DataTable({
         responsive: true,
