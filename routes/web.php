@@ -47,8 +47,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('admin/subscriber/store', 'App\Http\Controllers\Admin\SubscriberController@store')->name('add_subscriber');
     Route::get('admin/subscriber/getVicinity/{id}', 'App\Http\Controllers\Admin\SubscriberController@getVicinity')->name('getVicinity');
     Route::get('admin/subscriber/view/{id}', 'App\Http\Controllers\Admin\SubscriberController@view')->name('view');
+    Route::get('admin/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Admin\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
 
-
+  
     Route::get('admin/billing', 'App\Http\Controllers\Admin\BillingController@index')->name('billing');
     Route::get('admin/billing/generate', 'App\Http\Controllers\Admin\BillingController@generate')->name('generate');
     Route::post('admin/billing/update', 'App\Http\Controllers\Admin\BillingController@update')->name('update');

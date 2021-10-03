@@ -59,7 +59,7 @@ class BillingController extends Controller
         $year = Carbon::parse($timestamp)->year;
         $month = Carbon::parse($timestamp)->month;
 
-        $subscriberData = DB::table("subscribers")->select('client_id', 'client_name')->get()->toArray();
+        $subscriberData = DB::table("subscribers")->select('client_id', 'client_name')->where('connection_status','=',1)->get()->toArray();
         $countSubscriber = DB::table("subscribers")->count();
 
         if ($countSubscriber == 0) {
@@ -131,22 +131,4 @@ class BillingController extends Controller
 
     }
 
-    public function show(billing $billing)
-    {
-        //
-    }
-
-    public function edit(billing $billing)
-    {
-        //
-    }
-
-    public function destroy(billing $billing)
-    {
-        //
-    }
-
-    public function getMonthName($month)
-    {
-    }
 }

@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Billings;
+use Carbon\Carbon;
 
 class SubscriberController extends Controller
 {
@@ -53,18 +55,58 @@ class SubscriberController extends Controller
         subscribers.locked_fund,subscribers.connection_status,areas.area_name,vicinities.vicinity_name from subscribers 
         INNER JOIN areas on subscribers.area=areas.id INNER JOIN vicinities on subscribers.vicinity=vicinities.id LIMIT 1"));
 
-        $totalBilling = DB::table("billings")->select('bill_amount')->where('client_id','=',$id)->where('billing_status','=',0)->get();
+        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
 
         $total_bill=0;
 
-        foreach ($totalBilling as $item) {
+        foreach ($billingData as $item) {
             $total_bill=$total_bill+$item->bill_amount;
         }
 
-        $billingData = DB::table("billings")->where('client_id',"=",$id)->get();
+        //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
         
         return view('admin.view.view_subscriber',compact('subscriberData','billingData','total_bill'));
         //return response()->json(['Successfully posted.ID: '=>$subscriberData]);
+    }
+
+
+    public function cut_lock_fund($id)
+    {
+
+        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
+
+        $total_bill=0;
+
+        foreach ($billingData as $item) {
+            $total_bill=$total_bill+$item->bill_amount;
+        }
+
+        $subscriberData = DB::table("subscribers")->select('locked_fund')->where('client_id','=',$id) ->first();
+
+        $locked_fund=$subscriberData->locked_fund;
+
+        $final_amount=$locked_fund-$total_bill;
+
+        if($final_amount>0)
+        {
+            $updated_by = auth()->user()->first_name . " " . auth()->user()->last_name;
+            $timestamp = Carbon::now()->toDateString();
+
+            $affectedRow = DB::table("billings")
+            ->where('client_id','=',$id)
+            ->where('billing_status','=',0)
+            ->update(['billing_status' => 1, "billing_date" => $timestamp, "updated_by" => $updated_by]);
+
+            $affectedRow2 = DB::table("subscribers")->where('client_id','=',$id)->update(['connection_status' => 0]);
+                return redirect('/admin/subscriber/view/'.$id)->with('success', trans("বাকী বিল জামানত থেকে কাটা হয়েছে।"));
+            
+        
+        }
+        else
+        {
+            return redirect('/admin/subscriber/view/'.$id)->with('success', trans("বাকী বিল জামানত এর পরিমান থেকে কম।।"));
+        }
+
     }
 
     /**
