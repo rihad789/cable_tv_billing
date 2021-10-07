@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $year=Carbon::parse($timestamp)->year;
         $month=Carbon::parse($timestamp)->month;
 
-        if($month.strlen(1)) {  $month="0".$month; }
+        //if($month.strlen(1)) {  $month="0".$month; }
 
         $dateTime=$year."-".$month;
 
@@ -72,7 +72,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard',compact('subTotal','subToday','subMonth','subYear','total_bill','total_this_month','paid_this_month','due_this_month'));
 
-        //return response()->json(['Response:'=>$total_this_month.$paid_this_month.$due_this_month]);
+        //return response()->json(['Response:'=>$total_this_month.$paid_this_month.$due_this_month.','.$month]);
     }
 
 
