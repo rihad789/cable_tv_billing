@@ -8,7 +8,7 @@
 
                 <div class="field">
                     <label>গ্রাহকের কার্ড নং</label>
-                    <input type="text" name="client_id" class="form-control" id="client_id" placeholder="গ্রাহকের কার্ড নং">
+                    <input type="text" name="client_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="client_id" placeholder="গ্রাহকের কার্ড নং">
                 </div>
 
                 <div class="field">
@@ -66,7 +66,7 @@
 
                 <div class="field">
                     <label>মোবাইল নং( ইংরেজিতে )</label>
-                    <input type="tel" pattern="[0-9]{11}" name="mobile_no" class="form-control" id="mobile_no" placeholder="01952-820194">
+                    <input type="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern="[0-9]{11}" name="mobile_no" class="form-control" id="mobile_no" placeholder="01952-820194">
                 </div>
 
                 <div class="field">

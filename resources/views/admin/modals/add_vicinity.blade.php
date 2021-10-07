@@ -20,7 +20,7 @@
 
             <div class="field">
                 <label>পাড়ার নাম</label>
-                <input type="text" name="vicinity_name" class="block mt-1 w-full" id="vicinity_name" placeholder="গ্রাহকের নাম">
+                <input type="text" name="vicinity_name" class="block mt-1 w-full" id="vicinity_name" placeholder="পাড়ার নাম">
             </div>
 
             <div class="field">

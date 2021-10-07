@@ -7,7 +7,6 @@
 
 @section('content')
 
-
 <div class="container-fluid">
 
         <div class="row">
@@ -21,7 +20,7 @@
                                 <div class="box-content">
 
                                         <p class="lead">&nbsp;&nbsp;গ্রাহক সংখ্যা</p>
-<hr>
+                                        <hr>
 
                                         <table width="100%" class="table table-bordered" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
 
@@ -29,32 +28,25 @@
                                                         <tr>
                                                                 <th>{{ __("নাম") }}</th>
                                                                 <th>{{ __("সংখ্যা") }}</th>
-
                                                         </tr>
                                                 </thead>
 
                                                 <tbody>
-
                                                         <tr>
-
                                                                 <td>মোট</td>
-                                                                <td>100 টি</td>
-
+                                                                <td>{{$subTotal}} টি</td>
                                                         </tr>
                                                         <tr>
                                                                 <td>এইবছর</td>
-                                                                <td>53 টি</td>
-
+                                                                <td>{{$subYear}} টি</td>
                                                         </tr>
                                                         <tr>
                                                                 <td>এই মাসে</td>
-                                                                <td>07 টি</td>
-
+                                                                <td>{{$subMonth}} টি</td>
                                                         </tr>
                                                         <tr>
                                                                 <td>নতুন কানেকশন</td>
-                                                                <td>03 টি</td>
-
+                                                                <td>{{$subToday}} টি</td>
                                                         </tr>
                                                 </tbody>
                                         </table>
@@ -70,8 +62,8 @@
 
                                 <div class="box-content">
 
-                                <p class="lead">&nbsp;&nbsp;কোম্পানির খাতা</p>
-<hr>
+                                        <p class="lead">&nbsp;&nbsp;কোম্পানির খাতা</p>
+                                        <hr>
 
                                         <table width="100%" class="table table-bordered" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
 
@@ -127,8 +119,8 @@
 
                                 <div class="box-content">
 
-                                <p class="lead">&nbsp;&nbsp;বিলের পরিমান</p>
-<hr>
+                                        <p class="lead">&nbsp;&nbsp;বিলের পরিমান</p>
+                                        <hr>
 
                                         <table width="100%" class="table table-bordered" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
 
@@ -143,16 +135,25 @@
                                                 <tbody>
 
                                                         <tr>
+                                                                <td>মোট বিল</td>
+                                                                <td>{{$total_bill}} টাকা</td>
+                                                        </tr>
 
-                                                                <td>মোট</td>
-                                                                <td>১০০০ টাকা</td>
-
+                                                        <tr>
+                                                                <td>চলতি মাসে মোট বিল</td>
+                                                                <td>{{$total_this_month}} টাকা</td>
                                                         </tr>
                                                         <tr>
-                                                                <td>এই মাসে বাকী</td>
-                                                                <td>53 টাকা</td>
-
+                                                                <td>চলতি মাসে জমা বিল</td>
+                                                                <td>{{$paid_this_month}} টাকা</td>
                                                         </tr>
+
+                                                        <tr>
+                                                                <td>চলতি মাসে বাকী বিল</td>
+                                                                <td>{{$due_this_month}} টাকা</td>
+                                                        </tr>
+
+
                                                 </tbody>
                                         </table>
                                 </div>

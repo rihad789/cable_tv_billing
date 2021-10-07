@@ -23,12 +23,14 @@ class SubscriberController extends Controller
         $areasData = DB::table("areas")->select('area_name')->where('id','=',$request->area) ->first();
         $vicinityData = DB::table("vicinities")->select('vicinity_name') ->where('id','=',$request->vicinity) ->first();
 
-        $addressData= $request->address.' , '.$areasData->area_name.' , '.$vicinityData->vicinity_name;
+        $addressData= $request->address.' , '.$vicinityData->vicinity_name.' , '.$areasData->area_name;
         $subscriber = Subscriber::create([
 
             'client_id' => $request->client_id,
             'client_name' => $request->client_name,
             'client_father' => $request->client_father,
+            'area' => $request->area,
+            'vicinity' => $request->vicinity,
             'address' => $addressData,
             'initialization_date' => $request->initialization_date,
             'mobile_no' => $request->mobile_no,
@@ -75,6 +77,7 @@ class SubscriberController extends Controller
         //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
     }
 
+    
 
     public function cut_lock_fund($id)
     {
