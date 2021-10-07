@@ -12,10 +12,8 @@ class Settings extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'sett_id',
         'website_name',
         'logo_url',
-        'dish_bill',
     ];
 }
 

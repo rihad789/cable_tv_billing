@@ -19,14 +19,17 @@ class SubscriberController extends Controller
     public function store(Request $request)
     {
         //
+
+        $areasData = DB::table("areas")->select('area_name')->where('id','=',$request->area) ->first();
+        $vicinityData = DB::table("vicinities")->select('vicinity_name') ->where('id','=',$request->vicinity) ->first();
+
+        $addressData= $request->address.' , '.$areasData->area_name.' , '.$vicinityData->vicinity_name;
         $subscriber = Subscriber::create([
 
             'client_id' => $request->client_id,
             'client_name' => $request->client_name,
             'client_father' => $request->client_father,
-            'area' => $request->area,
-            'vicinity' => $request->vicinity,
-            'address' => $request->address,
+            'address' => $addressData,
             'initialization_date' => $request->initialization_date,
             'mobile_no' => $request->mobile_no,
             'bill_amount' =>$request->bill_amount,
@@ -49,24 +52,27 @@ class SubscriberController extends Controller
     public function view($id)
     {
         //
-        //$subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->get();
-        $subscriberData=DB::select(DB::raw("select subscribers.id,subscribers.client_id,subscribers.client_name,subscribers.client_father,
-        subscribers.address,subscribers.initialization_date,subscribers.disconnection_date,subscribers.mobile_no,subscribers.bill_amount,
-        subscribers.locked_fund,subscribers.connection_status,areas.area_name,vicinities.vicinity_name from subscribers 
-        INNER JOIN areas on subscribers.area=areas.id INNER JOIN vicinities on subscribers.vicinity=vicinities.id LIMIT 1"));
+        $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->get();
+        
+        $status = DB::table("subscribers")->select('connection_status')->where('client_id','=',$id) ->first();
 
         $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
 
         $total_bill=0;
+        $due_bill=0;
 
         foreach ($billingData as $item) {
             $total_bill=$total_bill+$item->bill_amount;
+            $due_bill = $due_bill + 1;
         }
+
+        $connection_status=$status->connection_status;
+
 
         //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
         
-        return view('admin.view.view_subscriber',compact('subscriberData','billingData','total_bill'));
-        //return response()->json(['Successfully posted.ID: '=>$subscriberData]);
+        return view('admin.view.view_subscriber',compact('subscriberData','billingData','total_bill','due_bill','connection_status'));
+        //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
     }
 
 

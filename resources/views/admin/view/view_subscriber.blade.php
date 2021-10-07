@@ -49,7 +49,7 @@
 
                             <tr>
                                 <td>ঠিকানা</td>
-                                <td>@isset($val->address){{ $val->address }}@endisset , @isset($val->vicinity_name){{ $val->vicinity_name }}@endisset , @isset($val->area_name){{ $val->area_name }}@endisset</td>
+                                <td>@isset($val->address){{ $val->address }}@endisset</td>
                             </tr>
 
                             <tr>
@@ -103,6 +103,8 @@
 
                     </table>
 
+                    @endforeach
+                    @endisset
 
 
                 </div>
@@ -120,8 +122,8 @@
 
                     <p class="lead">&nbsp;&nbsp;বিলিং খাতা
 
-                    @isset($val->connection_status)
-                    @if($val->connection_status==1)
+
+                    @if($connection_status==1 && $due_bill >=3 )
                         
                         <button onclick="location.href='/admin/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-primary float-right"><i class="dollar sign icon"></i>বাকী জামানত থেকে কাটুন</button>
                         </p>
@@ -132,10 +134,9 @@
                         </p>
                     
                     @endif
-                    @endisset
 
-                    @endforeach
-                    @endisset
+
+
                     <hr>
                     <table class="table table-bordered">
                         <tr class="text-center">

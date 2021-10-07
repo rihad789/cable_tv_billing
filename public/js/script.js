@@ -82,13 +82,29 @@ $(window).resize(function () {
     }
 });
 
+$('#sidebar').toggleClass('active');
+$('#body').toggleClass('active');
+
+
 /*
  * Toggle sidebar on Menu button click
  */
 $('#slidesidebar').on('click', function () {
-    $('#sidebar').toggleClass('active');
-    $('#body').toggleClass('active');
+
+    if ($(window).width() <= 768) {
+        $('#sidebar').toggleClass('active');
+        $('#body').toggleClass('active');
+    }
+    else
+    {
+        $('#sidebar').toggleClass('active');
+        $('#body').toggleClass('active');
+    }
+
+
 });
+
+
 
 /*
  * Hide form message

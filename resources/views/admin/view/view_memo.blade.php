@@ -52,9 +52,9 @@
 
                             <tr>
 
-                            <td>  </td>
+                             
                                 @isset($memoData)
-
+                                <td>{{ $serial++}}</td>
                                 <td class="font-weight-bold">মোট পন্যের সংখ্যা</td>
                                 <td class="font-weight-bold"> {{ $memoData }} টি</td>
 
@@ -65,7 +65,7 @@
                                 <td class="font-weight-bold"> {{ $total_amount }} টাকা</td>
 
                                 @endisset
-
+                                
                             </tr>
 
 
@@ -79,5 +79,19 @@
     </div>
 
 </div>
+
+@endsection
+
+
+@section('scripts')
+<script type="text/javascript">
+    $('#dataTables-example').DataTable({
+        responsive: true,
+        pageLength: 12,
+        lengthChange: false,
+    });
+
+
+</script>
 
 @endsection

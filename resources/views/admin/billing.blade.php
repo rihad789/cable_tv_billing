@@ -51,7 +51,7 @@
                                 <th>{{ __("বিল বছর") }}</th>
                                 <th>{{ __("বিলের পরিমান")}}</th>
                                 <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
-                                <th></th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -94,11 +94,6 @@
                                 @elseif($val->billing_status=="0")
                                 <td class="text-danger">বাকী </td>
                                 @endif
-                                <td class="align-right">
-                                    <a href="{{ url('/admin/subscriber/view'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
-                                    <a href="{{ url('admin/subscriber/delete/'.$val->client_id) }}" onclick="return confirm('Are you sure you want to delete the user? It will revoke the user access')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                    <a href="{{ url('admin/subscriber/delete/'.$val->client_id) }}" onclick="return confirm('আপনি কি সত্যিই কল করতে চাচ্ছেন?')" class="ui circular basic icon button tiny"><i class="phone icon"></i></a>
-                                </td>
 
                             </tr>
                             @endforeach

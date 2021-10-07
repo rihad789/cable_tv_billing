@@ -16,7 +16,7 @@ class BillingController extends Controller
     {
         //
         $billingData = DB::table("billings")->get();
-        $subscribersData = DB::table("subscribers")->select('client_id', 'client_name')->get();
+        $subscribersData = DB::table("subscribers")->select('client_id', 'client_name')->where('connection_status','=',1)->get();
 
         $timestamp = Carbon::now()->toDateString();
         $year = Carbon::parse($timestamp)->year;

@@ -30,9 +30,13 @@
     <div class="wrapper">
 
         <nav id="sidebar" class="active">
-            <div class="sidebar-header bg-lightblue">
-
-            </div>
+ 
+        <ul class="list-unstyled components">
+        <li class="">
+                        <h4 class="text-info text-center">{{ __('ডিঙ্গেদহ নেটওয়ার্ক') }}</h4>
+                </li>
+                <hr>
+        </ul>   
 
             <ul class="list-unstyled components">
                 <li class="">
@@ -110,6 +114,29 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto navmenu">
 
+                        <li class="nav-item">
+                                <div class="ui pointing link dropdown item" tabindex="0">
+                                    <i class="bell icon"></i> <span class="navmenutext">Notifications</span>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu" tabindex="-1" style="overflow-y:scroll;height:300px;">
+
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
+                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
+                                        <a href="{{ url('admin/fare') }}" class="item"><i class="money bill alternate outline icon"></i>{{ __('Fare') }}</a>
+
+                                    </div>
+                                </div>
+                            </li>
 
                             <li class="nav-item">
                                 <div class="ui pointing link dropdown item" tabindex="0">

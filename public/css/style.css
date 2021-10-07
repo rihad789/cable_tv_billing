@@ -164,6 +164,7 @@ a[data-toggle="collapse"] {
     display: block;
     font-weight: 200;
     border-right: 1px solid #e6ecf5;
+    box-shadow: black;
 }
 
 #body>.content {
@@ -189,7 +190,7 @@ a[data-toggle="collapse"] {
 }
 
 .navbar {
-    box-shadow: none
+    box-shadow: black;
 }
 
 .navbar,
