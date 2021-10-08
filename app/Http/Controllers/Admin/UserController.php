@@ -231,7 +231,7 @@ class UserController extends Controller
 
             if($userData->image_url==null)
             {
-                $image="images/img/Untitled-2.png";
+                $image="Untitled-2.png";
 
             }
             else
