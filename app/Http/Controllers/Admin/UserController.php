@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\UploadedFile;
 
 
 class UserController extends Controller
@@ -221,17 +222,65 @@ class UserController extends Controller
                 "users.district",
                 "users.thana",
                 "users.street",
-                "users.postal_code"
+                "users.postal_code", 
+                "image_url"
             )
             ->where("id", "=", $id)
             ->first();
 
-        return view('admin.view.view_user', compact('userData'));
 
+            if($userData->image_url==null)
+            {
+                $image="images/img/Untitled-2.png";
+
+            }
+            else
+            {
+                $image=$userData->image_url;
+            }
+
+        return view('admin.view.view_user', compact('userData','image'))->with('message');
 
         //return response()->json(['userData'=>$userData]);
     }
 
+    public function upload_image(Request $request)
+    {
+
+
+        //$imageName = $request->image;  
+
+        $image_url = DB::table("users")->select('phone')->where("id", "=", $request->id) ->first();
+
+        $imageName = $image_url->phone.'.'.$request->image->getClientOriginalExtension();
+
+
+        if(file_exists(public_path('images/img/.$imageName'))){
+
+            unlink(public_path('images/img/.$imageName'));
+
+            $request->image->move(public_path('images/img'), $imageName);
+      
+          }else{
+      
+            $request->image->move(public_path('images/img'), $imageName);
+      
+          }
+
+    
+        //$request->image->move(public_path('images/img'), $imageName);
+
+        /* Store $imageName name in DATABASE from HERE */
+
+        $affectedRow = DB::update("UPDATE users SET image_url = '$imageName' WHERE id= '$request->id'");
+
+        if ($affectedRow == 1) {
+            return redirect('admin/users/view/'.$request->id)->with('success', trans("Profile Image Updated Successfully!"));
+        } 
+
+       // return response()->json(['Response'=>$affectedRow]);
+
+    }
 
     public function update_users(Request $request)
     {
@@ -258,7 +307,7 @@ class UserController extends Controller
 
 
         if ($affectedRow == 1) {
-            return redirect('admin/users')->with('success', trans("Operator Profile Updated Successfully!"));
+            return redirect('admin/users/view/'.$id)->with('success', trans("Operator Profile Updated Successfully!"));
         } else {
             return back()->with('error', trans("Profile is Already Updated!"));
         }

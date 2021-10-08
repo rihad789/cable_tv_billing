@@ -16,7 +16,7 @@ class CreateMemosTable extends Migration
         Schema::create('memos', function (Blueprint $table) {
             $table->id();
             $table->string('memo_no')->unique();
-            $table->string('buyer_name');
+            $table->integer('buyer_id');
             $table->integer('products_total');
             $table->integer('grand_amount');
             $table->string('creation_date');

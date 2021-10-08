@@ -1,7 +1,7 @@
 <div class="ui modal medium add">
     <div class="header">{{ __("নতুন সিস্টেম ব্যবহারকারী যোগ করুন") }}</div>
     <div class="content">
-        <form id="add_system_user_form" action="{{ url('admin/users/add') }}" class="ui form add-user" autocomplete="off" method="post" accept-charset="utf-8">
+        <form id="add_system_user_form" action="{{ url('admin/users/add') }}"  class="ui form add-user" autocomplete="off" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="two fields">

@@ -80,13 +80,15 @@ $(window).resize(function () {
     if ($(window).width() <= 768) {
         $('#sidebar, #body').addClass('active');
     }
+
 });
 
+$('#sidebar').toggleClass('active');
+$('#body').toggleClass('active');
 
 $(window).resize(function () {
     if ($(window).width() > 768) {
-        $('#sidebar').toggleClass('active');
-        $('#body').toggleClass('active');
+        $('#sidebar, #body').addClass('active');
     }
 });
 

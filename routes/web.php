@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('admin/users/view/{id}', 'App\Http\Controllers\Admin\UserController@view_users')->name('view_users');
     Route::post('admin/users/update', 'App\Http\Controllers\Admin\UserController@update_users')->name('edit_users');
     Route::get('admin/users/delete/{id}', 'App\Http\Controllers\Admin\UserController@delete_users')->name('delete_users');
+    Route::post('admin/users/upload_image', 'App\Http\Controllers\Admin\UserController@upload_image')->name('upload_image');
    
 });
 

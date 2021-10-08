@@ -14,7 +14,7 @@ class Memo extends Model
     protected $fillable = [
     
         'memo_no',
-        'buyer_name',
+        'buyer_id',
         'products_total',
         'grand_amount',
         'creation_date',

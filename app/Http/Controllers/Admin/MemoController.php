@@ -17,8 +17,9 @@ class MemoController extends Controller
     public function index()
     {
         //
-        $memoData=DB::table("memos") ->get();
-        return view('admin.memo',compact('memoData'));
+        $memoData=DB::select( DB::raw("select memos.memo_no,memos.products_total,memos.grand_amount,memos.creation_date,users.first_name,users.last_name from memos INNER JOIN users on memos.buyer_id=users.id;"));
+        $userData = DB::table("users")->select('id','first_name','last_name')->get();
+        return view('admin.memo',compact('memoData','userData'));
     }
 
     public function create()
@@ -43,7 +44,7 @@ class MemoController extends Controller
             $memo=Memo::create([
 
                 'memo_no' => $request->memo_no,
-                'buyer_name' => $request->buyer_name,
+                'buyer_id' => $request->buyer_id,
                 'products_total' => $request->products_total,
                 'grand_amount' => $request->grand_amount,
                 'creation_date' => $creation_date,

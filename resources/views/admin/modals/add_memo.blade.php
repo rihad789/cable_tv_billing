@@ -13,10 +13,23 @@
                     <input type="text" name="memo_no" class="form-control" id="memo_no" placeholder="মেমো নং" autocapitalize="off">
                 </div>
 
+
+
                 <div class="field">
-                    <label>ক্রেতার নাম</label>
-                    <input type="text" name="buyer_name" class="form-control" id="buyer_name" placeholder="ক্রেতার নাম" autocapitalize="off">
+                <div class="sixteen wide field role">
+                    <label for="">ক্রেতার নাম</label>
+                    <select id="buyer_id" class="ui dropdown uppercase required" name="buyer_id" required>
+                        <option value="">ক্রেতার নাম পছন্দ করুন</option>
+
+                        @foreach ($userData as $val)
+                        <option value={{ $val->id }}>{{ $val->first_name }} , {{ $val->last_name }}</option>
+                        @endforeach
+
+                    </select>
                 </div>
+            </div>
+
+
             </div>
 
             <div id="inputFormRow">

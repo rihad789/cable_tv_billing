@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $serial++}}</td>
                                 <td>{{ $val->memo_no }}</td>
-                                <td>{{ $val->buyer_name }}</td>
+                                <td>{{ $val->first_name }} , {{ $val->last_name }}</td> 
                                 <td>{{ $val->products_total }} টি</td>
                                 <td>{{ $val->grand_amount }} টাকা</td>
                                 <td>{{ $val->creation_date }} </td>
