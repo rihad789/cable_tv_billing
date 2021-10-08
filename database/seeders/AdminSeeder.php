@@ -21,10 +21,10 @@ class AdminSeeder extends Seeder
             'first_name' => "Admin",
             'last_name' => "Admin",
             'phone' => "01234567890",
-            'password' => Hash::make("admin"),
+            'password' => Hash::make("owner"),
         ]);
 
-        $user->attachRole("admin");
+        $user->attachRole("owner");
 
     }
 }
