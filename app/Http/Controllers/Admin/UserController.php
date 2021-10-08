@@ -237,9 +237,6 @@ class UserController extends Controller
     {
 
         $id = $request->id;
-
-        $email = $request->email;
-        $contact_email = $request->contact_email;
         $phone = $request->phone;
         $altphone = $request->altphone;
         $first_name = $request->first_name;
@@ -253,17 +250,9 @@ class UserController extends Controller
         $street = $request->street;
         $postal_code = $request->postal_code;
 
-        $pres_division = $request->pres_division;
-        $pres_district = $request->pres_district;
-        $pres_thana = $request->pres_thana;
-        $pres_postal_code = $request->pres_postal_code;
-        $pres_street = $request->pres_street;
-
-
-        $affectedRow = DB::update("UPDATE users SET email = '$email' , contact_email = '$contact_email', phone = '$phone', altphone = '$altphone', first_name = '$first_name',
+        $affectedRow = DB::update("UPDATE users SET phone = '$phone', altphone = '$altphone', first_name = '$first_name',
          last_name = '$last_name', gender = '$gender', civilstatus = '$civilstatus',division = '$division', district = '$district', thana = '$thana', 
-         street = '$street', postal_code = '$postal_code',pres_division = '$pres_division', pres_district = '$pres_district', pres_thana = '$pres_thana',
-         pres_postal_code = '$pres_postal_code', pres_street = '$pres_street' WHERE id= $id");
+         street = '$street', postal_code = '$postal_code' WHERE id= $id");
 
         //return response()->json(['contact_email' => $contact_email, 'phone' => $phone, 'altphone' => $altphone, 'first_name' => $first_name, 'last_name' => $last_name, 'gender' => $gender, 'civilstatus' => $civilstatus,'division' => $division, 'district' => $district, 'thana' => $thana, 'street' => $street, 'postal_code' => $postal_code,'pres_division' => $pres_division, 'pres_district' => $pres_district, 'pres_thana' => $pres_thana, 'pres_postal_code' => $pres_postal_code, 'pres_street' => $pres_street]);
 
