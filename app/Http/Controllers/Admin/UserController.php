@@ -6,6 +6,7 @@ use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -167,33 +168,36 @@ class UserController extends Controller
     public function users()
     {
 
-        $userEmail = Auth::user()->email;
+        $userEmail = Auth::user()->phone;
 
-        $user = DB::select(DB::raw("select users.id,users.email,users.first_name,users.last_name,roles.display_name from users 
-            INNER JOIN role_user on role_user.user_id=users.id INNER JOIN roles on roles.id=role_user.role_id where NOT users.email='$userEmail'"));
+        $user = DB::select(DB::raw("select users.id,users.phone,users.first_name,users.last_name,roles.display_name from users 
+            INNER JOIN role_user on role_user.user_id=users.id INNER JOIN roles on roles.id=role_user.role_id where NOT users.phone='$userEmail'"));
 
-        return view('admin.users', compact('user'));
+           
+        $role_id = DB::table("roles")->get();
+
+        return view('admin.users', compact('user','role_id'));
     }
 
 
     public function add_users(Request $request)
     {
 
-        $emailExixt = DB::table("users")
-            ->where("email", "=", $request->email)
+        $phoneExixt = DB::table("users")
+            ->where("phone", "=", $request->phone) 
             ->count();
 
-        if ($emailExixt >= 1) {
+        if ($phoneExixt >= 1) {
             return back()->with('error', trans("User already registered!"))->withInput();
         } else {
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'email' => $request->email,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password),
             ]);
 
-            $user->attachRole("operator");
+            $user->attachRole($request->role_id);
 
             return redirect('admin/users')->with('success', trans("User registered successfully!"));
         }
@@ -207,8 +211,6 @@ class UserController extends Controller
         $userData = DB::table("users")
             ->select(
                 "users.id",
-                "users.email",
-                "users.contact_email",
                 "users.phone",
                 "users.altphone",
                 "users.first_name",
@@ -219,12 +221,7 @@ class UserController extends Controller
                 "users.district",
                 "users.thana",
                 "users.street",
-                "users.postal_code",
-                "users.pres_division",
-                "users.pres_district",
-                "users.pres_thana",
-                "users.pres_street",
-                "users.pres_postal_code"
+                "users.postal_code"
             )
             ->where("id", "=", $id)
             ->first();

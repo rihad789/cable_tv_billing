@@ -19,13 +19,16 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('first_name');
             $table->string('last_name');
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
+            $table->string('altphone')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('civilstatus')->nullable();
             $table->string('division')->nullable();
             $table->string('district')->nullable();
             $table->string('thana')->nullable();
             $table->string('street')->nullable();
             $table->string('postal_code')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }

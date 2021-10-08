@@ -60,7 +60,21 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('admin/settings', 'App\Http\Controllers\Admin\SettingsController@index')->name('settings');
 
-    
+
+    //User Route
+    Route::get('admin/profile', 'App\Http\Controllers\Admin\UserController@admin_profile')->name('profile');
+    Route::post('admin/profile/update', 'App\Http\Controllers\Admin\UserController@admin_profile_update')->name('update_profile');
+
+    Route::get('admin/account', 'App\Http\Controllers\Admin\UserController@admin_account')->name('account');
+    Route::post('admin/account/update', 'App\Http\Controllers\Admin\UserController@update_admin_account')->name('update_account');
+    Route::post('admin/account/update_password', 'App\Http\Controllers\Admin\UserController@admin_update_password')->name('update_password');
+
+    //Users Route
+    Route::get('admin/users', 'App\Http\Controllers\Admin\UserController@users')->name('users');
+    Route::post('admin/users/add', 'App\Http\Controllers\Admin\UserController@add_users')->name('add_users');
+    Route::get('admin/users/view/{id}', 'App\Http\Controllers\Admin\UserController@view_users')->name('view_users');
+    Route::post('admin/users/update', 'App\Http\Controllers\Admin\UserController@update_users')->name('edit_users');
+    Route::get('admin/users/delete/{id}', 'App\Http\Controllers\Admin\UserController@delete_users')->name('delete_users');
    
 });
 

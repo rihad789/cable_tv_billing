@@ -11,13 +11,7 @@
 
 <div class="container-fluid">
 
-        <div class="row">
-                <h2 class="page-title">{{ __("Operator") }}
-                        <button class="ui positive button mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Add") }}</button>
-                </h2>
-        </div>
-
-        <div class="row">
+       <div class="row">
                 <div class="box box-success">
                         <div class="box-body">
                                 @if ($errors->any())
@@ -38,10 +32,10 @@
                                 <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                                         <thead class="thead-light">
                                                 <tr>
-                                                        <th>{{ __("Serial") }}</th>
-                                                        <th>{{ __("Name") }}</th>
-                                                        <th>{{ __("Email") }}</th>
-                                                        <th>{{ __("Role") }}</th>
+                                                        <th>{{ __("সিরিয়াল") }}</th>
+                                                        <th>{{ __("নাম") }}</th>
+                                                        <th>{{ __("ফোন নং") }}</th>
+                                                        <th>{{ __("ব্যবহারকারীর ধরন") }}</th>
                                                         <th></th>
                                                 </tr>
                                         </thead>
@@ -52,7 +46,7 @@
                                                 <tr>
                                                         <td>{{ $serial++ }}</td>
                                                         <td>{{ $val->first_name.",".$val->last_name }}</td>
-                                                        <td>{{ $val->email }}</td>
+                                                        <td>{{ $val->phone }}</td>
                                                         <td>{{ $val->display_name }}</td>
 
                                                         <td class="align-right">
@@ -89,32 +83,39 @@
 
         $('#add_system_user_form').form({
             fields: {
-                email: {
-                    identifier: 'email',
+                phone: {
+                    identifier: 'phone',
                     rules: [{
-                        type: 'email',
-                        prompt: 'Please Enter Login Email'
+                        type: 'empty',
+                        prompt: 'অনুগ্রহ করে ব্যবহারকারীর ফোন নং দিন'
                     }]
                 },
                 first_name: {
                     identifier: 'first_name',
                     rules: [{
                         type: 'empty',
-                        prompt: 'Please Enter First Name'
+                        prompt: 'অনুগ্রহ করে নামের প্রথম অংশ লিখুন'
                     }]
                 },
                 last_name: {
                     identifier: 'last_name',
                     rules: [{
                         type: 'empty',
-                        prompt: 'Please Enter Last Name'
+                        prompt: 'অনুগ্রহ করে নামের শেষাংশ লিখুন'
+                    }]
+                },
+                role_id: {
+                    identifier: 'role_id',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'অনুগ্রহ করে ব্যবহারকারীর ধরন পছন্দ করুন'
                     }]
                 },
                 password: {
                     identifier: 'password',
                     rules: [{
                         type: 'empty',
-                        prompt: 'Please Enter Password'
+                        prompt: 'অনুগ্রহ করে পাসওয়ার্ড লিখুন'
                     }]
                 }
             }

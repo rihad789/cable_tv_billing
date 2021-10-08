@@ -56,14 +56,14 @@
                 <li class="">
                     <a href="{{ url('admin/subscriber') }}">
                         <i class="ui address book icon"></i>
-                        <p>{{ __('গ্রাহক লিষ্ট') }}</p>
+                        <p>{{ __('গ্রাহক তালিকা') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/billing') }}">
                         <i class="dollar sign icon"></i>
-                        <p>{{ __('ডিস বিলিং') }}</p>
+                        <p>{{ __('ডিশ বিলিং') }}</p>
                     </a>
                 </li>
 
@@ -79,6 +79,13 @@
                     <a href="{{ url('admin/account') }}">
                         <i class="ui calculator icon"></i>
                         <p>{{ __('একাউন্ট') }}</p>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('admin/users') }}">
+                        <i class="users icon"></i>
+                        <p>{{ __('ব্যবহারকারী') }}</p>
                     </a>
                 </li>
 

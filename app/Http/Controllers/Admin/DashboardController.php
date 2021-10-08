@@ -15,7 +15,6 @@ use App\Models\Complaints;
 class DashboardController extends Controller
 {
     //
-
     public function index()
     {
        
