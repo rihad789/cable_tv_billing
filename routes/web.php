@@ -31,7 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 //For admin
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
+Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     //Admin Side Nav Route
@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 
 //For Operator
-Route::group(['middleware' => ['auth', 'role:operator']], function () {
+Route::group(['middleware' => ['auth', 'role:manager']], function () {
 
 
     //Operator Side Nav Route
