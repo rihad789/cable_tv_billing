@@ -22,7 +22,7 @@
                     <p class="lead">&nbsp;&nbsp;কোম্পানির খাতা</p>
                     <hr>
 
-                    <table width="50%%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]' >
+                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]' >
                         <thead class="thead-light">
                             <tr>
 
@@ -85,11 +85,21 @@
 
 @section('scripts')
 <script type="text/javascript">
-    $('#dataTables-example').DataTable({
-        responsive: true,
-        pageLength: 12,
-        lengthChange: false,
-    });
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 10,
+            ordering:false,
+            lengthChange: false,
+            dom: 'Blfrtip',
+    buttons: [
+        
+            'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+
+        
+    ]});
 
 
 </script>

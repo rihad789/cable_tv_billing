@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
     
     Route::get('admin/subscriber', 'App\Http\Controllers\Admin\SubscriberController@index')->name('subscriber');
+    Route::post('admin/subscriber/filter', 'App\Http\Controllers\Admin\SubscriberController@filter')->name('filter');  
     Route::post('admin/subscriber/store', 'App\Http\Controllers\Admin\SubscriberController@store')->name('add_subscriber');
     Route::get('admin/subscriber/getVicinity/{id}', 'App\Http\Controllers\Admin\SubscriberController@getVicinity')->name('getVicinity');
     Route::get('admin/subscriber/view/{id}', 'App\Http\Controllers\Admin\SubscriberController@view')->name('view');
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
   
     Route::get('admin/billing', 'App\Http\Controllers\Admin\BillingController@index')->name('billing');
+    Route::post('admin/billing', 'App\Http\Controllers\Admin\BillingController@filter')->name('filter');  
     Route::get('admin/billing/generate', 'App\Http\Controllers\Admin\BillingController@generate')->name('generate');
     Route::post('admin/billing/update', 'App\Http\Controllers\Admin\BillingController@update')->name('update');
 
@@ -68,6 +70,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('admin/account', 'App\Http\Controllers\Admin\UserController@admin_account')->name('account');
     Route::post('admin/account/update', 'App\Http\Controllers\Admin\UserController@update_admin_account')->name('update_account');
     Route::post('admin/account/update_password', 'App\Http\Controllers\Admin\UserController@admin_update_password')->name('update_password');
+
 
     //Users Route
     Route::get('admin/users', 'App\Http\Controllers\Admin\UserController@users')->name('users');

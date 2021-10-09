@@ -257,7 +257,7 @@
 <script>
     $(document).ready(function() {
 
-        $('#edit_system_user_form, #edit_employee_form').form({
+        $('#edit_system_user_form').form({
             fields: {
                 phone: {
                     identifier: 'phone',

@@ -28,7 +28,7 @@
                     <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন এরিয়া") }}</button>
                     </p><hr>
 
-                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table table-striped" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
 
@@ -71,8 +71,8 @@
         </p>
 <hr>
 
-        <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
-            <thead class="thead-light">
+        <table width="100%" class="table table-striped" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
+            <thead>
                 <tr>
                     <th>{{ __("সিরিয়াল") }}</th>
                     <th>{{ __("পাড়ার নাম") }}</th> 
@@ -119,24 +119,38 @@
     $(document).ready(function() {
 
         $('#dataTables-example').DataTable({
-        responsive: true,
-        pageLength: 10,
-        lengthChange: false,
-        dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ]
-    });
+            responsive: true,
+            pageLength: 10,
+            ordering:false,
+            lengthChange: false,
+            dom: 'Blfrtip',
+    buttons: [
+        
+            'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+
+        
+    ]});
+
 
     $('#dataTables-example2').DataTable({
-        responsive: true,
-        pageLength: 10,
-        lengthChange: false,
-        dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ]
-    });
+            responsive: true,
+            pageLength: 10,
+            ordering:false,
+            lengthChange: false,
+            dom: 'Blfrtip',
+    buttons: [
+        
+            'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+
+        
+    ]});
+
 
         $('#add_area_form').form({
             fields: {

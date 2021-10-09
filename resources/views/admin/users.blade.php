@@ -29,8 +29,8 @@
                                 <p class="lead">&nbsp;&nbsp;অপারেটর
                 <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন অপারেটর") }}</button>
                 </p>
-                                <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                                        <thead class="thead-light">
+                                <table width="100%" class="table table-striped" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                                        <thead>
                                                 <tr>
                                                         <th>{{ __("সিরিয়াল") }}</th>
                                                         <th>{{ __("নাম") }}</th>
@@ -69,12 +69,11 @@
 @section('scripts')
 <script type="text/javascript">
         $('#dataTables-example').DataTable({
-                responsive: true,
-                pageLength: 15,
-                lengthChange: false,
-                searching: true,
-                ordering: true
-        });
+            responsive: true,
+            pageLength: 10,
+            ordering:false,
+            lengthChange: false,
+});
 </script>
 
 

@@ -6,12 +6,10 @@
 @endsection
 
 @section('content')
-@include('admin.modals.edit_bill') 
+@include('admin.modals.edit_bill')
 
 
 <div class="container-fluid">
-
-
 
     <div class="row">
 
@@ -22,89 +20,133 @@
             <div class="box box-success">
 
                 <div class="box-content">
+                    <p class="lead">&nbsp;&nbsp;বিলিং খাতা
+                        <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
+                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right">{{ __("এই মাসের বিল তৈরি করুন") }}</button>
+                    </p>
 
-                <p class="lead">&nbsp;&nbsp;বিলিং খাতা
-                <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
-            <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right">{{ __("এই মাসের বিল তৈরি করুন") }}</button>
-                    </p><hr>
+                    <table width="100%" class="table">
+                        <tr>
+                            <td>
+                                <form action="{{ url('admin/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
+                                    @csrf
+                                    <div class="two fields">
 
-                <table class="table table-bordered">
+                                        <div class="field">
 
-                <tr class="text-center">
+                                            <select id="billing_status" name="billing_status" class="ui search dropdown getid">
+                                                <option value="">{{ __("বিলিং স্ট্যাটাস") }}</option>
+                                                <option value="1">{{ __("বিল পরিশোধিত") }}</option>
+                                                <option value="0">{{ __("বিল বাকী রয়েছে") }}</option>
 
-                <td class="table-primary">মোট বিল : {{ $total_bill }}</td>
-                <td class="table-secondary">চলতি মাসে বিল জমা হবে : {{ $total_this_month }}</td>
-                <td class="table-info">এই পর্যন্ত জমা বিল : {{ $paid_this_month }}</td> 
+                                            </select>
+
+                                        </div>
+
+                                        <div class="field">
+
+                                            <select id="billing_time" name="billing_time" class="ui search dropdown getid">
+                                                <option value="">বিলিং এর সময়সীমা পছন্দ করুন</option>
+                                                
+                                                
+                                                <option value="1">চলতি মাস</option>
+                                                <option value="2">পুর্বের মাস</option>
+                                                <option value="3">শুরু থেকে</option>
+                                                
+                                            </select>
+                                        </div>
+
+                                        <div class="field">
+
+                                            <input type="hidden" name="emp_id" value="">
+                                            <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
+
+                                        </div>
+
+                                    </div>
+
+                </div>
+                </form>
+
+                </td>
 
                 </tr>
+
                 </table>
 
+                <table width="100%" class="table table-striped">
 
+                    <thead class="text-center text-black">
+                        <th class="table-primary">মোট বিল : {{ $total_bill }}</th>
+                        <th class="table-danger">চলতি মাসে মোট বিল: {{ $total_this_month }}</th>
+                        <th class="table-info">বিল বাকী আছে : {{ $paid_this_month }}</th>
+                    </thead>
+                </table>
 
-                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
+                <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                    <thead>
 
-                                <th>{{ __("গ্রাহকের কার্ড নং") }}</th>
-                                <th>{{ __("গ্রাহকের নাম") }}</th>
-                                <th>{{ __("বিল মাস") }}</th>
-                                <th>{{ __("বিল বছর") }}</th>
-                                <th>{{ __("বিলের পরিমান")}}</th>
-                                <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
+                        <tr>
+                            <th>{{ __("গ্রাহকের কার্ড নং") }}</th>
+                            <th>{{ __("গ্রাহকের নাম") }}</th>
+                            <th>{{ __("বিল মাস") }}</th>
+                            <th>{{ __("বিল বছর") }}</th>
+                            <th>{{ __("বিলের পরিমান")}}</th>
+                            <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @isset($billingData)
-                            @foreach ($billingData as $val)
-                            <tr>
-                                <td>{{ $val->client_id}}</td>
-                                <td>{{ $val->client_name}}</td> 
-                                @if($val->bill_month=="1")
-                                <td>জানুয়ারী</td>
-                                @elseif($val->bill_month=="2")
-                                <td>ফেব্রুয়ারী</td>
-                                @elseif($val->bill_month=="3")
-                                <td>মার্চ</td>
-                                @elseif($val->bill_month=="4")
-                                <td>এপ্রিল</td>
-                                @elseif($val->bill_month=="5")
-                                <td>মে</td>
-                                @elseif($val->bill_month=="6")
-                                <td>জুন</td>
-                                @elseif($val->bill_month=="7")
-                                <td>জুলায়</td>
-                                @elseif($val->bill_month=="8")
-                                <td>আগষ্ট</td>
-                                @elseif($val->bill_month=="9")
-                                <td>সেপ্টেম্বর</td>
-                                @elseif($val->bill_month=="10")
-                                <td>অক্টোবর</td>
-                                @elseif($val->bill_month=="11")
-                                <td>নভেমম্বর</td>
-                                @elseif($val->bill_month=="12")
-                                <td>ডিসেম্বর</td>
-                                @endif
-                                
-                                <td>{{ $val->bill_year }}</td>
-                                <td>{{ $val->bill_amount }}</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @isset($billingData)
+                        @foreach ($billingData as $val)
+                        <tr>
+                            <td>{{ $val->client_id}}</td>
+                            <td>{{ $val->client_name}}</td>
+                            @if($val->bill_month=="1")
+                            <td>জানুয়ারী</td>
+                            @elseif($val->bill_month=="2")
+                            <td>ফেব্রুয়ারী</td>
+                            @elseif($val->bill_month=="3")
+                            <td>মার্চ</td>
+                            @elseif($val->bill_month=="4")
+                            <td>এপ্রিল</td>
+                            @elseif($val->bill_month=="5")
+                            <td>মে</td>
+                            @elseif($val->bill_month=="6")
+                            <td>জুন</td>
+                            @elseif($val->bill_month=="7")
+                            <td>জুলায়</td>
+                            @elseif($val->bill_month=="8")
+                            <td>আগষ্ট</td>
+                            @elseif($val->bill_month=="9")
+                            <td>সেপ্টেম্বর</td>
+                            @elseif($val->bill_month=="10")
+                            <td>অক্টোবর</td>
+                            @elseif($val->bill_month=="11")
+                            <td>নভেমম্বর</td>
+                            @elseif($val->bill_month=="12")
+                            <td>ডিসেম্বর</td>
+                            @endif
 
-                                @if($val->billing_status=="1")
-                                <td class="text-primary">পরিশোধিত</td>
-                                @elseif($val->billing_status=="0")
-                                <td class="text-danger">বাকী </td>
-                                @endif
+                            <td>{{ $val->bill_year }}</td>
+                            <td>{{ $val->bill_amount }}</td>
 
-                            </tr>
-                            @endforeach
-                            @endisset
-                        </tbody>
-                    </table>
-                </div>
+                            @if($val->billing_status=="1")
+                            <td class="text-primary">পরিশোধিত</td>
+                            @elseif($val->billing_status=="0")
+                            <td class="text-danger">বাকী </td>
+                            @endif
+
+                        </tr>
+                        @endforeach
+                        @endisset
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </div>
+
+</div>
 
 </div>
 
@@ -115,19 +157,25 @@
 
 <script>
     $(document).ready(function() {
-        
 
         $('#dataTables-example').DataTable({
-        responsive: true,
-        pageLength: 10,
-        lengthChange: false,
-        dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ]
-    });
+            responsive: true,
+            pageLength: 10,
+            ordering: false,
+            lengthChange: false,
+            dom: 'Blfrtip',
+            buttons: [
 
-        $('#edit_biil_form').form({   
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+
+
+            ]
+        });
+
+        $('#edit_biil_form').form({
             fields: {
                 client_id: {
                     identifier: 'client_id',

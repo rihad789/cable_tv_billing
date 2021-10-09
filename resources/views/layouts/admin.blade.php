@@ -20,6 +20,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
+    
+
+
+
 
     @yield('styles')
     
@@ -89,12 +93,12 @@
                     </a>
                 </li>
 
-                <li class="">
-                    <a href="{{ url('admin/reports') }}">
+                <!-- <li class="">
+                    <a href="{{ url('admin/report_view') }}">
                         <i class="ui chart bar icon"></i>
                         <p>{{ __('রিপোর্ট') }}</p>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="">
                     <a href="{{ url('admin/settings') }}">
@@ -194,6 +198,14 @@
     <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <script src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+
+    <script src="{{ asset('vendor/DataTables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('vendor/DataTables/jszip.min.js') }}"></script>
+    <script src="{{ asset('vendor/DataTables/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('vendor/DataTables/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('vendor/DataTables/buttons.html5.min.js') }}"></script>
+
+
     @if ($success = Session::get('success'))
     <script>
         $(document).ready(function() {

@@ -8,19 +8,12 @@
 @section('content')
 @include('admin.modals.add_subscriber')
 
-
 <div class="container-fluid">
 
-
-
     <div class="row">
-
         <div class="col-md-12">
-
             <!-- Card user Count Data -->
-
             <div class="box box-success">
-
                 <div class="box-content">
 
                 <p class="lead">&nbsp;&nbsp;গ্রাহক লিষ্ট
@@ -28,7 +21,18 @@
                 </p>
                     <hr>
 
-                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table table-striped">
+
+<thead class="text-center text-black">
+    <th class="table-primary">সর্বমোট গ্রাহক : {{ $total_sub }} জন </th>
+    <th class="table-danger">সংযোগ চালু আছে: {{ $connected_sub }} জন</th>
+    <th class="table-info">সংযোগ বিছিন্ন আছে : {{ $disconnect_sub }} জন</th>
+</thead>
+</table>
+
+
+
+                    <table width="100%"  id="dataTables-example" class="table table-striped" class="" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
 
@@ -75,19 +79,29 @@
 
 @section('scripts')
 
-
 <script>
     $(document).ready(function() {
 
         $('#dataTables-example').DataTable({
-        responsive: true,
-        pageLength: 10,
-        lengthChange: false,
-        dom: 'Bfrtip',
-        buttons: [
-            'excel', 'pdf', 'print'
-        ]
-    });
+            responsive: true,
+            pageLength: 10,
+            ordering:false,
+            lengthChange: false,
+            dom: 'Blfrtip',
+    buttons: [
+        
+            'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+
+        
+    ]});
+
+
+        // $('#dataTables-example').DataTable( {    buttons: [        'copy', 'excel', 'pdf'    ]} );  table.buttons().container()    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+
+        
 
                 $("#area").change(function() {
 
@@ -202,7 +216,21 @@
             }
         });
 
-    });
+
+
+
+});
+
+
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
+        ]
+    } );
+} );
+
 </script>
 
 @endsection

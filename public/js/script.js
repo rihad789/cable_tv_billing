@@ -83,14 +83,18 @@ $(window).resize(function () {
 
 });
 
-$('#sidebar').toggleClass('active');
-$('#body').toggleClass('active');
+
 
 $(window).resize(function () {
     if ($(window).width() > 768) {
         $('#sidebar, #body').addClass('active');
     }
 });
+
+if ($(window).width() > 1024) {
+    $('#sidebar').toggleClass('active');
+$('#body').toggleClass('active');
+}
 
 // $('#sidebar').toggleClass('active');
 // $('#body').toggleClass('active');

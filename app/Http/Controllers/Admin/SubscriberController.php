@@ -13,13 +13,18 @@ class SubscriberController extends Controller
     {
         $subscriberData = DB::table("subscribers") ->get();
         $areasData = DB::table("areas") ->get();
-        return view('admin.subscriber',compact('subscriberData','areasData'));
+
+        $total_sub = DB::table("subscribers")->count();
+        $disconnect_sub=DB::table("subscribers")->where('connection_status','=',0)->count();
+        $connected_sub=DB::table("subscribers")->where('connection_status','=',1)->count();
+
+
+        return view('admin.subscriber',compact('subscriberData','areasData','total_sub','disconnect_sub','connected_sub'));
     }
 
     public function store(Request $request)
     {
         //
-
         $areasData = DB::table("areas")->select('area_name')->where('id','=',$request->area) ->first();
         $vicinityData = DB::table("vicinities")->select('vicinity_name') ->where('id','=',$request->vicinity) ->first();
 
@@ -124,9 +129,15 @@ class SubscriberController extends Controller
      * @param  \App\Models\subscriber  $subscriber
      * @return \Illuminate\Http\Response
      */
-    public function edit(subscriber $subscriber)
+    public function filter(Request $request)
     {
         //
+
+        $subscriberData = DB::table("subscribers") ->get();
+        $areasData = DB::table("areas")->where('')->get();
+        return view('admin.subscriber',compact('subscriberData','areasData'));
+
+
     }
 
     /**

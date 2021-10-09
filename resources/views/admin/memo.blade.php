@@ -76,11 +76,21 @@
 
 @section('scripts')
 <script type="text/javascript">
-    $('#dataTables-example').DataTable({
-        responsive: true,
-        pageLength: 10,
-        lengthChange: false,
-    });
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 10,
+            ordering:false,
+            lengthChange: false,
+            dom: 'Blfrtip',
+    buttons: [
+        
+            'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+
+        
+    ]});
 
 
 </script>
