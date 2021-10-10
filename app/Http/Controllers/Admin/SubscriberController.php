@@ -78,7 +78,7 @@ class SubscriberController extends Controller
 
         //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
         
-        return view('admin.view.view_subscriber',compact('subscriberData','billingData','total_bill','due_bill','connection_status'));
+        return view('admin.view.view_subscriber',compact('id','subscriberData','billingData','total_bill','due_bill','connection_status'));
         //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
     }
 
@@ -111,14 +111,17 @@ class SubscriberController extends Controller
             ->where('billing_status','=',0)
             ->update(['billing_status' => 1, "billing_date" => $timestamp, "updated_by" => $updated_by]);
 
-            $affectedRow2 = DB::table("subscribers")->where('client_id','=',$id)->update(['connection_status' => 0]);
-                return redirect('/admin/subscriber/view/'.$id)->with('success', trans("বাকী বিল জামানত থেকে কাটা হয়েছে।"));
+            $affectedRow2 = DB::table("subscribers")
+            ->where('client_id','=',$id)
+            ->update(['connection_status' => 0,'locked_fund'=>$final_amount]);
+
+             return redirect('/admin/subscriber/'.$id)->with('success', trans("বাকী বিল জামানত থেকে কাটা হয়েছে।"));
             
         
         }
         else
         {
-            return redirect('/admin/subscriber/view/'.$id)->with('success', trans("বাকী বিল জামানত এর পরিমান থেকে কম।।"));
+            return redirect('/admin/subscriber/'.$id)->with('success', trans("বাকী বিল জামানত এর পরিমান থেকে কম।।"));
         }
 
     }
@@ -137,6 +140,21 @@ class SubscriberController extends Controller
         $areasData = DB::table("areas")->where('')->get();
         return view('admin.subscriber',compact('subscriberData','areasData'));
 
+
+    }
+
+
+    public function billing($id)
+    {
+
+        $billingData = DB::table("billings")
+        ->where("client_id", "=", $id)
+        ->orderBy("billing_status","asc")
+        ->get();
+        
+    
+        return view('admin.view.view_subscriber_bills',compact('billingData'));
+        //return response()->json(['Response'=>$billingData]);
 
     }
 

@@ -1,7 +1,7 @@
 <div class="ui modal medium edit">
     <div class="header">{{ __("নতুন পাড়া যোগ করুন") }}</div>
     <div class="content">
-        <form id="add_vicinity_form" action="{{ url('admin/vicinity/store') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
+        <form id="add_vicinity_form" action="{{ url('admin/vicinity') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">

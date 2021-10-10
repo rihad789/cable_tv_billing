@@ -93,9 +93,13 @@ class BillingController extends Controller
             $month=$month-1;
             $billingData=DB::select(DB::raw("SELECT * FROM `billings`;"));
         }
-        else
+        else if($request->billing_status!=null)
         {
             $billingData = DB::table("billings")->where('billing_status','=',$request->billing_status)->get();
+        }
+        else
+        {
+            $billingData = DB::table("billings")->get();
         }
 
 

@@ -1,7 +1,7 @@
 <div class="ui modal medium add">
     <div class="header">{{ __("নতুন এরিয়া যোগ করুন") }}</div>
     <div class="content">
-        <form id="add_area_form" action="{{ url('admin/area/store') }}" class="ui form add-user" method="post" accept-charset="utf-8">
+        <form id="add_area_form" action="{{ url('admin/area') }}" class="ui form add-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">

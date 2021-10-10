@@ -24,68 +24,49 @@
                         <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
                         <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right">{{ __("এই মাসের বিল তৈরি করুন") }}</button>
                     </p>
+<hr>
 
-                    <table width="100%" class="table">
-                        <tr>
-                            <td>
-                                <form action="{{ url('admin/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
-                                    @csrf
-                                    <div class="two fields">
+                    <form action="{{ url('admin/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
+                        @csrf
+                        <div class="inline three fields">
+                            <div class="three wide field">
+                                <select name="billing_time" id="billing_time" class="ui search dropdown getid">
+                                    <option value="">{{ __("বিলিং সময়সীমা") }}</option>
+                                    <option value="1">{{ __("চলতি মাস") }}</option>
+                                    <option value="2">{{ __("আগের মাস") }}</option>
+                                    <option value="3">{{ __("শুরু থেকে") }}</option>
+  
+                                </select>
+                            </div>
 
-                                        <div class="field">
+                            <div class="three wide field">
+                                <select name="billing_status" id="billing_status" class="ui search dropdown getid">
+                                    <option value="">{{ __("বিলিং স্ট্যাটাস") }}</option>
+                                    <option value="1">{{ __("বিল পরিশোধিত।") }}</option>
+                                    <option value="0">{{ __("বিল বাকী রয়েছে। ") }}</option>
+                                </select>
+                            </div>
 
-                                            <select id="billing_status" name="billing_status" class="ui dropdown uppercase required form-control">
-                                                <option value="">{{ __("বিলিং স্ট্যাটাস") }}</option>
-                                                <option value="1">{{ __("বিল পরিশোধিত") }}</option>
-                                                <option value="0">{{ __("বিল বাকী রয়েছে") }}</option>
+                            <input type="hidden" name="emp_id" value="">
+                            <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("ফিল্টার") }}</button>
+                        </div>
+                    </form>
 
-                                            </select>
-
-                                        </div>
-
-                                        <div class="field">
-
-                                            <select id="billing_time" name="billing_time" class="ui dropdown uppercase required form-control">
-                                                <option value="">বিলিং এর সময়সীমা</option>
-                                                
-                                                <option value="1">চলতি মাস</option>
-                                                <option value="2">পুর্বের মাস</option>
-                                                <option value="3">শুরু থেকে</option>
-                                                
-                                            </select>
-                                        </div>
-
-                                        <div class="field">
-
-                                            <input type="hidden" name="emp_id" value="">
-                                            <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
-
-                                        </div>
-
-                                    </div>
-
-                </div>
-                </form>
-
-                </td>
-
-                </tr>
-
-                </table>
-
-                <table width="100%" class="table table-striped">
-
-                    <thead class="text-center text-black">
-                        <th class="table-primary">মোট বিল : {{ $total_bill }}</th>
-                        <th class="table-danger">চলতি মাসে মোট বিল: {{ $total_this_month }}</th>
-                        <th class="table-info">বিল বাকী আছে : {{ $paid_this_month }}</th>
-                    </thead>
-                </table>
-
-                <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                     <thead>
 
-                        <tr>
+                    <tr><th colspan="6"></th></tr>
+
+                    <tr class="text-center">
+                        <th colspan="2" class="table-primary">মোট বিল : {{ $total_bill }} টাকা </th>
+                        <th  colspan="2" class="table-danger">চলতি মাসে মোট বিল: {{ $total_this_month }} টাকা</th>
+                        <th colspan="2" class="table-info">বিল বাকী আছে : {{ $paid_this_month }} টাকা</th>
+                    
+                    </tr>
+
+                    <tr><th colspan="6"></th></tr>
+
+                    <tr>
                             <th>{{ __("গ্রাহকের কার্ড নং") }}</th>
                             <th>{{ __("গ্রাহকের নাম") }}</th>
                             <th>{{ __("বিল মাস") }}</th>
@@ -93,7 +74,8 @@
                             <th>{{ __("বিলের পরিমান")}}</th>
                             <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
 
-                        </tr>
+                    </tr>
+
                     </thead>
                     <tbody>
                         @isset($billingData)

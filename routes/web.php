@@ -39,16 +39,21 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     Route::get('admin/area', 'App\Http\Controllers\Admin\AreaController@index')->name('area');
-    Route::post('admin/area/store', 'App\Http\Controllers\Admin\AreaController@add_area')->name('add_area');
-    Route::post('admin/vicinity/store', 'App\Http\Controllers\Admin\AreaController@add_vicinity')->name('add_vicinity');
+    Route::post('admin/area', 'App\Http\Controllers\Admin\AreaController@add_area')->name('add_area');
+    Route::get('admin/area/delete/{id}', 'App\Http\Controllers\Admin\AreaController@delete_area')->name('delete_area');
 
+    Route::post('admin/vicinity', 'App\Http\Controllers\Admin\AreaController@add_vicinity')->name('add_vicinity');
+    Route::get('admin/vicinity/delete/{id}', 'App\Http\Controllers\Admin\AreaController@delete_vicinity')->name('delete_vicinity');
     
+
     Route::get('admin/subscriber', 'App\Http\Controllers\Admin\SubscriberController@index')->name('subscriber');
     Route::post('admin/subscriber/filter', 'App\Http\Controllers\Admin\SubscriberController@filter')->name('filter');  
     Route::post('admin/subscriber/store', 'App\Http\Controllers\Admin\SubscriberController@store')->name('add_subscriber');
     Route::get('admin/subscriber/getVicinity/{id}', 'App\Http\Controllers\Admin\SubscriberController@getVicinity')->name('getVicinity');
-    Route::get('admin/subscriber/view/{id}', 'App\Http\Controllers\Admin\SubscriberController@view')->name('view');
+    Route::get('admin/subscriber/{id}', 'App\Http\Controllers\Admin\SubscriberController@view')->name('view_subscriber');
     Route::get('admin/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Admin\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
+
+    Route::get('admin/subscriber/billing/{id}', 'App\Http\Controllers\Admin\SubscriberController@billing')->name('billing');
 
   
     Route::get('admin/billing', 'App\Http\Controllers\Admin\BillingController@index')->name('billing');
@@ -57,8 +62,9 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::post('admin/billing/update', 'App\Http\Controllers\Admin\BillingController@update')->name('update');
 
     Route::get('admin/memo', 'App\Http\Controllers\Admin\MemoController@index')->name('account');
-    Route::post('admin/memo/store', 'App\Http\Controllers\Admin\MemoController@store')->name('store');
-    Route::get('admin/memo/view/{id}', 'App\Http\Controllers\Admin\MemoController@view')->name('view');
+    Route::post('admin/memo', 'App\Http\Controllers\Admin\MemoController@store')->name('store');
+    Route::get('admin/memo/{id}', 'App\Http\Controllers\Admin\MemoController@view')->name('view');
+
 
     Route::get('admin/settings', 'App\Http\Controllers\Admin\SettingsController@index')->name('settings');
 

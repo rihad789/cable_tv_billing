@@ -21,19 +21,22 @@
                 </p>
                     <hr>
 
-                    <table width="100%" class="table table-striped">
-
-<thead class="text-center text-black">
-    <th class="table-primary">সর্বমোট গ্রাহক : {{ $total_sub }} জন </th>
-    <th class="table-danger">সংযোগ চালু আছে: {{ $connected_sub }} জন</th>
-    <th class="table-info">সংযোগ বিছিন্ন আছে : {{ $disconnect_sub }} জন</th>
-</thead>
-</table>
-
-
 
                     <table width="100%"  id="dataTables-example" class="table table-striped" class="" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
+                        <thead>
+
+                        <tr><td colspan="6"></td></tr>
+
+<tr class="text-center">
+    <th colspan="2" class="table-primary">সর্বমোট গ্রাহক : {{ $total_sub }} জন </th>
+    <th colspan="2" class="table-danger">সংযোগ চালু আছে: {{ $connected_sub }} জন</th>
+    <th colspan="2" class="table-info">সংযোগ বিছিন্ন আছে : {{ $disconnect_sub }} জন</th>
+
+</tr>
+
+<tr><td colspan="6"></td></tr>
+
+
                             <tr>
 
                                 <th>{{ __("গ্রাহকের কার্ড নং") }}</th>
@@ -59,7 +62,7 @@
                                 <td class="text-danger">সংযোগ বন্ধ আছে</td>
                                 @endif
                                 <td class="align-right">
-                                    <a href="{{ url('/admin/subscriber/view/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
+                                    <a href="{{ url('/admin/subscriber/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
                                 </td>
 
                             </tr>

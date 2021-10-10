@@ -3,7 +3,7 @@
         <button id="addRow" class="ui btn btn-primary mini offsettop5  float-right"><i class="ui icon plus"></i>{{ __("নতুন সারী যোগ করুন") }}</button>
     </div>
     <div class="content">
-        <form id="add_new_calculation" action="{{ url('admin/memo/store') }}" class="ui form add-user" method="post" accept-charset="utf-8" style="overflow-y:scroll;height:400px;">
+        <form id="add_new_calculation" action="{{ url('admin/memo') }}" class="ui form add-user" method="post" accept-charset="utf-8" style="overflow-y:scroll;height:400px;">
             @csrf
 
             <div class="two fields">
@@ -12,8 +12,6 @@
                     <label>মেমো নং</label>
                     <input type="text" name="memo_no" class="form-control" id="memo_no" placeholder="মেমো নং" autocapitalize="off">
                 </div>
-
-
 
                 <div class="field">
                 <div class="sixteen wide field role">

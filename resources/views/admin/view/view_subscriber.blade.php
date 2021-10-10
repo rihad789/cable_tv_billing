@@ -126,18 +126,20 @@
                     @if($connection_status==1 && $due_bill >=3 )
                         
                         <button onclick="location.href='/admin/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-primary float-right"><i class="dollar sign icon"></i>বাকী জামানত থেকে কাটুন</button>
-                        </p>
+                        <button onclick="location.href='/admin/subscriber/billing/{{ $id }}'"  class="btn btn-primary float-right"><i class="eye icon"></i>গ্রাহকের সম্পুর্ন বিল দেখুন </button>    
+                    </p>
 
                     @else
                     
                         <button  class="btn btn-primary float-right" disabled><i class="dollar sign icon"></i>বাকী জামানত থেকে কাটুন</button>
+                        <button onclick="location.href='/admin/subscriber/billing/{{ $id }}'"  class="btn btn-primary float-right"><i class="eye icon"></i>গ্রাহকের সম্পুর্ন বিল দেখুন </button>
                         </p>
                     
                     @endif
-
-
-
+                    
                     <hr>
+
+                
                     <table class="table table-bordered">
                         <tr class="text-center">
                             <td class="table-primary">বিল বাকী আছে : {{ $total_bill }}</td>

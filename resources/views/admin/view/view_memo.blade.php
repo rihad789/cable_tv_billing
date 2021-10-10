@@ -22,6 +22,25 @@
                     <p class="lead">&nbsp;&nbsp;কোম্পানির খাতা</p>
                     <hr>
 
+                    <table width="100%" class="table" data-order='[[ 0, "asc" ]]' >
+                        <thead class="thead-light">
+                            <tr>
+                            @isset($memoData)
+                                <th class="font-weight-bold">মোট পন্যের সংখ্যা</th>
+                                <th class="font-weight-bold"> {{ $memoData }} টি</th>
+                                @endisset
+
+                                @isset($total_amount)
+                                <th class="font-weight-bold">সর্বমোট মূল্য</th>
+                                <th class="font-weight-bold"> {{ $total_amount }} টাকা</th>
+                                @endisset
+
+                            </tr>
+                        </thead>
+
+
+                    </table>
+
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]' >
                         <thead class="thead-light">
                             <tr>
@@ -52,9 +71,8 @@
 
                             <tr>
 
-                             
                                 @isset($memoData)
-                                <td>{{ $serial++}}</td>
+                                <td></td>
                                 <td class="font-weight-bold">মোট পন্যের সংখ্যা</td>
                                 <td class="font-weight-bold"> {{ $memoData }} টি</td>
 
@@ -98,7 +116,6 @@
         'csvHtml5',
         'pdfHtml5'
 
-        
     ]});
 
 

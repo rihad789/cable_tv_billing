@@ -20,13 +20,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
-    
-
-
-
 
     @yield('styles')
-    
+
 </head>
 
 <body>
@@ -34,62 +30,62 @@
     <div class="wrapper">
 
         <nav id="sidebar" class="active">
- 
-        <ul class="list-unstyled components">
-        <li class="">
-                        <h4 class="text-info text-center">{{ __('ডিঙ্গেদহ নেটওয়ার্ক') }}</h4>
+
+            <ul class="list-unstyled components">
+                <li class="">
+                    <h4 class="text-info text-center">{{ __('DINGEDAH  NETWORK') }}</h4>
                 </li>
                 <hr>
-        </ul>   
+            </ul>
 
             <ul class="list-unstyled components">
                 <li class="">
                     <a href="{{ url('admin') }}">
                         <i class="ui icon home"></i>
-                        <p>{{ __('ড্যাশবোর্ড') }}</p>
+                        <p>{{ __('Dashboard') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/area') }}">
                         <i class="ui building icon"></i>
-                        <p>{{ __('গ্রাম ও পাড়া') }}</p> 
+                        <p>{{ __('Area & Vicinity') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/subscriber') }}">
                         <i class="ui address book icon"></i>
-                        <p>{{ __('গ্রাহক তালিকা') }}</p>
+                        <p>{{ __('Customer list') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/billing') }}">
                         <i class="dollar sign icon"></i>
-                        <p>{{ __('ডিশ বিলিং') }}</p>
+                        <p>{{ __('Dish Billing') }}</p>
                     </a>
                 </li>
 
-                
+
                 <li class="">
                     <a href="{{ url('admin/memo') }}">
                         <i class="shopping basket icon"></i>
-                        <p>{{ __('কেনাকাটা') }}</p>
+                        <p>{{ __('shopping') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/account') }}">
                         <i class="ui calculator icon"></i>
-                        <p>{{ __('একাউন্ট') }}</p>
+                        <p>{{ __('Account') }}</p>
                     </a>
                 </li>
 
                 <li class="">
                     <a href="{{ url('admin/users') }}">
                         <i class="users icon"></i>
-                        <p>{{ __('ব্যবহারকারী') }}</p>
+                        <p>{{ __('Users') }}</p>
                     </a>
                 </li>
 
@@ -103,7 +99,7 @@
                 <li class="">
                     <a href="{{ url('admin/settings') }}">
                         <i class="ui cogs icon"></i>
-                        <p>{{ __('সেটিংস') }}</p>
+                        <p>{{ __('Settings') }}</p>
                     </a>
                 </li>
 
@@ -118,34 +114,16 @@
                         <i class="ui icon bars"></i> <span class="toggle-sidebar-menu">{{ __('Menu') }}</span>
                     </button>
 
-                    <button onclick="location.href='/'"  class="ui icon button btn-light-outline">
+                    <button onclick="location.href='/'" class="ui icon button btn-light-outline">
                         <i class="ui icon home"></i> <span class="toggle-sidebar-menu">{{ __('Dashboard') }}</span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto navmenu">
 
-                        <li class="nav-item">
-                                <div class="ui pointing link dropdown item" tabindex="0">
-                                    <i class="bell icon"></i> <span class="navmenutext">Notifications</span>
-                                    <i class="dropdown icon"></i>
-                                    <div class="menu" tabindex="-1" style="overflow-y:scroll;height:300px;">
-
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Disconnect Rakib Ahmed Connections.') }}</a>
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('রাসেল আহমেড এর কানেকশপ্ন ডিসেবল করুন।.') }}</a> 
-                                        <a href="{{ url('admin/fare') }}" class="item"><i class="money bill alternate outline icon"></i>{{ __('Fare') }}</a>
-
-                                    </div>
+                            <li class="nav-item">
+                                <div class="ui pointing link item">
+                                    <a href="{{ url('admin/notification') }}" class="ui circular basic icon  tiny "> <i class="tasks icon"></i> 5</a>
                                 </div>
                             </li>
 
@@ -154,6 +132,7 @@
                                     <i class="linkify icon"></i> <span class="navmenutext">Manage</span>
                                     <i class="dropdown icon"></i>
                                     <div class="menu" tabindex="-1">
+
                                         <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Operator') }}</a>
                                         <a href="{{ url('admin/fare') }}" class="item"><i class="money bill alternate outline icon"></i>{{ __('Fare') }}</a>
 

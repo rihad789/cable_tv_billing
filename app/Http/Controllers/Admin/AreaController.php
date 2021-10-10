@@ -49,6 +49,25 @@ class AreaController extends Controller
         return redirect("admin/area")->with('error', trans("নতুন এরিয়া জমা হয়েছে!"));
     }
 
+    public function delete_area($id)
+    {
+        $affectedRow = Area::where('id', $id)->delete();
+
+        if ($affectedRow == 1) {
+
+            $affectedRow2 = Vicinity::where('id', $id)->delete();
+
+            if($affectedRow2 >=1)
+            {
+
+                return redirect('admin/area')->with('success', trans("Area Deleted successfully!"));
+            }
+
+        }
+
+    }
+
+
     public function add_vicinity(Request $request)
     {
         //
@@ -70,6 +89,16 @@ class AreaController extends Controller
         }
 
         return redirect("admin/area")->with('error', trans("নতুন পাড়া জমা হয়েছে!"));
+    }
+
+    public function delete_vicinity($id)
+    {
+        $affectedRow = Vicinity::where('id', $id)->delete();
+
+        if ($affectedRow == 1) {
+            return redirect('admin/area')->with('success', trans("Vicinity Deleted successfully!"));
+        }
+
     }
 
     public function edit(Area $area)

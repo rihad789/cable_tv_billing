@@ -46,9 +46,8 @@
                                 <td>{{ $serial++}}</td>
                                 <td>{{ $val->area_name }}</td>
                                 <td class="align-right">
-                                    <a href="{{ url('/admin/subscriber/view'.$val->id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
-                                    <a href="{{ url('admin/subscriber/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই কল করতে চাচ্ছেন?')" class="ui circular basic icon button tiny"><i class="phone icon"></i></a>
-                                </td>
+                                <a href="{{ url('admin/area/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই গ্রাম মুছে ফেলতে চান? ফলস্বরূপ গ্রামের সাথে পাড়াসমূহ মূছে যাবে?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                              </td>
                             </tr>
                             @endforeach
                             @endisset
@@ -88,10 +87,10 @@
                     <td>{{ $serial++}}</td>
                     <td>{{ $val->vicinity_name }}</td>
                     <td>{{ $val->area_name }}</td>
+
                     <td class="align-right">
-                        <a href="{{ url('/admin/subscriber/view'.$val->id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
-                        <a href="{{ url('admin/subscriber/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই কল করতে চাচ্ছেন?')" class="ui circular basic icon button tiny"><i class="phone icon"></i></a>
-                    </td>
+                    <a href="{{ url('admin/vicinity/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই পাড়া মুছে ফেলতে চান?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                        </td>
                 </tr>
                 @endforeach
                 @endisset

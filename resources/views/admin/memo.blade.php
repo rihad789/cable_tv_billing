@@ -55,7 +55,7 @@
 
 
                                 <td class="align-right">
-                                    <a href="{{ url('/admin/memo/view/'.$val->memo_no) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
+                                    <a href="{{ url('/admin/memo/'.$val->memo_no) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
                                 </td>
 
                             </tr>
