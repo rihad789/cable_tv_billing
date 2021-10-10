@@ -34,7 +34,7 @@
 
                                         <div class="field">
 
-                                            <select id="billing_status" name="billing_status" class="ui search dropdown getid">
+                                            <select id="billing_status" name="billing_status" class="ui dropdown uppercase required form-control">
                                                 <option value="">{{ __("বিলিং স্ট্যাটাস") }}</option>
                                                 <option value="1">{{ __("বিল পরিশোধিত") }}</option>
                                                 <option value="0">{{ __("বিল বাকী রয়েছে") }}</option>
@@ -45,9 +45,8 @@
 
                                         <div class="field">
 
-                                            <select id="billing_time" name="billing_time" class="ui search dropdown getid">
+                                            <select id="billing_time" name="billing_time" class="ui dropdown uppercase required form-control">
                                                 <option value="">বিলিং এর সময়সীমা পছন্দ করুন</option>
-                                                
                                                 
                                                 <option value="1">চলতি মাস</option>
                                                 <option value="2">পুর্বের মাস</option>
