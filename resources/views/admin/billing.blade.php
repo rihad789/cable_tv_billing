@@ -46,7 +46,7 @@
                                         <div class="field">
 
                                             <select id="billing_time" name="billing_time" class="ui dropdown uppercase required form-control">
-                                                <option value="">বিলিং এর সময়সীমা পছন্দ করুন</option>
+                                                <option value="">বিলিং এর সময়সীমা</option>
                                                 
                                                 <option value="1">চলতি মাস</option>
                                                 <option value="2">পুর্বের মাস</option>
