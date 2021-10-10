@@ -57,12 +57,8 @@ class AreaController extends Controller
 
             $affectedRow2 = Vicinity::where('id', $id)->delete();
 
-            if($affectedRow2 >=1)
-            {
-
-                return redirect('admin/area')->with('success', trans("Area Deleted successfully!"));
-            }
-
+            return redirect('admin/area')->with('success', trans("Area Deleted successfully!"));
+        
         }
 
     }
