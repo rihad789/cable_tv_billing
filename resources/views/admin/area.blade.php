@@ -25,10 +25,10 @@
                 <div class="box-content">
 
                     <p class="lead">&nbsp;&nbsp;এরিয়া সমূহ
-                    <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন এরিয়া") }}</button>
+                    <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন এরিয়া") }}</button>
                     </p><hr>
 
-                    <table width="100%" class="table table-striped" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
 
@@ -66,12 +66,12 @@
     <div class="box-content">
 
         <p class="lead">&nbsp;&nbsp;পাড়াসমূহ
-        <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("নতুন পাড়া") }}</button>
+        <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("নতুন পাড়া") }}</button>
         </p>
 <hr>
 
-        <table width="100%" class="table table-striped" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
-            <thead>
+        <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
+            <thead class="thead-light">
                 <tr>
                     <th>{{ __("সিরিয়াল") }}</th>
                     <th>{{ __("পাড়ার নাম") }}</th> 
@@ -121,34 +121,35 @@
             responsive: true,
             pageLength: 10,
             ordering:false,
-            lengthChange: false,
+            lengthChange: true,
             dom: 'Blfrtip',
     buttons: [
         
-            'copyHtml5',
+        'copyHtml5',
         'excelHtml5',
-        'csvHtml5',
         'pdfHtml5'
-
-        
-    ]});
+    ],
+            lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]});
 
 
     $('#dataTables-example2').DataTable({
             responsive: true,
             pageLength: 10,
             ordering:false,
-            lengthChange: false,
+            lengthChange: true,
             dom: 'Blfrtip',
     buttons: [
-        
-            'copyHtml5',
+        'copyHtml5',
         'excelHtml5',
-        'csvHtml5',
         'pdfHtml5'
-
-        
-    ]});
+    ],
+        lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]});
 
 
         $('#add_area_form').form({

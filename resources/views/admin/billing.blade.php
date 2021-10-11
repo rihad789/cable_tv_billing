@@ -9,11 +9,12 @@
 @include('admin.modals.edit_bill')
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="printableArea">
 
     <div class="box box-success">
 
         <div class="box-content">
+
 
             <div class="row">
 
@@ -21,16 +22,19 @@
 
                     <p class="lead">&nbsp;&nbsp;BILLING DIARY
 
+                    <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
                         <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="arrow up icon"></i>{{ __("Update Bill") }}</button>
-                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process This Month Bill") }}</button>
+                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-info mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process This Month Bill") }}</button>
 
                     </p>
 
-                    <hr>
-
                 </div>
 
+                <hr>
+
             </div>
+
+
 
             <div class="row">
 
@@ -56,10 +60,18 @@
                                 </select>
                             </div>
 
+
+                            <div class="two fields">
+
                             <div class="field">
 
-                                <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
+<button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
+</div>
+
+
                             </div>
+
+
 
                         </div>
                     </form>
@@ -85,9 +97,9 @@
                             </tr>
 
                             <tr class="text-center">
-                                <th colspan="2" class="table-primary">মোট বিল : {{ $total_bill }} টাকা </th>
-                                <th colspan="2" class="table-danger">চলতি মাসে মোট বিল: {{ $total_this_month }} টাকা</th>
-                                <th colspan="2" class="table-info">বিল বাকী আছে : {{ $paid_this_month }} টাকা</th>
+                                <th colspan="2" class="table-primary">Total Bill : {{ $total_bill }} Taka </th>
+                                <th colspan="2" class="table-danger">Current Month Total: {{ $total_this_month }} Taka</th>
+                                <th colspan="2" class="table-info">Bill Due : {{ $paid_this_month }} Taka</th>
 
                             </tr>
 
@@ -96,12 +108,12 @@
                             </tr>
 
                             <tr>
-                                <th>{{ __("গ্রাহকের কার্ড নং") }}</th>
-                                <th>{{ __("গ্রাহকের নাম") }}</th>
-                                <th>{{ __("বিল মাস") }}</th>
-                                <th>{{ __("বিল বছর") }}</th>
-                                <th>{{ __("বিলের পরিমান")}}</th>
-                                <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
+                            <th>{{ __("Client Card No") }}</th>
+                            <th>{{ __("Client Name") }}</th>
+                            <th>{{ __("Bill Month") }}</th>
+                            <th>{{ __("Bill Year") }}</th>
+                            <th>{{ __("Bill Amount")}}</th>
+                            <th>{{ __("Billing Status")}}</th>
                             </tr>
 
                         </thead>
@@ -112,38 +124,38 @@
                                 <td>{{ $val->client_id}}</td>
                                 <td>{{ $val->client_name}}</td>
                                 @if($val->bill_month=="1")
-                                <td>জানুয়ারী</td>
-                                @elseif($val->bill_month=="2")
-                                <td>ফেব্রুয়ারী</td>
-                                @elseif($val->bill_month=="3")
-                                <td>মার্চ</td>
-                                @elseif($val->bill_month=="4")
-                                <td>এপ্রিল</td>
-                                @elseif($val->bill_month=="5")
-                                <td>মে</td>
-                                @elseif($val->bill_month=="6")
-                                <td>জুন</td>
-                                @elseif($val->bill_month=="7")
-                                <td>জুলায়</td>
-                                @elseif($val->bill_month=="8")
-                                <td>আগষ্ট</td>
-                                @elseif($val->bill_month=="9")
-                                <td>সেপ্টেম্বর</td>
-                                @elseif($val->bill_month=="10")
-                                <td>অক্টোবর</td>
-                                @elseif($val->bill_month=="11")
-                                <td>নভেমম্বর</td>
-                                @elseif($val->bill_month=="12")
-                                <td>ডিসেম্বর</td>
-                                @endif
+                            <td>January</td>
+                            @elseif($val->bill_month=="2")
+                            <td>February</td>
+                            @elseif($val->bill_month=="3")
+                            <td>March</td>
+                            @elseif($val->bill_month=="4")
+                            <td>April</td>
+                            @elseif($val->bill_month=="5")
+                            <td>May</td>
+                            @elseif($val->bill_month=="6")
+                            <td>June</td>
+                            @elseif($val->bill_month=="7")
+                            <td>July</td>
+                            @elseif($val->bill_month=="8")
+                            <td>August</td>
+                            @elseif($val->bill_month=="9")
+                            <td>September</td>
+                            @elseif($val->bill_month=="10")
+                            <td>Octobor</td>
+                            @elseif($val->bill_month=="11")
+                            <td>November</td>
+                            @elseif($val->bill_month=="12")
+                            <td>December</td>
+                            @endif
 
                                 <td>{{ $val->bill_year }}</td>
                                 <td>{{ $val->bill_amount }}</td>
 
                                 @if($val->billing_status=="1")
-                                <td class="text-primary">পরিশোধিত</td>
+                                <td class="text-primary">Paid</td>
                                 @elseif($val->billing_status=="0")
-                                <td class="text-danger">বাকী </td>
+                                <td class="text-danger">Due </td>
                                 @endif
 
                             </tr>
@@ -173,19 +185,22 @@
             responsive: true,
             pageLength: 10,
             ordering: false,
-            lengthChange: false,
+            lengthChange: true,
             dom: 'Blfrtip',
             buttons: [
-
                 'copyHtml5',
                 'excelHtml5',
-                'csvHtml5',
                 'pdfHtml5'
 
-
-            ]
+            ],
+            lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]
         });
 
+
+        
         $('#edit_biil_form').form({
             fields: {
                 client_id: {
@@ -206,6 +221,20 @@
         });
 
     });
+
+
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+
 </script>
 
 @endsection

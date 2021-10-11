@@ -27,8 +27,10 @@
                                 @endif
 
                                 <p class="lead">&nbsp;&nbsp;SYSTEM USER
-                <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New System User") }}</button>
+                <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New System User") }}</button>
                 </p>
+
+                <hr>
                                 <table width="100%" class="table table-striped" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                                         <thead>
                                                 <tr>

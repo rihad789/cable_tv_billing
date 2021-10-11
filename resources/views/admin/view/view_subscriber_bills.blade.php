@@ -8,7 +8,7 @@
 @section('content')
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="printableArea">
 
     <div class="row">
 
@@ -19,7 +19,10 @@
             <div class="box box-success">
 
                 <div class="box-content">
-                    <p class="lead">&nbsp;&nbsp;বিলিং খাতা </p>
+                    <p class="lead">&nbsp;&nbsp;বিলিং খাতা 
+                    <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+
+                    </p>
                         <!-- <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
                         <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right">{{ __("এই মাসের বিল তৈরি করুন") }}</button>
                      -->
@@ -104,7 +107,7 @@
             responsive: true,
             pageLength: 10,
             ordering: false,
-            lengthChange: false,
+            lengthChange: true,
             dom: 'Blfrtip',
             buttons: [
 
@@ -112,18 +115,16 @@
                 'excelHtml5',
                 'pdfHtml5',
             ],
+            
 
-            exportOptions: {
-            format: {
-                body: function ( data, row, column, node ) {
-                    // Strip $ from salary column to make it numeric
-                    return column === 5 ?
-                        data.replace( /[$,]/g, '' ) :
-                        data;
-                }
-            }
-        }
+        lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]
+
         });
+
+
 
         $('#edit_biil_form').form({
             fields: {
@@ -145,6 +146,19 @@
         });
 
     });
+
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+
 </script>
 
 @endsection

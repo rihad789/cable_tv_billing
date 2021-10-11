@@ -9,7 +9,7 @@
 @include('admin.modals.add_memo')
 
 
-<div class="container-fluid">
+<div class="container-fluid" id="printableArea">
 
     <div class="row">
 
@@ -21,8 +21,10 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;ACCOUNT DIARY
-                        <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Memo") }}</button>
+                    <p class="lead">&nbsp;&nbsp;SHOPPING DIARY
+                    <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Memo") }}</button>
+
                     </p>
                     <hr>
 
@@ -80,17 +82,31 @@
             responsive: true,
             pageLength: 10,
             ordering:false,
-            lengthChange: false,
+            lengthChange: true,
             dom: 'Blfrtip',
     buttons: [
-        
-            'copyHtml5',
+    
+        'copyHtml5',
         'excelHtml5',
-        'csvHtml5',
         'pdfHtml5'
 
-        
-    ]});
+    ],
+    lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]});
+
+
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
 
 
 </script>

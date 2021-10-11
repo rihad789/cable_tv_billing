@@ -8,7 +8,7 @@
 @section('content')
 @include('admin.modals.add_subscriber')
 
-<div class="container-fluid">
+<div class="container-fluid" id="printableArea">
 
     <div class="row">
         <div class="col-md-12">
@@ -17,13 +17,15 @@
                 <div class="box-content">
 
                 <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
-                <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Subscriber") }}</button>
+                
+                <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+                <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Subscriber") }}</button>
                 </p>
                     <hr>
 
 
-                    <table width="100%"  id="dataTables-example" class="table table-striped" class="" data-order='[[ 0, "asc" ]]'>
-                        <thead>
+                    <table width="100%"  id="dataTables-example" class="table" class="" data-order='[[ 0, "asc" ]]'>
+                        <thead class="thead-light">
 
                         <tr><td colspan="6"></td></tr>
 
@@ -87,17 +89,18 @@
             responsive: true,
             pageLength: 10,
             ordering:false,
-            lengthChange: false,
+            lengthChange: true,
             dom: 'Blfrtip',
-    buttons: [
-        
-            'copyHtml5',
-        'excelHtml5',
-        'csvHtml5',
-        'pdfHtml5'
+            buttons: [
 
-        
-    ]});
+                'copyHtml5',
+                'excelHtml5',
+                'pdfHtml5'
+            ],
+            lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]});
 
 
         // $('#dataTables-example').DataTable( {    buttons: [        'copy', 'excel', 'pdf'    ]} );  table.buttons().container()    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
@@ -217,20 +220,19 @@
             }
         });
 
-
-
-
 });
 
 
-$(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'print'
-        ]
-    } );
-} );
+function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
 
 </script>
 
