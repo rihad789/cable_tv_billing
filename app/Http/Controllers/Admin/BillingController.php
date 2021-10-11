@@ -67,16 +67,16 @@ class BillingController extends Controller
 
         if($billing_time=="1" && $request->billing_status != null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE bill_year=$year AND bill_month=$month AND billing_status=$request->billing_status;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year=$year AND bill_month=$month AND billing_status=$request->billing_status;"));
         }
         else if($billing_time=="1" && $request->billing_status == null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE bill_year=$year AND bill_month=$month;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year=$year AND bill_month=$month;"));
         }
         else if($billing_time=="2" && $request->billing_status != null )
         {
             $month=$month-1;
-            $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE bill_year=$year AND bill_month=$month AND billing_status=$request->billing_status;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year=$year AND bill_month=$month AND billing_status=$request->billing_status;"));
         }
         else if($billing_time=="2" && $request->billing_status == null )
         {
@@ -85,24 +85,17 @@ class BillingController extends Controller
         }
         else if($billing_time=="3" && $request->billing_status != null )
         {
-            $month=$month-1;
             $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE billing_status=$request->billing_status;"));
         }
         else if($billing_time=="3" && $request->billing_status == null )
         {
-            $month=$month-1;
-            $billingData=DB::select(DB::raw("SELECT * FROM `billings`;"));
-        }
-        else if($request->billing_status!=null)
-        {
-            $billingData = DB::table("billings")->where('billing_status','=',$request->billing_status)->get();
+            $billingData = DB::table("billings")->get();
         }
         else
         {
-            $billingData = DB::table("billings")->get();
+            $billingData = DB::table("billings")->where('billing_status','=',$request->billing_status)->get();
         }
-
-
+  
         $subscribersData = DB::table("subscribers")->select('client_id', 'client_name')->where('connection_status','=',1)->get();
 
         $timestamp = Carbon::now()->toDateString();
