@@ -87,7 +87,7 @@
 
         $('#dataTables-example').DataTable({
             responsive: true,
-            pageLength: 10,
+            pageLength: 8,
             ordering:false,
             lengthChange: true,
             dom: 'Blfrtip',
