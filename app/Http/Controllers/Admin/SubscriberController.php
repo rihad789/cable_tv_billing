@@ -25,6 +25,15 @@ class SubscriberController extends Controller
     public function store(Request $request)
     {
         //
+        $client_id=DB::table("subscribers")->where('client_id','=',$request->client_id)->count();
+
+        if($client_id==1)
+        {
+            return redirect("admin/subscriber")->with('error', trans("সরি! গ্রাহকের আইডি আগে থেকে ডাটাবেজে আছে।"));
+        }
+        else
+        {
+
         $areasData = DB::table("areas")->select('area_name')->where('id','=',$request->area) ->first();
         $vicinityData = DB::table("vicinities")->select('vicinity_name') ->where('id','=',$request->vicinity) ->first();
 
@@ -46,6 +55,10 @@ class SubscriberController extends Controller
         ]);
 
         return redirect("admin/subscriber")->with('success', trans("নতুন গ্রাহক যুক্ত হয়েছে।"));
+
+        }
+
+
     }
 
     public function getVicinity($id)

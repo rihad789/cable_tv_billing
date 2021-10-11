@@ -122,7 +122,6 @@
 
                     <p class="lead">&nbsp;&nbsp;বিলিং খাতা
 
-
                     @if($connection_status==1 && $due_bill >=3 )
                         
                         <button onclick="location.href='/admin/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-primary float-right"><i class="dollar sign icon"></i>বাকী জামানত থেকে কাটুন</button>
@@ -138,7 +137,6 @@
                     @endif
                     
                     <hr>
-
                 
                     <table class="table table-bordered">
                         <tr class="text-center">
@@ -149,8 +147,6 @@
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
-
-
                                 <th>{{ __("বিল মাস") }}</th>
                                 <th>{{ __("বিল বছর") }}</th>
                                 <th>{{ __("বিলের পরিমান")}}</th>
