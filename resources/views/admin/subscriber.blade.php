@@ -98,8 +98,8 @@
                 'pdfHtml5'
             ],
             lengthMenu: [
-            [10, 25, 50, -1],
-            ['10 rows', '25 rows', '50 rows', 'Show all']
+            [08, 25, 50, -1],
+            ['08 rows', '25 rows', '50 rows', 'Show all']
         ]});
 
 
