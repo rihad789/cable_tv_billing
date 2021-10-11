@@ -55,8 +55,8 @@
                             <div class="field">
                                 <select name="billing_status" id="billing_status" class="ui search dropdown getid">
                                     <option value="">{{ __("Billing Status") }}</option>
-                                    <option value="1">{{ __("Paid") }}</option>
-                                    <option value="0">{{ __("Due ") }}</option>
+                                    <option value=true>{{ __("Paid") }}</option>
+                                    <option value=false>{{ __("Due ") }}</option>
                                 </select>
                             </div>
 
