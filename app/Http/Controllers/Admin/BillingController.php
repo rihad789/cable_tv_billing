@@ -67,21 +67,21 @@ class BillingController extends Controller
 
         if($billing_time=="1" && $request->billing_status != null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year=$year AND bill_month=$month AND billing_status=$request->billing_status;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month' AND billing_status=$request->billing_status;"));
         }
         else if($billing_time=="1" && $request->billing_status == null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year=$year AND bill_month=$month;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month';"));
         }
         else if($billing_time=="2" && $request->billing_status != null )
         {
             $month=$month-1;
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year=$year AND bill_month=$month AND billing_status=$request->billing_status;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month' AND billing_status=$request->billing_status;"));
         }
         else if($billing_time=="2" && $request->billing_status == null )
         {
             $month=$month-1;
-            $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE bill_year=$year AND bill_month=$month;"));
+            $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE bill_year= '$year' AND bill_month='$month';"));
         }
         else if($billing_time=="3" && $request->billing_status != null )
         {
