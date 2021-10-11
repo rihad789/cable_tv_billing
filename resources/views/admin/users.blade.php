@@ -26,16 +26,16 @@
                                 </div>
                                 @endif
 
-                                <p class="lead">&nbsp;&nbsp;অপারেটর
-                <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন অপারেটর") }}</button>
+                                <p class="lead">&nbsp;&nbsp;SYSTEM USER
+                <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New System User") }}</button>
                 </p>
                                 <table width="100%" class="table table-striped" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                                         <thead>
                                                 <tr>
-                                                        <th>{{ __("সিরিয়াল") }}</th>
-                                                        <th>{{ __("নাম") }}</th>
-                                                        <th>{{ __("ফোন নং") }}</th>
-                                                        <th>{{ __("ব্যবহারকারীর ধরন") }}</th>
+                                                        <th>{{ __("Serial") }}</th>
+                                                        <th>{{ __("Name") }}</th> 
+                                                        <th>{{ __("Phone") }}</th>
+                                                        <th>{{ __("Role") }}</th>
                                                         <th></th>
                                                 </tr>
                                         </thead>

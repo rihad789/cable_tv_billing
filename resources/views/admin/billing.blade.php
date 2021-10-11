@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('meta')
-<title>বিলিং | ডিঙ্গেদহ নেটওয়ার্ক</title>
-<meta name="description" content="Metro Bangla Operator">
+<title>Billing | Dingedah Network</title>
+<meta name="description" content="Dingedah Network Billing">
 @endsection
 
 @section('content')
@@ -11,58 +11,71 @@
 
 <div class="container-fluid">
 
-    <div class="row">
+    <div class="box box-success">
 
-        <div class="col-md-12">
+        <div class="box-content">
 
-            <!-- Card user Count Data -->
+            <div class="row">
 
-            <div class="box box-success">
+                <div class="col-md-12">
 
-                <div class="box-content">
-                    <p class="lead">&nbsp;&nbsp;বিলিং খাতা
-                        <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
-                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right">{{ __("এই মাসের বিল তৈরি করুন") }}</button>
+                    <p class="lead">&nbsp;&nbsp;BILLING DIARY
+
+                        <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="arrow up icon"></i>{{ __("Update Bill") }}</button>
+                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process This Month Bill") }}</button>
+
                     </p>
+
                     <hr>
 
-                    <div class="row">
+                </div>
 
-                        <div class="col-md-12">
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
 
                     <form action="{{ url('admin/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
                         @csrf
                         <div class="two fields">
                             <div class="field">
                                 <select name="billing_time" id="billing_time" class="ui search dropdown getid">
-                                    <option value="">{{ __("বিলিং সময়সীমা") }}</option>
-                                    <option value="1">{{ __("চলতি মাস") }}</option>
-                                    <option value="2">{{ __("আগের মাস") }}</option>
-                                    <option value="3">{{ __("শুরু থেকে") }}</option>
+                                    <option value="">{{ __("Billing Timeline") }}</option>
+                                    <option value="1">{{ __("Current Month") }}</option>
+                                    <option value="2">{{ __("Last Month") }}</option>
+                                    <option value="3">{{ __("From Start") }}</option>
                                 </select>
                             </div>
 
                             <div class="field">
                                 <select name="billing_status" id="billing_status" class="ui search dropdown getid">
-                                    <option value="">{{ __("বিলিং স্ট্যাটাস") }}</option>
-                                    <option value="1">{{ __("বিল পরিশোধিত।") }}</option>
-                                    <option value="0">{{ __("বিল বাকী রয়েছে। ") }}</option>
+                                    <option value="">{{ __("Billing Status") }}</option>
+                                    <option value="1">{{ __("Paid") }}</option>
+                                    <option value="0">{{ __("Due ") }}</option>
                                 </select>
                             </div>
 
                             <div class="field">
-                                <input type="hidden" name="emp_id" value="">
-                                <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("ফিল্টার") }}</button>
+
+                                <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
                             </div>
 
                         </div>
                     </form>
 
-                        </div>
 
-                    </div>
+                </div>
 
 
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- Card user Count Data -->
 
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead>
@@ -89,7 +102,6 @@
                                 <th>{{ __("বিল বছর") }}</th>
                                 <th>{{ __("বিলের পরিমান")}}</th>
                                 <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
-
                             </tr>
 
                         </thead>
@@ -140,7 +152,9 @@
                         </tbody>
                     </table>
                 </div>
+
             </div>
+
         </div>
 
     </div>

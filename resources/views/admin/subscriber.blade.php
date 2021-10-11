@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('meta')
-<title>গ্রাহক | ডিঙ্গেদহ নেটওয়ার্ক</title>
-<meta name="description" content="Metro Bangla Operator">
+<title>Subscriber | Dingedah Network</title>
+<meta name="description" content="Dingedah Network Subscriber">
 @endsection
 
 @section('content')
@@ -16,8 +16,8 @@
             <div class="box box-success">
                 <div class="box-content">
 
-                <p class="lead">&nbsp;&nbsp;গ্রাহক লিষ্ট
-                <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন গ্রাহক") }}</button>
+                <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
+                <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Subscriber") }}</button>
                 </p>
                     <hr>
 
@@ -28,22 +28,20 @@
                         <tr><td colspan="6"></td></tr>
 
 <tr class="text-center">
-    <th colspan="2" class="table-primary">সর্বমোট গ্রাহক : {{ $total_sub }} জন </th>
-    <th colspan="2" class="table-danger">সংযোগ চালু আছে: {{ $connected_sub }} জন</th>
-    <th colspan="2" class="table-info">সংযোগ বিছিন্ন আছে : {{ $disconnect_sub }} জন</th>
+    <th colspan="2" class="table-primary">Total Subscriber : {{ $total_sub }}  </th>
+    <th colspan="2" class="table-danger">Connection Running: {{ $connected_sub }} </th>
+    <th colspan="2" class="table-info">Connection Disconnected : {{ $disconnect_sub }} </th>
 
 </tr>
 
 <tr><td colspan="6"></td></tr>
 
-
                             <tr>
-
-                                <th>{{ __("গ্রাহকের কার্ড নং") }}</th>
-                                <th>{{ __("গ্রাহকের নাম") }}</th>
-                                <th>{{ __("সংযোগের তারিখ") }}</th>
-                                <th>{{ __("মোবাইল নং")}}</th>
-                                <th>{{ __("কানেকশন স্ট্যাটাস")}}</th>
+                                <th>{{ __("Subscriber Card No") }}</th>
+                                <th>{{ __("Subscriber Name") }}</th>
+                                <th>{{ __("Initilization Date") }}</th>
+                                <th>{{ __("Phone")}}</th>
+                                <th>{{ __("Connection Status")}}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -57,9 +55,9 @@
                                 <td>{{ $val->mobile_no }}</td>
                                 
                                 @if($val->connection_status=="1")
-                                <td class="text-primary">সংযোগ চালু আছে</td>
+                                <td class="text-primary">Running</td>
                                 @elseif($val->connection_status=="0")
-                                <td class="text-danger">সংযোগ বন্ধ আছে</td>
+                                <td class="text-danger">Disconnected</td>
                                 @endif
                                 <td class="align-right">
                                     <a href="{{ url('/admin/subscriber/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>

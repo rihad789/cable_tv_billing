@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('meta')
-<title>একাউন্ট | ডিঙ্গেদহ নেটওয়ার্ক</title>
-<meta name="description" content="Metro Bangla Operator">
+<title>Account | Dingedah Network</title>
+<meta name="description" content="Dingedah Network Memo">
 @endsection
 
 @section('content')
@@ -21,8 +21,8 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;কোম্পানির খাতা
-                        <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন হিসাব") }}</button>
+                    <p class="lead">&nbsp;&nbsp;ACCOUNT DIARY
+                        <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Memo") }}</button>
                     </p>
                     <hr>
 
@@ -30,12 +30,12 @@
                         <thead class="thead-light">
                             <tr>
 
-                                <th>{{ __("সিরিয়াল") }}</th>
-                                <th>{{ __("মেমো নং") }}</th>
-                                <th>{{ __("ক্রেতার নাম") }}</th>
-                                <th>{{ __("মোট পন্য") }}</th>
-                                <th>{{ __("সর্বমোট মূল্য") }}</th>
-                                <th>{{ __("তারিখ") }}</th>
+                                <th>{{ __("Serial") }}</th>
+                                <th>{{ __("Memo No") }}</th>
+                                <th>{{ __("Buyer Name") }}</th>
+                                <th>{{ __("Total Product") }}</th>
+                                <th>{{ __("Total Value") }}</th>
+                                <th>{{ __("Date") }}</th>
                                 <th></th>
 
                             </tr>
@@ -49,8 +49,8 @@
                                 <td>{{ $serial++}}</td>
                                 <td>{{ $val->memo_no }}</td>
                                 <td>{{ $val->first_name }} , {{ $val->last_name }}</td> 
-                                <td>{{ $val->products_total }} টি</td>
-                                <td>{{ $val->grand_amount }} টাকা</td>
+                                <td>{{ $val->products_total }} </td>
+                                <td>{{ $val->grand_amount }} Taka</td>
                                 <td>{{ $val->creation_date }} </td>
 
 
