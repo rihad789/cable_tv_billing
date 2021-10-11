@@ -22,7 +22,7 @@
                 <div class="box-content">
 
                     <p class="lead">&nbsp;&nbsp;SHOPPING DIARY
-                    <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
                         <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Memo") }}</button>
 
                     </p>
@@ -50,7 +50,7 @@
                             <tr>
                                 <td>{{ $serial++}}</td>
                                 <td>{{ $val->memo_no }}</td>
-                                <td>{{ $val->first_name }} , {{ $val->last_name }}</td> 
+                                <td>{{ $val->first_name }} , {{ $val->last_name }}</td>
                                 <td>{{ $val->products_total }} </td>
                                 <td>{{ $val->grand_amount }} Taka</td>
                                 <td>{{ $val->creation_date }} </td>
@@ -78,37 +78,36 @@
 
 @section('scripts')
 <script type="text/javascript">
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 10,
-            ordering:false,
-            lengthChange: true,
-            dom: 'Blfrtip',
-    buttons: [
-    
-        'copyHtml5',
-        'excelHtml5',
-        'pdfHtml5'
+    $('#dataTables-example').DataTable({
+        responsive: true,
+        pageLength: 10,
+        ordering: false,
+        lengthChange: true,
+        dom: 'Blfrtip',
+        buttons: [
 
-    ],
-    lengthMenu: [
+            'copyHtml5',
+            'excelHtml5',
+            'pdfHtml5'
+
+        ],
+        lengthMenu: [
             [10, 25, 50, -1],
             ['10 rows', '25 rows', '50 rows', 'Show all']
-        ]});
+        ]
+    });
 
 
     function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
 
-     document.body.innerHTML = printContents;
+        document.body.innerHTML = printContents;
 
-     window.print();
+        window.print();
 
-     document.body.innerHTML = originalContents;
-}
-
-
+        document.body.innerHTML = originalContents;
+    }
 </script>
 
 <script>

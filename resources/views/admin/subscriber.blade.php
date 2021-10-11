@@ -16,27 +16,31 @@
             <div class="box box-success">
                 <div class="box-content">
 
-                <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
-                
-                <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Subscriber") }}</button>
-                </p>
+                    <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
+
+                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Subscriber") }}</button>
+                    </p>
                     <hr>
 
 
-                    <table width="100%"  id="dataTables-example" class="table" class="" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" id="dataTables-example" class="table" class="" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
 
-                        <tr><td colspan="6"></td></tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
 
-<tr class="text-center">
-    <th colspan="2" class="table-primary">Total Subscriber : {{ $total_sub }}  </th>
-    <th colspan="2" class="table-danger">Connection Running: {{ $connected_sub }} </th>
-    <th colspan="2" class="table-info">Connection Disconnected : {{ $disconnect_sub }} </th>
+                            <tr class="text-center">
+                                <th colspan="2" class="table-primary">Total Subscriber : {{ $total_sub }} </th>
+                                <th colspan="2" class="table-danger">Connection Running: {{ $connected_sub }} </th>
+                                <th colspan="3" class="table-info">Connection Disconnected : {{ $disconnect_sub }} </th>
 
-</tr>
+                            </tr>
 
-<tr><td colspan="6"></td></tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
 
                             <tr>
                                 <th>{{ __("Serial") }}</th>
@@ -49,16 +53,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($serial=1)
+                            @php($serial=1)
                             @isset($subscriberData)
                             @foreach ($subscriberData as $val)
                             <tr>
-                            <td>{{ $serial++}}</td>
+                                <td>{{ $serial++}}</td>
                                 <td>{{ $val->client_id}}</td>
                                 <td>{{ $val->client_name }}</td>
                                 <td>{{ $val->initialization_date }}</td>
                                 <td>{{ $val->mobile_no }}</td>
-                                
+
                                 @if($val->connection_status=="1")
                                 <td class="text-primary">Running</td>
                                 @elseif($val->connection_status=="0")
@@ -91,7 +95,7 @@
         $('#dataTables-example').DataTable({
             responsive: true,
             pageLength: 8,
-            ordering:false,
+            ordering: false,
             lengthChange: true,
             dom: 'Blfrtip',
             buttons: [
@@ -101,53 +105,54 @@
                 'pdfHtml5'
             ],
             lengthMenu: [
-            [08, 25, 50, -1],
-            ['08 rows', '25 rows', '50 rows', 'Show all']
-        ]});
+                [08, 25, 50, -1],
+                ['08 rows', '25 rows', '50 rows', 'Show all']
+            ]
+        });
 
 
         // $('#dataTables-example').DataTable( {    buttons: [        'copy', 'excel', 'pdf'    ]} );  table.buttons().container()    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
 
-        
-
-                $("#area").change(function() {
-
-                        var area = $(this).val();
-
-                        // clear all values 
-                        $('#vicinity option:not(:first)').remove();
-
-                        $.ajax({
-                                url: '/admin/subscriber/getVicinity/' + area,
-                                type: 'get',
-                                dataType: 'json',
-                                success: function(response) {
-
-                                        var len = 0;
-                                        if (response.data != null) {
-                                                len = response.data.length;
-                                        }
-
-                                        if (len > 0) {
 
 
-                                                for (var i = 0; i < len; i++) {
-                                                        var id = response.data[i].id;
-                                                        var name = response.data[i].vicinity_name;
+        $("#area").change(function() {
 
-                                                        var option = "<option value='" + id + "'>" + name + "</option>";
+            var area = $(this).val();
 
-                                                        $("#vicinity").append(option);
+            // clear all values 
+            $('#vicinity option:not(:first)').remove();
 
-                                                }
-                                        }
-                                },
+            $.ajax({
+                url: '/admin/subscriber/getVicinity/' + area,
+                type: 'get',
+                dataType: 'json',
+                success: function(response) {
 
-                        });
-                });
+                    var len = 0;
+                    if (response.data != null) {
+                        len = response.data.length;
+                    }
+
+                    if (len > 0) {
+
+
+                        for (var i = 0; i < len; i++) {
+                            var id = response.data[i].id;
+                            var name = response.data[i].vicinity_name;
+
+                            var option = "<option value='" + id + "'>" + name + "</option>";
+
+                            $("#vicinity").append(option);
+
+                        }
+                    }
+                },
+
+            });
+        });
 
         $('#add_subscriber_form').form({
-            fields: {  
+            fields: {
 
                 client_id: {
                     identifier: 'client_id',
@@ -223,21 +228,19 @@
             }
         });
 
-});
+    });
 
 
-function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
 
-     document.body.innerHTML = printContents;
+        document.body.innerHTML = printContents;
 
-     window.print();
+        window.print();
 
-     document.body.innerHTML = originalContents;
-}
-
+        document.body.innerHTML = originalContents;
+    }
 </script>
 
 @endsection
-

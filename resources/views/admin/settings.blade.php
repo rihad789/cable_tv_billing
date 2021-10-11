@@ -21,19 +21,19 @@
                     <hr>
 
                     <div class="field">
-                            <label>{{ __("ওয়েবসাইটের নাম") }}</label>
-                            <input id="website_name" class="block mt-1 w-full" type="text" placeholder="ওয়েবসাইটের নাম" value="@isset($settingsData->website_name){{ $settingsData->website_name }}@endisset" name="website_name" />
-                        </div>
+                        <label>{{ __("ওয়েবসাইটের নাম") }}</label>
+                        <input id="website_name" class="block mt-1 w-full" type="text" placeholder="ওয়েবসাইটের নাম" value="@isset($settingsData->website_name){{ $settingsData->website_name }}@endisset" name="website_name" />
+                    </div>
 
-                        <div class="field">
-                            <label>{{ __("ওয়েবসাইটের লগো লিংক") }}</label>
-                            <input id="logo_url" class="block mt-1 w-full" type="file"  value="@isset($settingsData->logo_url){{ $settingsData->logo_url }}@endisset" name="logo_url" />
-                        </div>
+                    <div class="field">
+                        <label>{{ __("ওয়েবসাইটের লগো লিংক") }}</label>
+                        <input id="logo_url" class="block mt-1 w-full" type="file" value="@isset($settingsData->logo_url){{ $settingsData->logo_url }}@endisset" name="logo_url" />
+                    </div>
 
-                        <div class="field">
-                            <label>{{ __("গ্রাহক প্রতি ডিস বিল") }}</label>
-                            <input id="dish_bill" class="block mt-1 w-full" type="number" placeholder="150" value="@isset($settingsData->dish_bill){{ $settingsData->dish_bill }}@endisset" name="dish_bill" />
-                        </div>
+                    <div class="field">
+                        <label>{{ __("গ্রাহক প্রতি ডিস বিল") }}</label>
+                        <input id="dish_bill" class="block mt-1 w-full" type="number" placeholder="150" value="@isset($settingsData->dish_bill){{ $settingsData->dish_bill }}@endisset" name="dish_bill" />
+                    </div>
 
                     <div class="field">
                         <div class="ui error message">
