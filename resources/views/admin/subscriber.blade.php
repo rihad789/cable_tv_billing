@@ -39,6 +39,7 @@
 <tr><td colspan="6"></td></tr>
 
                             <tr>
+                                <th>{{ __("Serial") }}</th>
                                 <th>{{ __("Subscriber Card No") }}</th>
                                 <th>{{ __("Subscriber Name") }}</th>
                                 <th>{{ __("Initilization Date") }}</th>
@@ -48,9 +49,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @php($serial=1)
                             @isset($subscriberData)
                             @foreach ($subscriberData as $val)
                             <tr>
+                            <td>{{ $serial++}}</td>
                                 <td>{{ $val->client_id}}</td>
                                 <td>{{ $val->client_name }}</td>
                                 <td>{{ $val->initialization_date }}</td>

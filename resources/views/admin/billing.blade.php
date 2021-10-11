@@ -108,6 +108,7 @@
                             </tr>
 
                             <tr>
+                            <th>{{ __("Serial") }}</th>
                             <th>{{ __("Client Card No") }}</th>
                             <th>{{ __("Client Name") }}</th>
                             <th>{{ __("Bill Month") }}</th>
@@ -118,9 +119,11 @@
 
                         </thead>
                         <tbody>
+                        @php($serial=1)
                             @isset($billingData)
                             @foreach ($billingData as $val)
                             <tr>
+                                <td>{{ $serial++}}</td>
                                 <td>{{ $val->client_id}}</td>
                                 <td>{{ $val->client_name}}</td>
                                 @if($val->bill_month=="1")
