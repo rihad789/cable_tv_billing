@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+@include('admin.modals.add_subscriber')
 
 <div class="container-fluid">
 
@@ -20,90 +21,98 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;গ্রাহক বিস্তারিত</p>
+                    <p class="lead">&nbsp;&nbsp;CLIENT DETAILS
+                    @isset($subscriberData->connection_status) 
+                                    @if($subscriberData->connection_status==1)
+                                    <button class="btn btn-secondary mini offsettop5 btn-add float-right" disabled>Issue New Card </button>
+                                    @else
+                                    <button  class="btn btn-secondary mini offsettop5 btn-add float-right">Issue New Card </button>
+                                    @endif
+                                    @endisset
+                    </p> 
                     <hr>
 
                     @isset($subscriberData)
-                    @foreach ($subscriberData as $val)
-
+ 
                     <table class="table">
 
                         <thead class="thead-light">
 
                             <tr>
-                                <th>ফিল্ডের নাম</th>
-                                <th>ফিল্ডের ভ্যালূ</th>
+                                <th>Field Name</th>
+                                <th>Field Value</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td>গ্রাহকের কার্ড নং</td>
-                                <td>@isset($val->client_id){{ $val->client_id }}@endisset</td>
+                                <td>Subscriber Card NO</td> 
+                                <td>@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset</td>
                             </tr>
 
                             <tr>
-                                <td>সংযোগের তারিখ</td>
-                                <td>@isset($val->initialization_date){{ $val->initialization_date }}@endisset</td>
+                                <td>Initialization Date</td>
+                                <td>@isset($subscriberData->initialization_date){{ $subscriberData->initialization_date }}@endisset</td>
                             </tr>
 
                             <tr>
-                                <td>ঠিকানা</td>
-                                <td>@isset($val->address){{ $val->address }}@endisset</td>
+                                <td>Address</td>
+                                <td>@isset($subscriberData->address){{ $subscriberData->address }}@endisset</td>
                             </tr>
 
                             <tr>
-                                <td>গ্রাহকের নাম</td>
-                                <td>@isset($val->client_name){{ $val->client_name }}@endisset</td>
+                                <td>Subscriber Name</td>
+                                <td>@isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset</td>
                             </tr>
 
                             <tr>
-                                <td>গ্রাহকের পিতা</td>
-                                <td>@isset($val->client_father){{ $val->client_father }}@endisset</td>
+                                <td>Subscriber Fathers Name</td>
+                                <td>@isset($subscriberData->client_father){{ $subscriberData->client_father }}@endisset</td>
                             </tr>
 
                             <tr>
-                                <td>মোবাইল নং</td>
-                                <td> <a type="button" href="tel:@isset($val->mobile_no){{ $val->mobile_no }}@endisset">@isset($val->mobile_no){{ $val->mobile_no }}@endisset <i class="icon call"></i></a></td>
+                                <td>Mobile No</td>
+                                <td> <a type="button" href="tel:@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset">@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset <i class="icon call"></i></a></td>
                             </tr>
 
                             <tr>
-                                <td>বিলের পরিমান</td>
-                                <td>@isset($val->bill_amount){{ $val->bill_amount }}@endisset টাকা</td>
+                                <td>Bill Amount</td>
+                                <td>@isset($subscriberData->bill_amount){{ $subscriberData->bill_amount }}@endisset টাকা</td>
                             </tr>
 
                             <tr>
-                                <td>জামানত</td>
-                                <td> @isset($val->locked_fund){{ $val->locked_fund }}@endisset টাকা</td>
+                                <td>Locked Fund</td>
+                                <td> @isset($subscriberData->locked_fund){{ $subscriberData->locked_fund }}@endisset টাকা</td>
                             </tr>
 
                             <tr>
-                                <td>কানেকশন স্ট্যাটাস</td>
-                                <td>@isset($val->connection_status)
-
-                                    @if($val->connection_status==1)
-                                    সংযোগ চালু আছে
+                                <td>Connection Status</td>
+                                <td> 
+                                    @isset($subscriberData->connection_status) 
+                                    @if($subscriberData->connection_status==1)
+                                    Running
                                     @else
-                                    সংযোগ বন্ধ আছে
+                                    Disconnected 
                                     @endif
-                                    @endisset</td>
+                                    @endisset
+                                </td>
+
+                                
                             </tr>
-
                             <tr>
-                                <td>গুরুত্বপুর্ন বার্তা</td>
-                                <td>@isset($val->connection_status)
-
-                                    @if($val->connection_status==0)
+                                <td>Important Message</td>
+                                <td>
+                                    @isset($subscriberData->connection_status)
+                                    @if($subscriberData->connection_status==0)
                                     এই গ্রাহকের কানেকশন কাট করা হয়েছে। পুনরায় ইনার বিল তৈরি করতে নতুন ভাবে গ্রাহক যুক্ত করুন।
                                     @endif
-                                    @endisset</td>
+                                    @endisset
+                                </td>
                             </tr>
 
                         </tbody>
 
                     </table>
-
-                    @endforeach
                     @endisset
 
 
@@ -120,18 +129,18 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;বিলিং খাতা
+                    <p class="lead">&nbsp;&nbsp;BILLING DIARY
 
                     @if($connection_status==1 && $due_bill >=3 )
                         
-                        <button onclick="location.href='/admin/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-primary float-right"><i class="dollar sign icon"></i>বাকী জামানত থেকে কাটুন</button>
-                        <button onclick="location.href='/admin/subscriber/billing/{{ $id }}'"  class="btn btn-primary float-right"><i class="eye icon"></i>গ্রাহকের সম্পুর্ন বিল দেখুন </button>    
+                        <button onclick="location.href='/admin/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-danger float-right"><i class="dollar sign icon"></i>Settle Due</button>
+                        <button onclick="location.href='/admin/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>     
                     </p>
 
                     @else
                     
-                        <button  class="btn btn-primary float-right" disabled><i class="dollar sign icon"></i>বাকী জামানত থেকে কাটুন</button>
-                        <button onclick="location.href='/admin/subscriber/billing/{{ $id }}'"  class="btn btn-primary float-right"><i class="eye icon"></i>গ্রাহকের সম্পুর্ন বিল দেখুন </button>
+                        <button  class="btn btn-danger float-right" disabled><i class="dollar sign icon"></i>Settle Due</button>
+                        <button onclick="location.href='/admin/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>
                         </p>
                     
                     @endif
@@ -140,17 +149,17 @@
                 
                     <table class="table table-bordered">
                         <tr class="text-center">
-                            <td class="table-primary">বিল বাকী আছে : {{ $total_bill }}</td>
+                            <td class="table-primary">Bill Due : {{ $total_bill }}</td>
                         </tr>
                     </table>
 
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
-                                <th>{{ __("বিল মাস") }}</th>
-                                <th>{{ __("বিল বছর") }}</th>
-                                <th>{{ __("বিলের পরিমান")}}</th>
-                                <th>{{ __("বিলিং স্ট্যাটাস")}}</th>
+                                <th>{{ __("Bill Month") }}</th>
+                                <th>{{ __("BIll Year") }}</th>
+                                <th>{{ __("Bill Amount")}}</th>
+                                <th>{{ __("Billing Status")}}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -159,39 +168,39 @@
                             @foreach ($billingData as $val)
                             <tr>
 
-                                @if($val->bill_month=="1")
-                                <td>জানুয়ারী</td>
+                            @if($val->bill_month=="1")
+                                <td>January</td>
                                 @elseif($val->bill_month=="2")
-                                <td>ফেব্রুয়ারী</td>
+                                <td>February</td>
                                 @elseif($val->bill_month=="3")
-                                <td>মার্চ</td>
+                                <td>March</td>
                                 @elseif($val->bill_month=="4")
-                                <td>এপ্রিল</td>
+                                <td>April</td>
                                 @elseif($val->bill_month=="5")
-                                <td>মে</td>
+                                <td>May</td>
                                 @elseif($val->bill_month=="6")
-                                <td>জুন</td>
+                                <td>June</td>
                                 @elseif($val->bill_month=="7")
-                                <td>জুলায়</td>
+                                <td>July</td>
                                 @elseif($val->bill_month=="8")
-                                <td>আগষ্ট</td>
+                                <td>August</td>
                                 @elseif($val->bill_month=="9")
-                                <td>সেপ্টেম্বর</td>
+                                <td>September</td>
                                 @elseif($val->bill_month=="10")
-                                <td>অক্টোবর</td>
+                                <td>Octobor</td>
                                 @elseif($val->bill_month=="11")
-                                <td>নভেমম্বর</td>
+                                <td>November</td>
                                 @elseif($val->bill_month=="12")
-                                <td>ডিসেম্বর</td>
+                                <td>December</td>
                                 @endif
 
                                 <td>{{ $val->bill_year }}</td>
                                 <td>{{ $val->bill_amount }}</td>
 
                                 @if($val->billing_status=="1")
-                                <td class="text-primary">পরিশোধিত</td>
+                                <td class="text-primary">Due</td>
                                 @elseif($val->billing_status=="0")
-                                <td class="text-danger">বাকী </td>
+                                <td class="text-danger">Paid </td>
                                 @endif
 
                             </tr>

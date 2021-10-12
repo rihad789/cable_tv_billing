@@ -72,7 +72,7 @@ class SubscriberController extends Controller
     public function view($id)
     {
         //
-        $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->get();
+        $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
         
         $status = DB::table("subscribers")->select('connection_status')->where('client_id','=',$id) ->first();
 
@@ -87,15 +87,16 @@ class SubscriberController extends Controller
         }
 
         $connection_status=$status->connection_status;
+        $areasData = DB::table("areas") ->get();
 
 
         //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
         
-        return view('admin.view.view_subscriber',compact('id','subscriberData','billingData','total_bill','due_bill','connection_status'));
+        return view('admin.view.view_subscriber',compact('id','areasData','subscriberData','billingData','total_bill','due_bill','connection_status'));
         //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
     }
 
-    
+  
 
     public function cut_lock_fund($id)
     {
@@ -149,10 +150,30 @@ class SubscriberController extends Controller
     {
         //
 
-        $subscriberData = DB::table("subscribers") ->get();
-        $areasData = DB::table("areas")->where('')->get();
-        return view('admin.subscriber',compact('subscriberData','areasData'));
+        $filter_input_area=$request->filter_input_area;
+        $filter_input_vicinity=$request->filter_input_vicinity;
+        $subscriberData="";
 
+        if($filter_input_area != null && $filter_input_vicinity != null)
+        {
+            $subscriberData = DB::table("subscribers")->where('area','=',$filter_input_area)->where('vicinity','=',$filter_input_vicinity)->get();
+        }
+        else if($filter_input_area != null && $filter_input_vicinity == null)
+        {
+            $subscriberData = DB::table("subscribers")->where('area','=',$filter_input_area)->get();
+        }
+        else
+        {
+            $subscriberData = DB::table("subscribers") ->get();
+        }
+
+        $areasData = DB::table("areas") ->get();
+
+        $total_sub = DB::table("subscribers")->count();
+        $disconnect_sub=DB::table("subscribers")->where('connection_status','=',0)->count();
+        $connected_sub=DB::table("subscribers")->where('connection_status','=',1)->count();
+
+        return view('admin.subscriber',compact('subscriberData','areasData','total_sub','disconnect_sub','connected_sub'));
 
     }
 

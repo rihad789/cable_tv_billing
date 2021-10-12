@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('meta')
-<title>এরিয়া | ডিঙ্গেদহ নেটওয়ার্ক</title>
+<title>AREA & VICINITY | DINGEDSH NETWORK</title>
 <meta name="description" content="Metro Bangla Operator">
 @endsection
 
@@ -24,8 +24,8 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;এরিয়া সমূহ
-                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("নতুন এরিয়া") }}</button>
+                    <p class="lead">&nbsp;&nbsp;AREA LIST 
+                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Area") }}</button>
                     </p>
                     <hr>
 
@@ -33,8 +33,8 @@
                         <thead class="thead-light">
                             <tr>
 
-                                <th>{{ __("সিরিয়াল") }}</th>
-                                <th>{{ __("এরিয়ার নাম") }}</th>
+                                <th>{{ __("Serial") }}</th>
+                                <th>{{ __("Area Name") }}</th>
 
                                 <th></th>
                             </tr>
@@ -66,17 +66,17 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;পাড়াসমূহ
-                        <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("নতুন পাড়া") }}</button>
+                    <p class="lead">&nbsp;&nbsp;VICINITY LIST
+                        <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("New Vicinity") }}</button> 
                     </p>
                     <hr>
 
                     <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
-                                <th>{{ __("সিরিয়াল") }}</th>
-                                <th>{{ __("পাড়ার নাম") }}</th>
-                                <th>{{ __("গ্রামের নাম")}}
+                                <th>{{ __("Serial") }}</th>
+                                <th>{{ __("Vicinity Name") }}</th>
+                                <th>{{ __("Area Name")}}
                                 <th></th>
                             </tr>
                         </thead>

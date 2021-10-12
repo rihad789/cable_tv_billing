@@ -47,12 +47,11 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     
 
     Route::get('admin/subscriber', 'App\Http\Controllers\Admin\SubscriberController@index')->name('subscriber');
-    Route::post('admin/subscriber/filter', 'App\Http\Controllers\Admin\SubscriberController@filter')->name('filter');  
+    Route::post('admin/subscriber', 'App\Http\Controllers\Admin\SubscriberController@filter')->name('filter');  
     Route::post('admin/subscriber/store', 'App\Http\Controllers\Admin\SubscriberController@store')->name('add_subscriber');
     Route::get('admin/subscriber/getVicinity/{id}', 'App\Http\Controllers\Admin\SubscriberController@getVicinity')->name('getVicinity');
     Route::get('admin/subscriber/{id}', 'App\Http\Controllers\Admin\SubscriberController@view')->name('view_subscriber');
     Route::get('admin/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Admin\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
-
     Route::get('admin/subscriber/billing/{id}', 'App\Http\Controllers\Admin\SubscriberController@billing')->name('billing');
 
   

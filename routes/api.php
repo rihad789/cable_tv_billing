@@ -18,7 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('retrieve_train_line','App\Http\Controllers\MetroCardAppController@retrieve_train_line');
+Route::get('retrieve_area','App\Http\Controllers\MobileAppController@retrieve_area');
+Route::get('retrieve_vicinity','App\Http\Controllers\MobileAppController@retrieve_vicinity');
 
 Route::post('add_new_complaint','App\Http\Controllers\MetroCardAppController@add_new_complaint');
 

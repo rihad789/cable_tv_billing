@@ -10,32 +10,71 @@
 
 <div class="container-fluid" id="printableArea">
 
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Card user Count Data -->
-            <div class="box box-success">
-                <div class="box-content">
-
+    <div class="box box-success">
+        <div class="box-content">
+            <div class="row">
+                <div class="col-md-12">
                     <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
-
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
                         <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Subscriber") }}</button>
                     </p>
                     <hr>
+                </div>
+                <hr>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="{{ url('admin/subscriber') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
+                        @csrf
+                        <div class="two fields">
+                            <div class="field">
+                                <div class="sixteen wide field role">
+                                    <select id="filter_input_area" class="ui dropdown uppercase required" name="filter_input_area" required>
+                                        <option value="">Select Area Name</option>
+                                        @isset($areasData)
+                                        @foreach ($areasData as $val)
+                                        <option value={{ $val->id }}>{{ $val->area_name }}</option>
+                                        @endforeach
+                                        @endisset
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <select id="filter_input_vicinity" class="ui dropdown uppercase required form-control" name="filter_input_vicinity" required>
+                                    <option value="">Select Vicinity Name</option>
+                                </select>
+                            </div>
+
+
+                            <div class="two fields">
+                                <div class="field">
+                                    <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- Card user Count Data -->
 
 
                     <table width="100%" id="dataTables-example" class="table" class="" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
-
                             <tr>
                                 <td colspan="6"></td>
                             </tr>
-
                             <tr class="text-center">
                                 <th colspan="2" class="table-primary">Total Subscriber : {{ $total_sub }} </th>
                                 <th colspan="2" class="table-danger">Connection Running: {{ $connected_sub }} </th>
                                 <th colspan="3" class="table-info">Connection Disconnected : {{ $disconnect_sub }} </th>
-
                             </tr>
 
                             <tr>
@@ -71,7 +110,6 @@
                                 <td class="align-right">
                                     <a href="{{ url('/admin/subscriber/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
                                 </td>
-
                             </tr>
                             @endforeach
                             @endisset
@@ -80,9 +118,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 @endsection
@@ -111,14 +147,40 @@
         });
 
 
-        // $('#dataTables-example').DataTable( {    buttons: [        'copy', 'excel', 'pdf'    ]} );  table.buttons().container()    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+        $("#filter_input_area").change(function() {
 
+            var area = $(this).val();
 
+            // clear all values 
+            $('#filter_input_vicinity option:not(:first)').remove();
+            $.ajax({
+                url: '/admin/subscriber/getVicinity/' + area,
+                type: 'get',
+                dataType: 'json',
+                success: function(response) {
+                    var len = 0;
+                    if (response.data != null) {
+                        len = response.data.length;
+                    }
+                    if (len > 0) {
+
+                        for (var i = 0; i < len; i++) {
+                            var id = response.data[i].id;
+                            var name = response.data[i].vicinity_name;
+
+                            var option = "<option value='" + id + "'>" + name + "</option>";
+
+                            $("#filter_input_vicinity").append(option);
+                        }
+                    }
+                },
+
+            });
+        });
 
         $("#area").change(function() {
 
             var area = $(this).val();
-
             // clear all values 
             $('#vicinity option:not(:first)').remove();
 
@@ -127,14 +189,11 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response) {
-
                     var len = 0;
                     if (response.data != null) {
                         len = response.data.length;
                     }
-
                     if (len > 0) {
-
 
                         for (var i = 0; i < len; i++) {
                             var id = response.data[i].id;
@@ -229,7 +288,6 @@
         });
 
     });
-
 
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;
