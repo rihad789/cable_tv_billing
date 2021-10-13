@@ -22,4 +22,11 @@ class MobileAppController extends Controller
         $vicinitiesData= DB::select( DB::raw("select vicinities.id,vicinities.vicinity_name,areas.area_name from vicinities INNER JOIN areas on vicinities.area_id=areas.id"));
         return response()->json(['VicinityJson'=>$vicinitiesData]);
     }
+
+    public function retrieve_subscriber()
+    {
+        $subscriberData = DB::table("subscribers")->select('client_id','client_name') ->get();
+        return response()->json(['SubscriberJson'=>$subscriberData]);
+    }
 }
+

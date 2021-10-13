@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('retrieve_area','App\Http\Controllers\MobileAppController@retrieve_area');
 Route::get('retrieve_vicinity','App\Http\Controllers\MobileAppController@retrieve_vicinity');
+Route::get('retrieve_subscriber','App\Http\Controllers\MobileAppController@retrieve_subscriber');
 
 Route::post('add_new_complaint','App\Http\Controllers\MetroCardAppController@add_new_complaint');
 
