@@ -12,96 +12,111 @@
 
 <div class="container-fluid">
 
+<div class="row">
+                <div class="col-md-12">
 
-
-    <div class="row">
-
-        <div class="col-md-5">
-
-            <!-- Card user Count Data -->
-
-            <div class="box box-success">
+                <div class="box box-success">
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;AREA LIST 
-                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Area") }}</button>
-                    </p>
-                    <hr>
+                <p class="lead">&nbsp;&nbsp;AREA & VICINITY
 
-                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
+                <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("Vicinity") }}</button> 
+                <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Area") }}</button>
 
-                                <th>{{ __("Serial") }}</th>
-                                <th>{{ __("Area Name") }}</th>
+                </p>
+                <hr>
 
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php($serial=1)
-                            @isset($areasData)
-                            @foreach ($areasData as $val)
-                            <tr>
-                                <td>{{ $serial++}}</td>
-                                <td>{{ $val->area_name }}</td>
-                                <td class="align-right">
-                                    <a href="{{ url('admin/area/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই গ্রাম মুছে ফেলতে চান? ফলস্বরূপ গ্রামের সাথে পাড়াসমূহ মূছে যাবে?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endisset
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                <div class="row">
+
+<div class="col-md-5">
+
+    <!-- Card user Count Data -->
+
+    <div class="box box-success">
+
+        <div class="box-content">
+
+
+            <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                <thead class="thead-light">
+                    <tr>
+
+                        <th>{{ __("Serial") }}</th>
+                        <th>{{ __("Area Name") }}</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php($serial=1)
+                    @isset($areasData)
+                    @foreach ($areasData as $val)
+                    <tr>
+                        <td>{{ $serial++}}</td>
+                        <td>{{ $val->area_name }}</td>
+                        <td class="align-right">
+                            <a href="{{ url('admin/area/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই গ্রাম মুছে ফেলতে চান? ফলস্বরূপ গ্রামের সাথে পাড়াসমূহ মূছে যাবে?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endisset
+                </tbody>
+            </table>
         </div>
-
-        <div class="col-md-7">
-
-            <!-- Card user Count Data -->
-
-            <div class="box box-success">
-
-                <div class="box-content">
-
-                    <p class="lead">&nbsp;&nbsp;VICINITY LIST
-                        <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("New Vicinity") }}</button> 
-                    </p>
-                    <hr>
-
-                    <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
-                                <th>{{ __("Serial") }}</th>
-                                <th>{{ __("Vicinity Name") }}</th>
-                                <th>{{ __("Area Name")}}
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php($serial=1)
-                            @isset($vicinitiesData)
-                            @foreach ($vicinitiesData as $val)
-                            <tr>
-                                <td>{{ $serial++}}</td>
-                                <td>{{ $val->vicinity_name }}</td>
-                                <td>{{ $val->area_name }}</td>
-
-                                <td class="align-right">
-                                    <a href="{{ url('admin/vicinity/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই পাড়া মুছে ফেলতে চান?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endisset
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
     </div>
+</div>
+
+<div class="col-md-7">
+
+    <!-- Card user Count Data -->
+
+    <div class="box box-success">
+
+        <div class="box-content">
+
+            <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
+                <thead class="thead-light">
+                    <tr>
+                        <th>{{ __("Serial") }}</th>
+                        <th>{{ __("Vicinity Name") }}</th>
+                        <th>{{ __("Area Name")}}
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php($serial=1)
+                    @isset($vicinitiesData)
+                    @foreach ($vicinitiesData as $val)
+                    <tr>
+                        <td>{{ $serial++}}</td>
+                        <td>{{ $val->vicinity_name }}</td>
+                        <td>{{ $val->area_name }}</td>
+
+                        <td class="align-right">
+                            <a href="{{ url('admin/vicinity/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই পাড়া মুছে ফেলতে চান?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @endisset
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+                </div>
+                </div>
+                    
+                   
+                </div>
+               
+            </div>
+
+
 
 </div>
 

@@ -1,11 +1,11 @@
 <div class="ui modal medium edit">
-    <div class="header">{{ __("নতুন পাড়া যোগ করুন") }}</div>
+    <div class="header">{{ __("Update BIlling") }}</div>
     <div class="content">
         <form id="edit_biil_form" action="{{ url('admin/billing/update') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">
-                    <label for="">গ্রাহকের আইডি</label>
+                    <label for="">Subscriber ID</label>
                     <input name="client_id" id="client_id" list="clients" autocomplete="off" placeholder="গ্রাহকের আইডি">
 
                     <datalist  id="clients">
@@ -19,9 +19,9 @@
             </div>
 
             <div class="field">
-                <label>বিলিং স্ট্যাটাস</label>
+                <label>Billing Status</label>
                 <select id="billing_status" class="ui dropdown uppercase required" name="billing_status" required>
-                    <option value="">স্ট্যাটাস পরিবর্তন করুন</option>
+                    <option value="">Select Billing Status</option>
                     <option value="1">Paid</option>
                     <option value="0">Unpaid</option>
                 </select>

@@ -59,22 +59,26 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::post('admin/billing', 'App\Http\Controllers\Admin\BillingController@filter')->name('filter');  
     Route::get('admin/billing/generate', 'App\Http\Controllers\Admin\BillingController@generate')->name('generate');
     Route::post('admin/billing/update', 'App\Http\Controllers\Admin\BillingController@update')->name('update');
+    Route::get('admin/billing/billcontection', 'App\Http\Controllers\Admin\BillingController@billcontection')->name('billcontection');
+
+
+    
 
     Route::get('admin/memo', 'App\Http\Controllers\Admin\MemoController@index')->name('account');
     Route::post('admin/memo', 'App\Http\Controllers\Admin\MemoController@store')->name('store');
     Route::get('admin/memo/{id}', 'App\Http\Controllers\Admin\MemoController@view')->name('view');
 
 
-    Route::get('admin/settings', 'App\Http\Controllers\Admin\SettingsController@index')->name('settings');
+    Route::get('admin/account', 'App\Http\Controllers\Admin\AccountController@index')->name('account');
 
 
     //User Route
     Route::get('admin/profile', 'App\Http\Controllers\Admin\UserController@admin_profile')->name('profile');
     Route::post('admin/profile/update', 'App\Http\Controllers\Admin\UserController@admin_profile_update')->name('update_profile');
 
-    Route::get('admin/account', 'App\Http\Controllers\Admin\UserController@admin_account')->name('account');
-    Route::post('admin/account/update', 'App\Http\Controllers\Admin\UserController@update_admin_account')->name('update_account');
-    Route::post('admin/account/update_password', 'App\Http\Controllers\Admin\UserController@admin_update_password')->name('update_password');
+    // Route::get('admin/account', 'App\Http\Controllers\Admin\UserController@admin_account')->name('account');
+    // Route::post('admin/account/update', 'App\Http\Controllers\Admin\UserController@update_admin_account')->name('update_account');
+    // Route::post('admin/account/update_password', 'App\Http\Controllers\Admin\UserController@admin_update_password')->name('update_password');
 
 
     //Users Route

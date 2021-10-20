@@ -1,14 +1,14 @@
 <div class="ui modal medium edit">
-    <div class="header">{{ __("নতুন পাড়া যোগ করুন") }}</div>
+    <div class="header">{{ __("New Vicinity Name") }}</div>
     <div class="content">
         <form id="add_vicinity_form" action="{{ url('admin/vicinity') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">
                 <div class="sixteen wide field role">
-                    <label for="">গ্রামের নাম</label>
+                    <label for="">Area Name</label>
                     <select id="area_id" class="ui dropdown uppercase required" name="area_id" required>
-                        <option value="">গ্রামের নাম পছন্দ করুন</option>
+                        <option value="">Select Area Name</option>
 
                         @foreach ($areasData as $val)
                         <option value={{ $val->id }}>{{ $val->area_name }}</option>
@@ -19,8 +19,8 @@
             </div>
 
             <div class="field">
-                <label>পাড়ার নাম</label>
-                <input type="text" name="vicinity_name" class="block mt-1 w-full" id="vicinity_name" placeholder="পাড়ার নাম">
+                <label>Vicinity Name</label>
+                <input type="text" name="vicinity_name" class="block mt-1 w-full" id="vicinity_name" placeholder="Vicinity Name">
             </div>
 
             <div class="field">

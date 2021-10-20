@@ -14,12 +14,22 @@ class SubscriberController extends Controller
         $subscriberData = DB::table("subscribers") ->get();
         $areasData = DB::table("areas") ->get();
 
+
+        $timestamp = Carbon::now()->toDateString();
+
+        //if($month.strlen(1)) {  $month="0".$month; }
+
+        $dateTime=Carbon::parse($timestamp)->year."-".Carbon::parse($timestamp)->month;
+
         $total_sub = DB::table("subscribers")->count();
         $disconnect_sub=DB::table("subscribers")->where('connection_status','=',0)->count();
         $connected_sub=DB::table("subscribers")->where('connection_status','=',1)->count();
+                
+        //Retrieving Subscriber Count for this Month
+        $subMonth=DB::table("subscribers")->where("created_at", "like", "$dateTime%")->count();
 
 
-        return view('admin.subscriber',compact('subscriberData','areasData','total_sub','disconnect_sub','connected_sub'));
+        return view('admin.subscriber',compact('subscriberData','subMonth','areasData','total_sub','disconnect_sub','connected_sub'));
     }
 
     public function store(Request $request)

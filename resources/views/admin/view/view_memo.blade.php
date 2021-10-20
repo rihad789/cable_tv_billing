@@ -21,7 +21,8 @@
 
                     <p class="lead">&nbsp;&nbsp;MEMO DETAILS
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-
+                        <button onclick="history.back()" class="ui btn btn-secondary mini offsettop5 float-right"><i class="arrow left icon"></i>{{ __("Go Back") }}</button>
+                    
                     </p>
                     <hr>
 

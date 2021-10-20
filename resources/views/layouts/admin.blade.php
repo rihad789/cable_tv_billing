@@ -39,19 +39,26 @@
             </ul>
 
             <ul class="list-unstyled components">
-                <li class="">
+                <!-- <li class="">
                     <a href="{{ url('admin') }}">
                         <i class="ui icon home"></i>
                         <p>{{ __('Dashboard') }}</p>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="">
+                    <a href="{{ url('admin/billing/billcontection') }}">
+                    <i class="calendar outline icon"></i>
+                        <p>{{ __('Bill Collection') }}</p>
+                    </a>
+                </li>
+
+                <!-- <li class="">
                     <a href="{{ url('admin/area') }}">
                         <i class="ui building icon"></i>
                         <p>{{ __('Area & Vicinity') }}</p>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="">
                     <a href="{{ url('admin/subscriber') }}">

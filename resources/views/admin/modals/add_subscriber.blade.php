@@ -1,5 +1,5 @@
 <div class="ui modal medium add">
-    <div class="header">{{ __("নতুন গ্রাহক") }}</div>
+    <div class="header">{{ __("New Subscriber") }}</div> 
     <div class="content">
         <form id="add_subscriber_form" action="{{ url('admin/subscriber/store') }}" class="ui form add-user" method="post" accept-charset="utf-8">
             @csrf
@@ -7,28 +7,13 @@
             <div class="two fields">
 
                 <div class="field">
-                    <label>গ্রাহকের কার্ড নং</label>
-                    <input type="text" name="client_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="client_id" placeholder="গ্রাহকের কার্ড নং">
+                    <label>Subscriber Card No</label>
+                    <input type="text" name="client_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="client_id" placeholder="Subscriber Card No">
                 </div>
 
                 <div class="field">
-                    <label>সংযোগের তারিখ</label>
-                    <input type="date" name="initialization_date" class="form-control" id="initialization_date" placeholder="সংযোগের তারিখ">
-                </div>
-
-            </div>
-
-            <div class="two fields">
-
-                <div class="field">
-                    <label>গ্রাহকের নাম</label>
-                    <input type="text" name="client_name" class="form-control" id="client_name" placeholder="গ্রাহকের নাম">
-
-                </div>
-
-                <div class="field">
-                    <label>গ্রাহকের পিতা</label>
-                    <input type="text" name="client_father" class="form-control" id="client_father" placeholder="গ্রাহকের পিতার নাম">
+                    <label>Initialization Date</label>
+                    <input type="date" name="initialization_date" class="form-control" id="initialization_date" placeholder="Initialization Date">
                 </div>
 
             </div>
@@ -36,9 +21,24 @@
             <div class="two fields">
 
                 <div class="field">
-                    <label>গ্রামের নাম</label>
+                    <label>Subscriber Name</label>
+                    <input type="text" name="client_name" class="form-control" id="client_name" placeholder="Subscriber Name">
+
+                </div>
+
+                <div class="field">
+                    <label>Father's Name</label>
+                    <input type="text" name="client_father" class="form-control" id="client_father" placeholder="Father's Name">
+                </div>
+
+            </div>
+
+            <div class="two fields">
+
+                <div class="field">
+                    <label>Area Name</label>
                     <select id="area" class="ui dropdown uppercase required form-control" name="area" required>
-                        <option value="">গ্রামের নাম পছন্দ করুন</option>
+                        <option value="">Select Area Nane</option>
 
                         @foreach ($areasData as $val)
                         <option value={{ $val->id }}>{{ $val->area_name }}</option>
@@ -48,9 +48,9 @@
                 </div>
 
                 <div class="field">
-                    <label>পাড়ার নাম</label>
+                    <label>Vicinity Name</label>
                     <select id="vicinity" class="ui dropdown uppercase required form-control" name="vicinity" required>
-                        <option value="">পাড়ার নাম পছন্দ করুন</option>
+                        <option value="">Select Vicinity Name</option>
 
                     </select>
                 </div>
@@ -58,25 +58,25 @@
             </div>
 
             <div class="field">
-                <label>ঠিকানা</label>
-                <input type="text" name="address" class="form-control" id="address" placeholder="ঠিকানা">
+                <label>Address</label>
+                <input type="text" name="address" class="form-control" id="address" placeholder="Address">
             </div>
 
             <div class="two fields">
 
                 <div class="field">
-                    <label>মোবাইল নং( ইংরেজিতে )</label>
+                    <label>Mobile No</label>
                     <input type="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern="[0-9]{11}" name="mobile_no" class="form-control" id="mobile_no" placeholder="01952-820194">
                 </div>
 
                 <div class="field">
-                    <label>জামানত( ইংরেজিতে )</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="locked_fund" class="form-control" id="locked_fund" placeholder="জামানত">
+                    <label>Locked Fund</label>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="locked_fund" class="form-control" id="locked_fund" placeholder="Locked Fund">
                 </div>
 
                 <div class="field">
-                    <label>বিলের পরিমান ( ইংরেজিতে )</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="bill_amount" class="form-control" id="bill_amount" placeholder="বিলের পরিমান">
+                    <label>Bill Amount</label>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="bill_amount" class="form-control" id="bill_amount" placeholder="Bill Amount">
                 </div>
 
             </div>

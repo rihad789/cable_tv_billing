@@ -23,7 +23,7 @@
 
                     <p class="lead">&nbsp;&nbsp;SHOPPING DIARY
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("New Memo") }}</button>
+                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Shopping Memo") }}</button>
 
                     </p>
                     <hr>
@@ -52,7 +52,7 @@
                                 <td>{{ $val->memo_no }}</td>
                                 <td>{{ $val->first_name }} , {{ $val->last_name }}</td>
                                 <td>{{ $val->products_total }} </td>
-                                <td>{{ $val->grand_amount }} Taka</td>
+                                <td>{{ $val->grand_amount }} ৳</td> 
                                 <td>{{ $val->creation_date }} </td>
 
 
@@ -140,22 +140,22 @@
             html += '<div class="two fields">';
 
             html += '<div class="field">';
-            html += '<label>পন্যের নাম</label>';
-            html += '<input type="text" name="title[]" class="form-control" id="title" placeholder="পন্যের নাম" autocapitalize="off" required>';
+            html += '<label>Product Name</label>';
+            html += '<input type="text" name="title[]" class="form-control" id="title" placeholder="Product Name" autocapitalize="off" required>';
             html += '</div>';
 
             html += '<div class="field">';
-            html += '<label>একক ইউনিট মূল্য</label>';
-            html += '<input type="number" name="single_unit_price[]" class="form-control" id="single_unit_price" placeholder="একক ইউনিট মূল্য" autocapitalize="off" required>';
+            html += '<label>Single Unit Price</label>';
+            html += '<input type="number" name="single_unit_price[]" class="form-control" id="single_unit_price" placeholder="Single Unit Price" autocapitalize="off" required>';
             html += '</div>'
 
             html += '<div class="field">';
-            html += '<label>পন্যের সংখ্যা</label>';
-            html += '<input type="number" name="quantity[]" class="form-control" id="quantity" placeholder="পন্যের সংখ্যা" autocapitalize="off" required>';
+            html += '<label>Quantity</label>';
+            html += '<input type="number" name="quantity[]" class="form-control" id="quantity" placeholder="Quantity" autocapitalize="off" required>';
             html += '</div>';
 
             html += '<div class="field">';
-            html += '<label>মোট টাকা</label>';
+            html += '<label>Total</label>';
             html += '<input type="number" name="total_amount[]" class="form-control" id="total_amount" placeholder="0" autocapitalize="off" required>';
             html += '</div>';
 

@@ -19,79 +19,79 @@
             <div class="box box-success">
 
                 <div class="box-content">
-                    <p class="lead">&nbsp;&nbsp;বিলিং খাতা 
-                    <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-
+                    <p class="lead">&nbsp;&nbsp;BILLING DIARY
+                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+                        <button onclick="history.back()" class="ui btn btn-secondary mini offsettop5 float-right"><i class="arrow left icon"></i>{{ __("Go Back") }}</button>
                     </p>
-                        <!-- <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
+                    <!-- <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("বিল আপডেট করুন") }}</button>
                         <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-secondary mini offsettop5 float-right">{{ __("এই মাসের বিল তৈরি করুন") }}</button>
                      -->
-<hr>
+                    <hr>
 
-                <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                    <thead>
-                        
-                        <tr>
-                            <th>{{ __("Client Card No") }}</th>
-                            <th>{{ __("Client Name") }}</th>
-                            <th>{{ __("Bill Month") }}</th>
-                            <th>{{ __("Bill Year") }}</th>
-                            <th>{{ __("Bill Amount")}}</th>
-                            <th>{{ __("Billing Status")}}</th>
+                    <table width="100%" class="table table-striped table-hover" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                        <thead>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @isset($billingData)
-                        @foreach ($billingData as $val)
-                        <tr>
-                            <td>{{ $val->client_id}}</td>
-                            <td>{{ $val->client_name}}</td>
-                            @if($val->bill_month=="1")
-                            <td>January</td>
-                            @elseif($val->bill_month=="2")
-                            <td>February</td>
-                            @elseif($val->bill_month=="3")
-                            <td>March</td>
-                            @elseif($val->bill_month=="4")
-                            <td>April</td>
-                            @elseif($val->bill_month=="5")
-                            <td>May</td>
-                            @elseif($val->bill_month=="6")
-                            <td>June</td>
-                            @elseif($val->bill_month=="7")
-                            <td>July</td>
-                            @elseif($val->bill_month=="8")
-                            <td>August</td>
-                            @elseif($val->bill_month=="9")
-                            <td>September</td>
-                            @elseif($val->bill_month=="10")
-                            <td>Octobor</td>
-                            @elseif($val->bill_month=="11")
-                            <td>November</td>
-                            @elseif($val->bill_month=="12")
-                            <td>December</td>
-                            @endif
+                            <tr>
+                                <th>{{ __("Client Card No") }}</th>
+                                <th>{{ __("Client Name") }}</th>
+                                <th>{{ __("Bill Month") }}</th>
+                                <th>{{ __("Bill Year") }}</th>
+                                <th>{{ __("Bill Amount")}}</th>
+                                <th>{{ __("Billing Status")}}</th>
 
-                            <td>{{ $val->bill_year }}</td>
-                            <td>{{ $val->bill_amount }}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @isset($billingData)
+                            @foreach ($billingData as $val)
+                            <tr>
+                                <td>{{ $val->client_id}}</td>
+                                <td>{{ $val->client_name}}</td>
+                                @if($val->bill_month=="1")
+                                <td>January</td>
+                                @elseif($val->bill_month=="2")
+                                <td>February</td>
+                                @elseif($val->bill_month=="3")
+                                <td>March</td>
+                                @elseif($val->bill_month=="4")
+                                <td>April</td>
+                                @elseif($val->bill_month=="5")
+                                <td>May</td>
+                                @elseif($val->bill_month=="6")
+                                <td>June</td>
+                                @elseif($val->bill_month=="7")
+                                <td>July</td>
+                                @elseif($val->bill_month=="8")
+                                <td>August</td>
+                                @elseif($val->bill_month=="9")
+                                <td>September</td>
+                                @elseif($val->bill_month=="10")
+                                <td>Octobor</td>
+                                @elseif($val->bill_month=="11")
+                                <td>November</td>
+                                @elseif($val->bill_month=="12")
+                                <td>December</td>
+                                @endif
 
-                            @if($val->billing_status=="1")
-                            <td class="text-primary">Paid</td>
-                            @elseif($val->billing_status=="0")
-                            <td class="text-danger">Due </td>
-                            @endif
+                                <td>{{ $val->bill_year }}</td>
+                                <td>{{ $val->bill_amount }}</td>
 
-                        </tr>
-                        @endforeach
-                        @endisset
-                    </tbody>
-                </table>
+                                @if($val->billing_status=="1")
+                                <td class="text-primary">Paid</td>
+                                @elseif($val->billing_status=="0")
+                                <td class="text-danger">Due </td>
+                                @endif
+
+                            </tr>
+                            @endforeach
+                            @endisset
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 </div>
 
@@ -115,12 +115,12 @@
                 'excelHtml5',
                 'pdfHtml5',
             ],
-            
 
-        lengthMenu: [
-            [10, 25, 50, -1],
-            ['10 rows', '25 rows', '50 rows', 'Show all']
-        ]
+
+            lengthMenu: [
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
+            ]
 
         });
 
@@ -148,17 +148,15 @@
     });
 
     function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
 
-     document.body.innerHTML = printContents;
+        document.body.innerHTML = printContents;
 
-     window.print();
+        window.print();
 
-     document.body.innerHTML = originalContents;
-}
-
-
+        document.body.innerHTML = originalContents;
+    }
 </script>
 
 @endsection

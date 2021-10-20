@@ -1,12 +1,12 @@
 <div class="ui modal medium add">
-    <div class="header">{{ __("নতুন এরিয়া যোগ করুন") }}</div>
+    <div class="header">{{ __("New Area Name") }}</div>
     <div class="content">
         <form id="add_area_form" action="{{ url('admin/area') }}" class="ui form add-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">
-                <label>এরিয়ার নাম</label>
-                <input type="text" name="area_name" class="block mt-1 w-full" id="area_name" placeholder="এরিয়ার নাম">
+                <label>Area Name</label>
+                <input type="text" name="area_name" class="block mt-1 w-full" id="area_name" placeholder="Area Name">
             </div>
 
             <div class="field">

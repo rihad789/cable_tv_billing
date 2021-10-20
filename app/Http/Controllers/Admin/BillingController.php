@@ -16,11 +16,14 @@ class BillingController extends Controller
     {
         //
         $billingData = DB::table("billings")->get();
+
         $subscribersData = DB::table("subscribers")->select('client_id', 'client_name')->where('connection_status','=',1)->get();
 
         $timestamp = Carbon::now()->toDateString();
         $year = Carbon::parse($timestamp)->year;
         $month = Carbon::parse($timestamp)->month;
+
+        $todays_billing = DB::table("billings")->where('updated_at','like',$timestamp.'%')->where('billing_status','=', 1)->get();
 
         $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
         ->where('bill_month',"=",$month)
@@ -35,8 +38,16 @@ class BillingController extends Controller
             $total_bill=$total_bill+$item->bill_amount;
         }
 
+        $paid_today=0;
+
+        foreach ($todays_billing as $item) {
+
+            $paid_today=$paid_today+$item->bill_amount;
+        }
+
         $total_this_month=0;
         $paid_this_month=0;
+        $due_this_month=0;
 
         foreach ($monthly_billing as $item) {
 
@@ -44,19 +55,25 @@ class BillingController extends Controller
             {
                 $paid_this_month=$paid_this_month+$item->bill_amount;
             }
+            else
+            {
+                $due_this_month = $due_this_month+ $item->bill_amount;
+            }
 
             $total_this_month=$total_this_month+$item->bill_amount;
 
         }
 
-        return view('admin.billing', compact('billingData', 'subscribersData','total_bill','total_this_month','paid_this_month')); 
+
+
+        return view('admin.billing', compact('billingData','paid_today','subscribersData','due_this_month','total_bill','total_this_month','paid_this_month')); 
     }
 
     public function filter(Request $request)
     {
 
-
         $billing_time=$request->billing_time;
+        $billing_status=$request->billing_status;
 
         $timestamp = Carbon::now()->toDateString();
         $year = Carbon::parse($timestamp)->year;
@@ -65,47 +82,68 @@ class BillingController extends Controller
 
        // $billingData=DB::select(DB::raw("SELECT * FROM `billings` WHERE bill_year='2021' AND bill_month='10' AND billing_status=0; "));
 
-        if($billing_time=="1" && $request->billing_status != null )
+        if($billing_time=="1" && $billing_status != null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month' AND billing_status=$request->billing_status;"));
+            $billingData = DB::table("billings")
+            ->where('bill_year','=',$year)
+            ->where('bill_month','=',$month)
+            ->where('billing_status','=',$billing_status)
+            ->get();
         }
-        else if($billing_time=="1" && $request->billing_status == null )
+        else if($billing_time=="1" && $billing_status == null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month';"));
+            $billingData = DB::table("billings")
+            ->where('bill_year','=',$year)
+            ->where('bill_month','=',$month)
+            ->get();
+
         }
-        else if($billing_time=="2" && $request->billing_status != null )
+        else if($billing_time=="2" && $billing_status != null )
         {
             $month=$month-1;
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month' AND billing_status=$request->billing_status;"));
+            $billingData = DB::table("billings")
+            ->where('bill_year','=',$year)
+            ->where('bill_month','=',$month)
+            ->where('billing_status','=',$billing_status)
+            ->get();
         }
-        else if($billing_time=="2" && $request->billing_status == null )
+        else if($billing_time=="2" && $billing_status == null )
         {
             $month=$month-1;
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE bill_year= '$year' AND bill_month='$month';"));
+            $billingData = DB::table("billings")
+            ->where('bill_year','=',$year)
+            ->where('bill_month','=',$month)
+            ->get();
         }
-        else if($billing_time=="3" && $request->billing_status != null )
+        else if($billing_time=="3" && $billing_status != null )
         {
-            $billingData=DB::select(DB::raw("SELECT * FROM billings WHERE billing_status=$request->billing_status;"));
+            $billingData = DB::table("billings")
+            ->where('billing_status','=',$billing_status)
+            ->get();
         }
-        else if($billing_time=="3" && $request->billing_status == null )
-        {
-            $billingData=DB::select(DB::raw("SELECT * FROM billings;"));
-        }
-        else if($request->billing_status!=null)
-        {
-            $billingData = DB::table("billings")->where('billing_status','=',$request->billing_status)->get();
-        }
-        else
+        else if($billing_time=="3" && $billing_status == null )
         {
             $billingData = DB::table("billings")->get();
         }
-
+        else if($billing_time == null && $billing_status != null)
+        {
+            $billingData = DB::table("billings")
+            ->where('billing_status','=',$billing_status)
+            ->get();
+        }
+        else
+        {
+            $billingData = DB::table("billings")
+            ->get();
+        }
 
         $subscribersData = DB::table("subscribers")->select('client_id', 'client_name')->where('connection_status','=',1)->get();
 
         $timestamp = Carbon::now()->toDateString();
         $year = Carbon::parse($timestamp)->year;
         $month = Carbon::parse($timestamp)->month;
+
+        $todays_billing = DB::table("billings")->where('updated_at','like',$timestamp.'%')->where('billing_status','=', 1)->get();
 
         $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
         ->where('bill_month',"=",$month)
@@ -120,8 +158,16 @@ class BillingController extends Controller
             $total_bill=$total_bill+$item->bill_amount;
         }
 
+        $paid_today=0;
+
+        foreach ($todays_billing as $item) {
+
+            $paid_today=$paid_today+$item->bill_amount;
+        }
+
         $total_this_month=0;
         $paid_this_month=0;
+        $due_this_month=0;
 
         foreach ($monthly_billing as $item) {
 
@@ -129,12 +175,16 @@ class BillingController extends Controller
             {
                 $paid_this_month=$paid_this_month+$item->bill_amount;
             }
+            else
+            {
+                $due_this_month = $due_this_month+ $item->bill_amount;
+            }
 
             $total_this_month=$total_this_month+$item->bill_amount;
 
         }
 
-        return view('admin.billing', compact('billingData', 'subscribersData','total_bill','total_this_month','paid_this_month')); 
+        return view('admin.billing', compact('billingData','paid_today','subscribersData','due_this_month','total_bill','total_this_month','paid_this_month')); 
 
 
     //return response()->json(['Response'=>$billingData.$month.$year.$month-1]);
@@ -203,20 +253,72 @@ class BillingController extends Controller
             ->first();
 
         if ($checkBill->billing_status == "1") {
-            return redirect('admin/billing')->with('success', trans("বিল পুর্বেই আপডেট করা হয়েছে"));
+            return redirect('admin/billing/billcontection')->with('success', trans("Collection is already added to company account"));
         } else {
 
             $affectedRow = Billings::where('client_id', $request->client_id)
                 ->update(['billing_status' => $billing_status, "billing_date" => $timestamp, "updated_by" => $updated_by]);
 
             if ($affectedRow == 1) {
-                return redirect('admin/billing')->with('success', trans("বিল আইডেট সম্পুর্ন হয়েছে"));
+                return redirect('admin/billing/billcontection')->with('success', trans("বিল আইডেট সম্পুর্ন হয়েছে"));
             }
         }
 
 
         // //return response()->json($request->client_id,$request->billing_status);
         // return response()->json(['Client_id'=>$request->client_id,"billing_status"=>$request->billing_status]);
+
+    }
+
+    public function billcontection()
+    {
+
+        $timestamp = Carbon::now()->toDateString();
+        $year = Carbon::parse($timestamp)->year;
+        $month = Carbon::parse($timestamp)->month;
+
+        $billingData = DB::table("billings")->where('updated_at','like',$timestamp.'%')->where('billing_status','=', 1)->get();
+                   
+        $subscribersData = DB::table("billings")
+        ->select('client_id', 'client_name')
+        ->where('bill_month',"=",$month)
+        ->where('billing_status','=', 0)
+        ->get();
+
+
+        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
+        ->where('bill_month',"=",$month)
+        ->where('bill_year',"=",$year)
+        ->get();
+
+        
+        $total_this_month=0;
+        $paid_this_month=0;
+        $due_this_month=0;
+        $paid_today=0;
+        $due_bill=0;
+
+        foreach ($monthly_billing as $item) {
+
+            if($item->billing_status=="1")
+            {
+                $paid_this_month=$paid_this_month+$item->bill_amount;
+            }
+            else           
+            {
+                $due_this_month=$due_this_month+$item->bill_amount;
+                $due_bill=$due_bill+1;
+            }
+
+            $total_this_month=$total_this_month+$item->bill_amount;
+        }
+
+        foreach ($billingData as $item) {
+
+            $paid_today=$paid_today+$item->bill_amount;
+        }
+
+        return view('admin.bill_collection', compact('billingData','due_bill','subscribersData','paid_today','due_this_month','total_this_month','paid_this_month')); 
 
     }
 

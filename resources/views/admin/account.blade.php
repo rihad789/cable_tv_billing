@@ -1,13 +1,16 @@
 @extends('layouts.admin')
 
 @section('meta')
-<title>Billing | Dingedah Network</title>
-<meta name="description" content="Dingedah Network Billing">
+<title>ACCOUNT | DINGEDSH NETWORK</title>
+<meta name="description" content="Metro Bangla Operator">
 @endsection
 
 @section('content')
-@include('admin.modals.edit_bill')
 
+
+@endsection
+
+@section('scripts')
 
 <div class="container-fluid" id="printableArea">
 
@@ -23,17 +26,17 @@
                     <p class="lead">&nbsp;&nbsp;BILLING DIARY
 
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-info mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process Bill") }}</button>
+                        <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="arrow up icon"></i>{{ __("Update Bill") }}</button>
+                        <button onclick="location.href='/admin/billing/generate'" class="ui btn btn-info mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process This Month Bill") }}</button>
 
                     </p>
-
-                    <hr>
 
                 </div>
 
                 <hr>
 
             </div>
+
 
 
             <div class="row">
@@ -43,21 +46,20 @@
                     <form action="{{ url('admin/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
                         @csrf
                         <div class="two fields">
-
                             <div class="field">
                                 <select name="billing_time" id="billing_time" class="ui search dropdown getid">
-                                    <option value="">{{ __("Billing Time") }}</option>
-                                    <option value='1'>Current Month</option>
-                                    <option value='2'>Past Month</option>
-                                    <option value='3'>All of them</option>
+                                    <option value="">{{ __("Billing Timeline") }}</option>
+                                    <option value="1">{{ __("Current Month") }}</option>
+                                    <option value="2">{{ __("Last Month") }}</option>
+                                    <option value="3">{{ __("From Start") }}</option>
                                 </select>
                             </div>
 
                             <div class="field">
                                 <select name="billing_status" id="billing_status" class="ui search dropdown getid">
                                     <option value="">{{ __("Billing Status") }}</option>
-                                    <option value=1>{{ __("Paid") }}</option>
-                                    <option value=0>{{ __("Due ") }}</option>
+                                    <option value=true>{{ __("Paid") }}</option>
+                                    <option value=false>{{ __("Due ") }}</option>
                                 </select>
                             </div>
 
@@ -83,64 +85,6 @@
 
             </div>
 
-            <div class="row">
-
-                <div class="col-md-6">
-                    <!-- Card user Count Data -->
-                    <table width="100%" class="table text-center" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
-                                <th>{{ __("Bill Total") }}</th>
-                                <th>{{ __("Bill Paid ") }}</th>
-                                <th>{{ __("Bill Due") }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> {{ $total_bill }} Taka </td>
-                                <td>{{ $paid_this_month }} Taka</td>
-                                <td>{{ $due_this_month }} Taka</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="col-md-6">
-                    <!-- Card user Count Data -->
-                    <table width="100%" class="table text-center" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
-                                <th>{{ __("Corrent Month Total") }}</th>
-                                <th>{{ __("Corrent Month Due") }}</th>
-                                <th>{{ __("Todays Collection") }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> {{ $total_this_month }} Taka </td>
-                                <td>{{ $due_this_month }} Taka</td>
-                                <td>{{ $paid_today }} Taka</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <hr>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-12">
-
-                    <hr>
-
-                </div>
-
-            </div>
-
 
             <div class="row">
 
@@ -149,7 +93,23 @@
                     <!-- Card user Count Data -->
 
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
+                        <thead>
+
+                            <tr>
+                                <th colspan="6"></th>
+                            </tr>
+
+                            <tr class="text-center">
+                                <th colspan="2" class="table-primary">Total Bill : {{ $total_bill }} Taka </th>
+                                <th colspan="2" class="table-danger">Current Month Total: {{ $total_this_month }} Taka</th>
+                                <th colspan="3" class="table-info">Bill Due : {{ $paid_this_month }} Taka</th>
+
+                            </tr>
+
+                            <tr>
+                                <th colspan="6"></th>
+                            </tr>
+
                             <tr>
                                 <th>{{ __("Serial") }}</th>
                                 <th>{{ __("Client Card No") }}</th>
@@ -219,64 +179,5 @@
 
 </div>
 
-@endsection
-
-@section('scripts')
-
-
-<script>
-    $(document).ready(function() {
-
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 10,
-            ordering: false,
-            lengthChange: true,
-            dom: 'Blfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'pdfHtml5'
-
-            ],
-            lengthMenu: [
-                [10, 25, 50, -1],
-                ['10 rows', '25 rows', '50 rows', 'Show all']
-            ]
-        });
-
-
-
-        $('#edit_biil_form').form({
-            fields: {
-                client_id: {
-                    identifier: 'client_id',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'গ্রাহকের আইডি পছন্দ করুন ।'
-                    }]
-                },
-                billing_status: {
-                    identifier: 'billing_status',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'বিলিং স্ট্যাটাস পরিবর্তন করুন ।'
-                    }]
-                }
-            }
-        });
-
-    });
-
-
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>
 
 @endsection

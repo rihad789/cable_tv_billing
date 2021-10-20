@@ -74,6 +74,7 @@ class DashboardController extends Controller
         //return response()->json(['Response:'=>$total_this_month.$paid_this_month.$due_this_month.','.$month]);
     }
 
+    
 
     public function fare()
     {
