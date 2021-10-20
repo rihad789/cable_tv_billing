@@ -47,7 +47,7 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('admin/billing/billcontection') }}">
+                    <a href="{{ url('admin/billing/billcollection') }}">
                     <i class="calendar outline icon"></i>
                         <p>{{ __('Bill Collection') }}</p>
                     </a>
