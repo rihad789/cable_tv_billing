@@ -22,17 +22,11 @@
                                         <p class="lead">&nbsp;&nbsp;BILL COLLECTION
 
                                                 <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-
                                                 @if( $due_bill == 0)
-                                                {
                                                 <button onclick="window.alert('NO more due bills this Month')" class="ui btn btn-info mini offsettop5 float-right"><i class="plus icon"></i>{{ __("Bill Collection") }}</button>
-                                                }
                                                 @else
-                                                {
                                                 <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="plus icon"></i>{{ __("Bill Collection") }}</button>
-                                                }
                                                 @endif
-
                                         </p>
                                         <hr>
                                 </div>
