@@ -270,7 +270,7 @@ class BillingController extends Controller
 
     }
 
-    public function billcontection()
+    public function billcollection()
     {
 
         $timestamp = Carbon::now()->toDateString();
