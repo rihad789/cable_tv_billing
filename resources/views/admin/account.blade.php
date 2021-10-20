@@ -43,53 +43,6 @@
 
                 <div class="col-md-12">
 
-                    <form action="{{ url('admin/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
-                        @csrf
-                        <div class="two fields">
-                            <div class="field">
-                                <select name="billing_time" id="billing_time" class="ui search dropdown getid">
-                                    <option value="">{{ __("Billing Timeline") }}</option>
-                                    <option value="1">{{ __("Current Month") }}</option>
-                                    <option value="2">{{ __("Last Month") }}</option>
-                                    <option value="3">{{ __("From Start") }}</option>
-                                </select>
-                            </div>
-
-                            <div class="field">
-                                <select name="billing_status" id="billing_status" class="ui search dropdown getid">
-                                    <option value="">{{ __("Billing Status") }}</option>
-                                    <option value=true>{{ __("Paid") }}</option>
-                                    <option value=false>{{ __("Due ") }}</option>
-                                </select>
-                            </div>
-
-
-                            <div class="two fields">
-
-                                <div class="field">
-
-                                    <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-                </div>
-
-
-            </div>
-
-
-            <div class="row">
-
-                <div class="col-md-12">
-
                     <!-- Card user Count Data -->
 
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
@@ -100,9 +53,9 @@
                             </tr>
 
                             <tr class="text-center">
-                                <th colspan="2" class="table-primary">Total Bill : {{ $total_bill }} Taka </th>
+                                <!-- <th colspan="2" class="table-primary">Total Bill : {{ $total_bill }} Taka </th>
                                 <th colspan="2" class="table-danger">Current Month Total: {{ $total_this_month }} Taka</th>
-                                <th colspan="3" class="table-info">Bill Due : {{ $paid_this_month }} Taka</th>
+                                <th colspan="3" class="table-info">Bill Due : {{ $paid_this_month }} Taka</th> -->
 
                             </tr>
 
