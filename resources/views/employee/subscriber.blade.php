@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-@include('manager.modals.add_subscriber')
 
 <div class="container-fluid" id="printableArea">
 
@@ -16,8 +15,6 @@
                 <div class="col-md-12">
                     <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button onclick="location.href='/manager/area'" class="ui btn btn-secondary mini offsettop5 float-right"><i class="ui building icon"></i>{{ __("Area & Vicinity") }}</button>
-                        <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Subscriber") }}</button>
                     </p>
                     <hr>
                 </div>
@@ -26,7 +23,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ url('manager/subscriber') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
+                    <form action="{{ url('employee/subscriber') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
                         @csrf
                         <div class="two fields">
                             <div class="field">
@@ -124,7 +121,7 @@
                                 <td class="text-danger">Disconnected</td>
                                 @endif
                                 <td class="align-right">
-                                    <a href="{{ url('/manager/subscriber/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
+                                    <a href="{{ url('/employee/subscriber/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -170,7 +167,7 @@
             // clear all values 
             $('#filter_input_vicinity option:not(:first)').remove();
             $.ajax({
-                url: '/manager/subscriber/getVicinity/' + area,
+                url: '/employee/subscriber/getVicinity/' + area,
                 type: 'get',
                 dataType: 'json',
                 success: function(response) {

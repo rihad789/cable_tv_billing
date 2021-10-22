@@ -37,7 +37,7 @@ class MemoController extends Controller
 
         if($check_memo_no==1)
         {
-            return redirect("manager/memo")->with('error', trans("সরি!এই মেমো নং ডাটাবেজে জমা আছে!"));
+            return redirect("employee/memo")->with('error', trans("সরি!এই মেমো নং ডাটাবেজে জমা আছে!"));
         }
         else
         {

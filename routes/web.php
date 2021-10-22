@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth', 'role:manager']], function () {
 
     Route::get('manager/subscriber', 'App\Http\Controllers\Manager\SubscriberController@index')->name('subscriber');
     Route::post('manager/subscriber', 'App\Http\Controllers\Manager\SubscriberController@filter')->name('filter');  
+    Route::post('manager/subscriber/settle_due', 'App\Http\Controllers\Manager\SubscriberController@settle_due')->name('settle_due'); 
     Route::post('manager/subscriber/store', 'App\Http\Controllers\Manager\SubscriberController@store')->name('add_subscriber');
     Route::get('manager/subscriber/getVicinity/{id}', 'App\Http\Controllers\Manager\SubscriberController@getVicinity')->name('getVicinity');
     Route::get('manager/subscriber/{id}', 'App\Http\Controllers\Manager\SubscriberController@view')->name('view_subscriber');
@@ -96,8 +97,11 @@ Route::group(['middleware' => ['auth', 'role:employee']], function () {
 
 
     Route::get('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@index')->name('subscriber');
+    Route::post('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@filter')->name('filter');  
     Route::get('employee/subscriber/{id}', 'App\Http\Controllers\Employee\SubscriberController@view')->name('view_subscriber');
+    Route::get('employee/subscriber/getVicinity/{id}', 'App\Http\Controllers\Employee\SubscriberController@getVicinity')->name('getVicinity');
     Route::get('employee/subscriber/billing/{id}', 'App\Http\Controllers\Employee\SubscriberController@subscriber_bills')->name('subscriber_bills');
+    Route::get('employee/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Employee\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
 
 
     Route::get('employee/memo', 'App\Http\Controllers\Employee\MemoController@index')->name('account');

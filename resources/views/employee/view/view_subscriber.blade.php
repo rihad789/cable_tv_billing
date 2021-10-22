@@ -1,4 +1,4 @@
-@extends('layouts.manager')
+@extends('layouts.employee')
 
 @section('meta')
 <title>View Station | Metro Bangla</title>
@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-@include('manager.modals.add_subscriber')
+
 
 <div class="container-fluid">
 
@@ -129,21 +129,24 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;BILLING DIARY
+                    <p class="lead">&nbsp;&nbsp;BILLING DIARY 
+
 
                     @if($connection_status==1 && $due_bill >=3 )
                         
-                        <button onclick="location.href='/manager/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-danger float-right"><i class="dollar sign icon"></i>Settle Due</button>
-                        <button onclick="location.href='/manager/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>     
+                        <button onclick="location.href='/employee/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-danger float-right"><i class="dollar sign icon"></i>Settle Due</button>
+                        <button onclick="location.href='/employee/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>     
                     </p>
 
                     @else
                     
                         <button  class="btn btn-danger float-right" disabled><i class="dollar sign icon"></i>Settle Due</button>
-                        <button onclick="location.href='/manager/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>
+                        <button onclick="location.href='/employee/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>
                         </p>
                     
                     @endif
+
+                    
                     
                     <hr>
                 

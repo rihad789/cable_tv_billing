@@ -106,7 +106,60 @@ class SubscriberController extends Controller
         //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
     }
 
-  
+  public function settle_due(Request $request)
+  {
+
+    $settle_due_type = $request->settle_due_type;
+
+    if($settle_due_type == 1)
+    {
+
+        
+
+    }
+    else
+    {
+
+        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
+
+        $total_bill=0;
+
+        foreach ($billingData as $item) {
+            $total_bill=$total_bill+$item->bill_amount;
+        }
+
+        $subscriberData = DB::table("subscribers")->select('locked_fund')->where('client_id','=',$id) ->first();
+
+        $locked_fund=$subscriberData->locked_fund;
+
+        $final_amount=$locked_fund-$total_bill;
+
+        if($final_amount>0)
+        {
+            $updated_by = auth()->user()->first_name . " " . auth()->user()->last_name;
+            $timestamp = Carbon::now()->toDateString();
+
+            $affectedRow = DB::table("billings")
+            ->where('client_id','=',$id)
+            ->where('billing_status','=',0)
+            ->update(['billing_status' => 1, "billing_date" => $timestamp, "updated_by" => $updated_by]);
+
+            $affectedRow2 = DB::table("subscribers")
+            ->where('client_id','=',$id)
+            ->update(['connection_status' => 0,'locked_fund'=>$final_amount]);
+
+             return redirect('manager/subscriber/'.$id)->with('success', trans("বাকী বিল জামানত থেকে কাটা হয়েছে।"));
+            
+        }
+        else
+        {
+            return redirect('manager/subscriber/'.$id)->with('success', trans("বাকী বিল জামানত এর পরিমান থেকে কম।।"));
+        }
+
+    }
+
+
+  }
 
     public function cut_lock_fund($id)
     {

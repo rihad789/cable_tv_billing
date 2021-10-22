@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-@include('manager.modals.add_memo')
+@include('employee.modals.add_memo')
 
 
 <div class="container-fluid" id="printableArea">
@@ -57,7 +57,7 @@
 
 
                                 <td class="align-right">
-                                    <a href="{{ url('/manager/memo/'.$val->memo_no) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
+                                    <a href="{{ url('/employee/memo/'.$val->memo_no) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
                                 </td>
 
                             </tr>
