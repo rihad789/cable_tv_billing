@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-@include('owner.modals.add_Sallery')
+@include('owner.modals.add_sallery')
 
 
 
