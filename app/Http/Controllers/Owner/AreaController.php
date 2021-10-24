@@ -74,7 +74,7 @@ class AreaController extends Controller
 
         if($check_vicinity==1)
         {
-            return redirect("manager/area")->with('error', trans("সরি! পাড়া ডাটাবেজে জমা আছে!"));
+            return redirect("owner/area")->with('error', trans("সরি! পাড়া ডাটাবেজে জমা আছে!"));
         }
         else
         {
@@ -84,7 +84,7 @@ class AreaController extends Controller
             ]);
         }
 
-        return redirect("manager/area")->with('error', trans("নতুন পাড়া জমা হয়েছে!"));
+        return redirect("owner/area")->with('error', trans("নতুন পাড়া জমা হয়েছে!"));
     }
 
     public function delete_vicinity($id)
@@ -92,7 +92,7 @@ class AreaController extends Controller
         $affectedRow = Vicinity::where('id', $id)->delete();
 
         if ($affectedRow == 1) {
-            return redirect('manager/area')->with('success', trans("Vicinity Deleted successfully!"));
+            return redirect('owner/area')->with('success', trans("Vicinity Deleted successfully!"));
         }
 
     }
