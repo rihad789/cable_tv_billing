@@ -47,7 +47,7 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('manager/billing/billcollection') }}">
+                    <a href="{{ url('owner/billing/billcollection') }}">
                     <i class="calendar outline icon"></i>
                         <p>{{ __('Bill Collection') }}</p>
                     </a>
@@ -61,40 +61,46 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('manager/subscriber') }}">
+                    <a href="{{ url('owner/subscriber') }}">
                         <i class="ui address book icon"></i>
                         <p>{{ __('Customer list') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('manager/billing') }}">
+                    <a href="{{ url('owner/billing') }}">
                         <i class="dollar sign icon"></i>
                         <p>{{ __('Dish Billing') }}</p>
                     </a>
                 </li>
 
-
                 <li class="">
-                    <a href="{{ url('manager/memo') }}">
-                        <i class="shopping basket icon"></i>
-                        <p>{{ __('shopping') }}</p>
+                    <a href="{{ url('owner/sallery') }}">
+                        <i class="smile icon"></i>
+                        <p>{{ __('Sallery') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('manager/account') }}">
+                    <a href="{{ url('owner/memo') }}">
+                        <i class="wrench icon"></i>
+                        <p>{{ __('Service Cost') }}</p>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('owner/users') }}">
+                        <i class="users icon"></i>
+                        <p>{{ __('Employee') }}</p>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('owner/account') }}">
                         <i class="ui calculator icon"></i>
                         <p>{{ __('Account') }}</p>
                     </a>
                 </li>
-
-                <!-- <li class="">
-                    <a href="{{ url('manager/users') }}">
-                        <i class="users icon"></i>
-                        <p>{{ __('Employee') }}</p>
-                    </a>
-                </li> -->
 
                 <!-- <li class="">
                     <a href="{{ url('admin/report_view') }}">

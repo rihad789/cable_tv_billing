@@ -16,7 +16,11 @@ class DashboardController extends Controller
     public function index()
     {
 
-        if (Auth::user()->hasRole('manager')) {
+        if (Auth::user()->hasRole('owner')) {
+            
+            return redirect('owner');
+        }
+        else if (Auth::user()->hasRole('manager')) {
             
             return redirect('manager');
         }

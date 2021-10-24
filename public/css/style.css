@@ -55,6 +55,9 @@ label {
     background: #363d4d;
     border: none;
     border-radius: 0;
+    position: relative;
+    top: 0;
+    width: 100%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid #e6ecf5;
 }
@@ -71,6 +74,7 @@ label {
     background: #ffffff;
     color: #fff;
     transition: all 0.3s;
+    
 }
 
 #sidebar.active {

@@ -18,13 +18,13 @@ class AdminSeeder extends Seeder
         //
 
         $user = User::create([
-            'first_name' => "Manager",
-            'last_name' => "manager",
+            'first_name' => "owner",
+            'last_name' => "owner",
             'phone' => "01234567890",
-            'password' => Hash::make("manager"),
+            'password' => Hash::make("owner"),
         ]);
 
-        $user->attachRole("manager");
+        $user->attachRole("owner");
 
     }
 }

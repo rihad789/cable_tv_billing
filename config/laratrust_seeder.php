@@ -13,6 +13,10 @@ return [
 
     'roles_structure' => [
 
+        'owner' => [
+            'users' => 'c,r,u,d',
+            'profile' => 'r,u'
+        ],
         'manager' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u'
