@@ -39,14 +39,16 @@
                                         <table width="100%" class="table" data-order='[[ 0, "asc" ]]'>
                                                 <thead class="thead-light">
                                                         <tr>
-                                                                <th>{{ __("Current Month Total") }}</th>
+                                                                <th>{{ __("Total Bill")}}</th>
+                                                                <th>{{ __("Current Month") }}</th>
                                                                 <th>{{ __("Bill Paid") }}</th>
                                                                 <th>{{ __("Bill Due") }}</th>
-                                                                <th>{{ __("Todyas Collection") }}</th>
+                                                                <th>{{ __("Todays Collection") }}</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr>
+                                                                <td>{{ $total_bill }} Taka</td>
                                                                 <td> {{ $total_this_month }} Taka </td>
                                                                 <td>{{ $paid_this_month }} Taka</td>
                                                                 <td>{{ $due_this_month }} Taka</td>

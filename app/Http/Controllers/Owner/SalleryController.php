@@ -37,17 +37,9 @@ class SalleryController extends Controller
         $year = Carbon::parse($timestamp)->year;
         $month = Carbon::parse($timestamp)->month;
 
-        $salleryCount = DB::table("salleries")
-        ->where('user_id', "=", $request->employee_id)
-        ->where('sallery_month', '=', $month)
-        ->where('sallery_year', '=', $year)
-        ->count();
+        $salleryCount = DB::table("salleries")->where('user_id', "=", $request->employee_id)->count();
 
-        if($salleryCount != 0)
-        {
-            return redirect('owner/sallery')->with('error', trans("Sallery Already Added"));
-        }
-        else
+        if($salleryCount == 0)
         {
             $sallery=Sallery::create([
 
@@ -58,8 +50,32 @@ class SalleryController extends Controller
                 'payment_status' =>false,
                 
             ]);
-
             return redirect('owner/sallery')->with('success', trans("Sallery Added Successfully"));
+        }
+        else
+        {
+
+            $payment_status = DB::table("salleries")->where('user_id', "=", $request->employee_id) ->select('payment_status')->first();
+
+            if($payment_status->payment_status==true)
+            {
+                $salleryCount = DB::table("salleries")
+                ->where('user_id', "=", $request->employee_id)
+                ->update([
+                'sallery_month' => $month,
+                'sallery_year' => $year,
+                'sallery_amount' =>$request->sallery,
+                'payment_status' =>false,]);
+
+
+                return redirect('owner/sallery')->with('success', trans("Sallery Updated Successfully"));
+            }
+
+            else
+            {
+                return redirect('owner/sallery')->with('error', trans("Sorry ,Previous Sallery Due"));
+            }
+
         }
 
     }

@@ -159,8 +159,9 @@
             html += '<input type="number" name="total_amount[]" class="form-control" id="total_amount" placeholder="0" autocapitalize="off" required>';
             html += '</div>';
 
-            html += '<div class="input-group-append">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger circular" ><i class="icon trash alternate outline"></i></button>';
+            html += '<div class="field">';
+            html += '<label>Action</label>';
+            html += '<button id="removeRow" type="button" class="btn btn-secondary circular" ><i class="icon trash alternate outline"></i>Remove</button>';
             html += '</div>';
 
             html += '</div>';

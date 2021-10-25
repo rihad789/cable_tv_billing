@@ -20,6 +20,7 @@ class CreateMemosTable extends Migration
             $table->integer('products_total');
             $table->integer('grand_amount');
             $table->string('creation_date');
+            $table->boolean('is_settled')->default(false);
             $table->timestamps();
  
         });

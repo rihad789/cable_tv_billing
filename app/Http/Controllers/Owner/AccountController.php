@@ -17,6 +17,32 @@ class AccountController extends Controller
     public function index()
     {
         //
+        $salleryData = DB::table("salleries")->select('sallery_amount','payment_status')->get();
+
+        $totalEmployee=0;
+        $totalSallery=0;
+        $sallery_paid=0;
+        $sallery_due=0;
+        $sallery_status=0;
+
+        foreach ($salleryData as $item) {
+
+            $totalEmployee=$totalEmployee+1;
+            $totalSallery=$totalSallery+$item->sallery_amount;
+
+            if($item->payment_status)
+            {
+                $sallery_paid=$sallery_paid+$item->sallery_amount;
+                $sallery_status=$sallery_status+1;
+
+            }
+            else
+            {
+                $sallery_status=false;
+                $sallery_due=$sallery_due+$item->sallery_amount;
+            }
+
+        }
 
         $totalBilling = DB::table("billings")->select('billing_status','bill_amount')->get();
 
@@ -53,8 +79,7 @@ class AccountController extends Controller
 
         $payable_balance=$bill_paid-$grand_total;
 
-
-        return view('owner.account', compact('locked_fund','totalMemo','payable_balance','total_bill','bill_paid','bill_due','total_products','grand_total')); 
+        return view('owner.account', compact('locked_fund','totalEmployee','totalSallery','sallery_paid','sallery_due','sallery_status','totalMemo','payable_balance','total_bill','bill_paid','bill_due','total_products','grand_total')); 
 
     }
 

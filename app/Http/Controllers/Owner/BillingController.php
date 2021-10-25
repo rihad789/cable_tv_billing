@@ -25,10 +25,7 @@ class BillingController extends Controller
 
         $todays_billing = DB::table("billings")->where('updated_at','like',$timestamp.'%')->where('billing_status','=', 1)->get();
 
-        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
-        ->where('bill_month',"=",$month)
-        ->where('bill_year',"=",$year)
-        ->get();
+        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')->where('bill_month',"=",$month)->where('bill_year',"=",$year)->get();
 
         $totalBilling = DB::table("billings")->select('bill_amount')->get();
 
@@ -84,42 +81,26 @@ class BillingController extends Controller
 
         if($billing_time=="1" && $billing_status != null )
         {
-            $billingData = DB::table("billings")
-            ->where('bill_year','=',$year)
-            ->where('bill_month','=',$month)
-            ->where('billing_status','=',$billing_status)
-            ->get();
+            $billingData = DB::table("billings")->where('bill_year','=',$year)->where('bill_month','=',$month)->where('billing_status','=',$billing_status)->get();
         }
         else if($billing_time=="1" && $billing_status == null )
         {
-            $billingData = DB::table("billings")
-            ->where('bill_year','=',$year)
-            ->where('bill_month','=',$month)
-            ->get();
+            $billingData = DB::table("billings")->where('bill_year','=',$year)->where('bill_month','=',$month)->get();
 
         }
         else if($billing_time=="2" && $billing_status != null )
         {
             $month=$month-1;
-            $billingData = DB::table("billings")
-            ->where('bill_year','=',$year)
-            ->where('bill_month','=',$month)
-            ->where('billing_status','=',$billing_status)
-            ->get();
+            $billingData = DB::table("billings")->where('bill_year','=',$year)->where('bill_month','=',$month)->where('billing_status','=',$billing_status)->get();
         }
         else if($billing_time=="2" && $billing_status == null )
         {
             $month=$month-1;
-            $billingData = DB::table("billings")
-            ->where('bill_year','=',$year)
-            ->where('bill_month','=',$month)
-            ->get();
+            $billingData = DB::table("billings")->where('bill_year','=',$year)->where('bill_month','=',$month)->get();
         }
         else if($billing_time=="3" && $billing_status != null )
         {
-            $billingData = DB::table("billings")
-            ->where('billing_status','=',$billing_status)
-            ->get();
+            $billingData = DB::table("billings")->where('billing_status','=',$billing_status)->get();
         }
         else if($billing_time=="3" && $billing_status == null )
         {
@@ -127,9 +108,7 @@ class BillingController extends Controller
         }
         else if($billing_time == null && $billing_status != null)
         {
-            $billingData = DB::table("billings")
-            ->where('billing_status','=',$billing_status)
-            ->get();
+            $billingData = DB::table("billings")->where('billing_status','=',$billing_status)->get();
         }
         else
         {
@@ -145,10 +124,7 @@ class BillingController extends Controller
 
         $todays_billing = DB::table("billings")->where('updated_at','like',$timestamp.'%')->where('billing_status','=', 1)->get();
 
-        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
-        ->where('bill_month',"=",$month)
-        ->where('bill_year',"=",$year)
-        ->get();
+        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')->where('bill_month',"=",$month)->where('bill_year',"=",$year)->get();
 
         $totalBilling = DB::table("billings")->select('bill_amount')->get();
 
@@ -206,11 +182,7 @@ class BillingController extends Controller
         } else {
             foreach ($subscriberData as $item) {
 
-                $clientCount = DB::table("billings")
-                    ->where('client_id', "=", $item->client_id)
-                    ->where('bill_month', '=', $month)
-                    ->where('bill_year', '=', $year)
-                    ->count();
+                $clientCount = DB::table("billings")->where('client_id', "=", $item->client_id)->where('bill_month', '=', $month)->where('bill_year', '=', $year)->count();
 
                 $billAmount=DB::table("subscribers")->select("subscribers.bill_amount")->where('client_id', "=", $item->client_id) ->first();
 
@@ -245,12 +217,7 @@ class BillingController extends Controller
         $year = Carbon::parse($timestamp)->year;
         $month = Carbon::parse($timestamp)->month;
 
-        $checkBill = DB::table("billings")
-            ->select('billing_status')
-            ->where('client_id', "=", $request->client_id)
-            ->where('bill_month', '=', $month)
-            ->where('bill_year', '=', $year)
-            ->first();
+        $checkBill = DB::table("billings")->select('billing_status')->where('client_id', "=", $request->client_id)->where('bill_month', '=', $month)->where('bill_year', '=', $year)->first();
 
         if ($checkBill->billing_status == "1") {
             return redirect('owner/billing/billcollection')->with('success', trans("Collection is already added to company account"));
@@ -279,17 +246,9 @@ class BillingController extends Controller
 
         $billingData = DB::table("billings")->where('updated_at','like',$timestamp.'%')->where('billing_status','=', 1)->get();
                    
-        $subscribersData = DB::table("billings")
-        ->select('client_id', 'client_name')
-        ->where('bill_month',"=",$month)
-        ->where('billing_status','=', 0)
-        ->get();
+        $subscribersData = DB::table("billings")->select('client_id', 'client_name')->where('bill_month',"=",$month)->where('billing_status','=', 0)->get();
 
-
-        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')
-        ->where('bill_month',"=",$month)
-        ->where('bill_year',"=",$year)
-        ->get();
+        $monthly_billing = DB::table("billings")->select('bill_amount','billing_status')->where('bill_month',"=",$month)->where('bill_year',"=",$year)->get();
 
         
         $total_this_month=0;
@@ -318,7 +277,15 @@ class BillingController extends Controller
             $paid_today=$paid_today+$item->bill_amount;
         }
 
-        return view('owner.bill_collection', compact('billingData','due_bill','subscribersData','paid_today','due_this_month','total_this_month','paid_this_month')); 
+        $totalBilling = DB::table("billings")->select('bill_amount')->get();
+
+        $total_bill=0;
+
+        foreach ($totalBilling as $item) {
+            $total_bill=$total_bill+$item->bill_amount;
+        }
+
+        return view('owner.bill_collection', compact('billingData','due_bill','subscribersData','total_bill','paid_today','due_this_month','total_this_month','paid_this_month')); 
 
     }
 

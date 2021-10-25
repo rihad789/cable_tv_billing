@@ -36,40 +36,6 @@
 
                 <div class="col-md-12">
 
-                    <form action="{{ url('owner/sallery/filter') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
-                        @csrf
-                        <div class="two fields">
-
-                            <div class="field">
-                                <select name="sallery_time" id="billing_time" class="ui  dropdown getid">
-                                    <option value="">{{ __("Sallery Time") }}</option>
-                                    <option value='1'>Current Month</option>
-                                    <option value='2'>Past Month</option>
-                                    <option value='3'>All of them</option>
-                                </select>
-                            </div>
-
-                            <div class="two fields">
-
-                                <div class="field">
-                                    <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </form>
-
-
-                </div>
-
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-12">
-
                     <!-- Card user Count Data -->
 
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
