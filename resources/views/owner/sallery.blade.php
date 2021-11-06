@@ -1,7 +1,9 @@
 @extends('layouts.owner')
 
 @section('meta')
-<title>Account | Dingedah Network</title>
+ 
+<title>Sallery | {{ $website_name }}</title>
+
 <meta name="description" content="Dingedah Network Memo">
 @endsection
 
@@ -97,12 +99,12 @@
 
                                 @if($val->payment_status=="1")
                                 <td class="align-right">
-                                <a onclick="window.alert('Sallery Already settled')" class="ui circular basic icon button tiny">Settlled</a>
+                                <a onclick="window.alert('Sallery Already settled')" class="ui circular basic icon button tiny">Sallery Paid</a>
                             
                                 </td>
                                 @elseif($val->payment_status=="0")
                                 <td class="align-right">
-                                <a href="{{ url('/owner/sallery/settle/'.$val->id) }}" onclick="return confirm('You are about to pay {{ $val->sallery_amount }} Taka to {{ $val->first_name }} , {{ $val->last_name }}.Are you sure?')" class="ui circular basic icon button tiny">Settle Payment</a>
+                                <a href="{{ url('/owner/sallery/settle/'.$val->id) }}" onclick="return confirm('You are about to pay {{ $val->sallery_amount }} Taka to {{ $val->first_name }} , {{ $val->last_name }}.Are you sure?')" class="ui circular basic icon button tiny">Pay Sallery</a>
                             
                                 </td>
                                 @endif

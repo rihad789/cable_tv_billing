@@ -18,6 +18,7 @@ class MemoDetails extends Model
         'total_amount',
         'memo_no'
     ];
+    
 }
 
 

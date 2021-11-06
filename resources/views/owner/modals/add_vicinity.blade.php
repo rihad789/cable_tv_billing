@@ -1,7 +1,7 @@
 <div class="ui modal medium edit">
     <div class="header">{{ __("New Vicinity Name") }}</div>
     <div class="content">
-        <form id="add_vicinity_form" action="{{ url('owner/vicinity') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
+        <form id="add_vicinity_form" action="{{ url('owner/vicinity/add') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">

@@ -33,7 +33,7 @@
 
             <ul class="list-unstyled components">
                 <li class="">
-                    <h4 class="text-info text-center">{{ __('DINGEDAH  NETWORK') }}</h4>
+                    <h4 class="text-info text-center uppercase">{{ $website_name }}</h4>
                 </li>
                 <hr>
             </ul>
@@ -57,7 +57,7 @@
                 <li class="">
                     <a href="{{ url('employee/memo') }}">
                         <i class="shopping basket icon"></i>
-                        <p>{{ __('shopping') }}</p>
+                        <p>{{ __('Service Cost') }}</p>
                     </a>
                 </li>
 
@@ -103,8 +103,8 @@
                                     <i class="ui icon user outline"></i> <span class="navmenutext">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</span>
                                     <i class="dropdown icon"></i>
                                     <div class="menu" tabindex="-1">
-                                        <a href="{{ url('admin/profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
-                                        <a href="{{ url('admin/account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
+                                        <a href="{{ url('employee/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
+                                        <a href="{{ url('employee/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
                                         <div class="divider"></div>
                                         <a href="{{ route('logout') }}" class="item"><i class="ui icon power"></i>{{ __('Logout') }}</a>
 

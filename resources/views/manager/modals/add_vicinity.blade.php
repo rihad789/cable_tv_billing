@@ -1,11 +1,11 @@
 <div class="ui modal medium edit">
     <div class="header">{{ __("New Vicinity Name") }}</div>
     <div class="content">
-        <form id="add_vicinity_form" action="{{ url('manager/vicinity') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
+        <form id="add_vicinity_form" action="{{ url('manager/vicinity/add') }}" class="ui form edit-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">
-                <div class="sixteen wide field role">
+
                     <label for="">Area Name</label>
                     <select id="area_id" class="ui dropdown uppercase required" name="area_id" required>
                         <option value="">Select Area Name</option>
@@ -15,7 +15,7 @@
                         @endforeach
 
                     </select>
-                </div>
+
             </div>
 
             <div class="field">

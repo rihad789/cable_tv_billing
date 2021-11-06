@@ -1,7 +1,7 @@
 <div class="ui modal medium add">
     <div class="header">{{ __("New Subscriber") }}</div> 
     <div class="content">
-        <form id="add_subscriber_form" action="{{ url('owner/subscriber/store') }}" class="ui form add-user" method="post" accept-charset="utf-8">
+        <form id="add_subscriber_form" action="{{ url('owner/subscriber/add') }}" class="ui form add-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="two fields">
@@ -22,13 +22,13 @@
 
                 <div class="field">
                     <label>Subscriber Name</label>
-                    <input type="text" name="client_name" class="form-control" id="client_name" placeholder="Subscriber Name">
+                    <input type="text" name="client_name" class="form-control" id="client_name" placeholder="Subscriber Name" value="@isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset">
 
                 </div>
 
                 <div class="field">
                     <label>Father's Name</label>
-                    <input type="text" name="client_father" class="form-control" id="client_father" placeholder="Father's Name">
+                    <input type="text" name="client_father" class="form-control" id="client_father" placeholder="Father's Name" value="@isset($subscriberData->client_father){{ $subscriberData->client_father }}@endisset">
                 </div>
 
             </div>
@@ -59,14 +59,14 @@
 
             <div class="field">
                 <label>Address</label>
-                <input type="text" name="address" class="form-control" id="address" placeholder="Address">
+                <input type="text" name="address" class="form-control" id="address" value="@isset($subscriberData->address){{ $subscriberData->address }}@endisset" placeholder="Address">
             </div>
 
             <div class="two fields">
 
                 <div class="field">
-                    <label>Mobile No</label>
-                    <input type="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern="[0-9]{11}" name="mobile_no" class="form-control" id="mobile_no" placeholder="01952-820194">
+                    <label>Mobile No</label> 
+                    <input type="phone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern="[0-9]{11}" name="mobile_no" class="form-control" id="mobile_no" value="@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset" placeholder="01952-820194">
                 </div>
 
                 <div class="field">
@@ -76,7 +76,7 @@
 
                 <div class="field">
                     <label>Bill Amount</label>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="bill_amount" class="form-control" id="bill_amount" placeholder="Bill Amount">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  name="bill_amount" value="@isset($subscriberData->bill_amount){{ $subscriberData->bill_amount }}@endisset" class="form-control" id="bill_amount" placeholder="Bill Amount">
                 </div>
 
             </div>

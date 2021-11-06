@@ -36,7 +36,7 @@
 
                     <div class="field">
                         <label>Product Name</label>
-                        <input type="text" name="title[]" class="form-control" id="title" placeholder="পন্যের নাম" autocapitalize="off" required>
+                        <input type="text" name="title[]" class="form-control" id="title" placeholder="Product name" autocapitalize="off" required>
                     </div>
 
                     <div class="field">
@@ -53,7 +53,6 @@
                         <label>Total Amount</label>
                         <input name="total_amount[]" class="form-control" type="number" id="total_amount" placeholder="0" autocapitalize="off" required>
                     </div>
-
 
 
                 </div>

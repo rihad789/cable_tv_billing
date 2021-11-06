@@ -1,7 +1,9 @@
 @extends('layouts.owner')
 
 @section('meta')
-<title>Dashboard | Metro Bangla Rail</title>
+
+<title>Dashboard | {{ $website_name }}</title>
+
 <meta name="description" content="Metro Bangla Operator">
 @endsection
 

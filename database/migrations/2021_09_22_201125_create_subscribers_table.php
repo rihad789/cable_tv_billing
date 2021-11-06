@@ -27,6 +27,7 @@ class CreateSubscribersTable extends Migration
             $table->integer('bill_amount');
             $table->integer('locked_fund');
             $table->boolean('connection_status')->default(true);
+            $table->boolean('is_settled')->default(false);
             $table->timestamps();
         });
     }

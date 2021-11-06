@@ -6,15 +6,15 @@
 
             <div class="field">
                     <label for="">Subscriber ID</label>
-                    <input name="client_id" id="client_id" list="clients" autocomplete="off" placeholder="গ্রাহকের আইডি">
-
-                    <datalist  id="clients">
-
-                    @foreach ($subscribersData as $val)
-                        <option value="{{ $val->client_id }}">
+                    <select name="client_id" id="client_id" class="ui search dropdown getid">
+                                    <option value="">{{ __("Select Subscriber ID") }}</option>
+                                    @foreach ($subscribersData as $val)
+                        <option value="{{ $val->client_id }}">{{ $val->client_id }}</option>
                     @endforeach
-                
-                   </datalist> 
+
+
+                                </select>
+
 
             </div>
 

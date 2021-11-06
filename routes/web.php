@@ -35,144 +35,180 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     //Admin Side Nav Route
-    Route::get('owner', 'App\Http\Controllers\Owner\DashboardController@index')->name('dashboard');
+    Route::get('owner', 'App\Http\Controllers\Owner\BillingController@billcollection');
+
+    //Area and Vicinity Routes
+    Route::get('owner/area_vicinity', 'App\Http\Controllers\Owner\AreaController@index');
+    Route::post('owner/area/add', 'App\Http\Controllers\Owner\AreaController@add_area');
+    Route::get('owner/area/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_area');
+    Route::post('owner/vicinity/add', 'App\Http\Controllers\Owner\AreaController@add_vicinity');
+    Route::get('owner/vicinity/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_vicinity');
+
+    //Subscriber Routes
+    Route::get('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@index');
+    Route::post('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@filter_subscriber');
+    Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due');
+    Route::post('owner/subscriber/add', 'App\Http\Controllers\Owner\SubscriberController@add_subscriber');
+    Route::get('owner/subscriber/getVicinity/{id}', 'App\Http\Controllers\Owner\SubscriberController@getVicinity');
+    Route::get('owner/subscriber/{id}', 'App\Http\Controllers\Owner\SubscriberController@view_subscriber');
+    Route::get('owner/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Owner\SubscriberController@cut_lock_fund'); 
+    Route::get('owner/subscriber/billing/{id}', 'App\Http\Controllers\Owner\SubscriberController@subscriber_bills');
 
 
-    Route::get('owner/area', 'App\Http\Controllers\Owner\AreaController@index')->name('area');
-    Route::post('owner/area', 'App\Http\Controllers\Owner\AreaController@add_area')->name('add_area');
-    Route::get('owner/area/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_area')->name('delete_area');
-
-    Route::post('owner/vicinity', 'App\Http\Controllers\Owner\AreaController@add_vicinity')->name('add_vicinity');
-    Route::get('owner/vicinity/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_vicinity')->name('delete_vicinity');
-    
-
-    Route::get('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@index')->name('subscriber');
-    Route::post('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@filter')->name('filter');  
-    Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due')->name('settle_due'); 
-    Route::post('owner/subscriber/store', 'App\Http\Controllers\Owner\SubscriberController@store')->name('add_subscriber');
-    Route::get('owner/subscriber/getVicinity/{id}', 'App\Http\Controllers\Owner\SubscriberController@getVicinity')->name('getVicinity');
-    Route::get('owner/subscriber/{id}', 'App\Http\Controllers\Owner\SubscriberController@view')->name('view_subscriber');
-    Route::get('owner/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Owner\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
-    Route::get('owner/subscriber/billing/{id}', 'App\Http\Controllers\Owner\SubscriberController@subscriber_bills')->name('subscriber_bills');
-
-  
-    Route::get('owner/billing', 'App\Http\Controllers\Owner\BillingController@index')->name('billing');
-    Route::post('owner/billing', 'App\Http\Controllers\Owner\BillingController@filter')->name('filter');  
-    Route::get('owner/billing/generate', 'App\Http\Controllers\Owner\BillingController@generate')->name('generate');
-    Route::post('owner/billing/update', 'App\Http\Controllers\Owner\BillingController@update')->name('update');
-    Route::get('owner/billing/billcollection', 'App\Http\Controllers\Owner\BillingController@billcollection')->name('billcollection');
+    //Billing Routes
+    Route::get('owner/billing', 'App\Http\Controllers\Owner\BillingController@index');
+    Route::post('owner/billing', 'App\Http\Controllers\Owner\BillingController@filter_billing');
+    Route::get('owner/billing/generate', 'App\Http\Controllers\Owner\BillingController@generate_bills');
+    Route::post('owner/billing/update', 'App\Http\Controllers\Owner\BillingController@update_bills');
 
 
-    
-    Route::get('owner/memo', 'App\Http\Controllers\Owner\MemoController@index')->name('account');
-    Route::post('owner/memo', 'App\Http\Controllers\Owner\MemoController@store')->name('store');
-    Route::get('owner/memo/{id}', 'App\Http\Controllers\Owner\MemoController@view')->name('view');
+
+    //Memo Routes
+    Route::get('owner/memo/history', 'App\Http\Controllers\Owner\MemoController@memo_history');
+    Route::get('owner/memo', 'App\Http\Controllers\Owner\MemoController@index');
+    Route::post('owner/memo/add', 'App\Http\Controllers\Owner\MemoController@add_memo');
+    Route::get('owner/memo/{id}', 'App\Http\Controllers\Owner\MemoController@view_memo');
 
 
-    Route::get('owner/account', 'App\Http\Controllers\Owner\AccountController@index')->name('account');
+    //Account Diary Controller
+    Route::get('owner/account_diary', 'App\Http\Controllers\Owner\AccountController@index');
+    Route::post('owner/account_diary/settle_account', 'App\Http\Controllers\Owner\AccountController@settle_account');
+    Route::get('owner/account_diary/settlements', 'App\Http\Controllers\Owner\AccountController@settlements');
 
 
-    //User Route
-    Route::get('owner/profile', 'App\Http\Controllers\Owner\UserController@admin_profile')->name('profile');
-    Route::post('owner/profile/update', 'App\Http\Controllers\Owner\UserController@admin_profile_update')->name('update_profile');
+    //Profile Route
+    Route::get('owner/my_profile', 'App\Http\Controllers\Owner\ProfileController@my_profile');
+    Route::post('owner/my_profile/update_profile', 'App\Http\Controllers\Owner\ProfileController@update_profile');
+    Route::post('owner/my_profile/upload_image', 'App\Http\Controllers\Owner\ProfileController@upload_image');
+
+    Route::get('owner/my_account', 'App\Http\Controllers\Owner\ProfileController@my_account');
+    Route::post('owner/my_account/update', 'App\Http\Controllers\Owner\ProfileController@update_account');
+    Route::post('owner/my_account/update_password', 'App\Http\Controllers\Owner\ProfileController@update_password');
 
 
-    //Users Route
-    Route::get('owner/users', 'App\Http\Controllers\Owner\UserController@users')->name('users');
-    Route::post('owner/users/add', 'App\Http\Controllers\Owner\UserController@add_users')->name('add_users');
-    Route::get('owner/users/view/{id}', 'App\Http\Controllers\Owner\UserController@view_users')->name('view_users');
-    Route::post('owner/users/update', 'App\Http\Controllers\Owner\UserController@update_users')->name('edit_users');
-    Route::get('owner/users/delete/{id}', 'App\Http\Controllers\Owner\UserController@delete_users')->name('delete_users');
-    Route::post('owner/users/upload_image', 'App\Http\Controllers\Owner\UserController@upload_image')->name('upload_image');
+    //Employee Route
+    Route::get('owner/employee', 'App\Http\Controllers\Owner\EmployeeController@index');
+    Route::post('owner/employee/add', 'App\Http\Controllers\Owner\EmployeeController@add_employee');
+    Route::get('owner/employee/{id}', 'App\Http\Controllers\Owner\EmployeeController@view_employee');
+    Route::post('owner/employee/update', 'App\Http\Controllers\Owner\EmployeeController@update_employee');
+    Route::get('owner/employee/delete/{id}', 'App\Http\Controllers\Owner\EmployeeController@delete_employee');
+    Route::post('owner/employee/upload_image', 'App\Http\Controllers\Owner\EmployeeController@upload_employee_image');
 
-    Route::get('owner/sallery','App\Http\Controllers\Owner\SalleryController@index')->name('sallery');
-    Route::post('owner/sallery/add','App\Http\Controllers\Owner\SalleryController@add_sallery')->name('add_sallery');
-    Route::post('owner/sallery/filter','App\Http\Controllers\Owner\SalleryController@filter')->name('filter_sallery');
-    Route::get('owner/sallery/settle/{id}','App\Http\Controllers\Owner\SalleryController@settle')->name('settle_sallery');
-   
+
+    //Employee Sallery Route
+    Route::get('owner/sallery', 'App\Http\Controllers\Owner\SalleryController@index');
+    Route::post('owner/sallery/add', 'App\Http\Controllers\Owner\SalleryController@add_sallery');
+    Route::get('owner/sallery/settle/{id}', 'App\Http\Controllers\Owner\SalleryController@settle');
 });
 
 
 
-
-//For manager
+//For Manager
 Route::group(['middleware' => ['auth', 'role:manager']], function () {
 
 
     //Admin Side Nav Route
-    Route::get('manager', 'App\Http\Controllers\Manager\DashboardController@index')->name('dashboard');
+    Route::get('manager', 'App\Http\Controllers\Manager\BillingController@bill_collection');
+
+    //Area and Vicinity Routes
+    Route::get('manager/area_vicinity', 'App\Http\Controllers\Manager\AreaController@index');
+    Route::post('manager/area/add', 'App\Http\Controllers\Manager\AreaController@add_area');
+    Route::get('manager/area/delete/{id}', 'App\Http\Controllers\Manager\AreaController@delete_area');
+    Route::post('manager/vicinity/add', 'App\Http\Controllers\Manager\AreaController@add_vicinity');
+    Route::get('manager/vicinity/delete/{id}', 'App\Http\Controllers\Manager\AreaController@delete_vicinity');
+
+    //Subscriber Routes
+    Route::get('manager/subscriber', 'App\Http\Controllers\Manager\SubscriberController@index');
+    Route::post('manager/subscriber', 'App\Http\Controllers\Manager\SubscriberController@filter_subscriber');
+    Route::post('manager/subscriber/settle_due', 'App\Http\Controllers\Manager\SubscriberController@settle_due');
+    Route::post('manager/subscriber/add', 'App\Http\Controllers\Manager\SubscriberController@add_subscriber');
+    Route::get('manager/subscriber/getVicinity/{id}', 'App\Http\Controllers\Manager\SubscriberController@getVicinity');
+    Route::get('manager/subscriber/{id}', 'App\Http\Controllers\Manager\SubscriberController@view_subscriber');
+    Route::get('manager/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Manager\SubscriberController@cut_lock_fund'); 
+    Route::get('manager/subscriber/billing/{id}', 'App\Http\Controllers\Manager\SubscriberController@subscriber_bills');
 
 
-    Route::get('manager/area', 'App\Http\Controllers\Manager\AreaController@index')->name('area');
-    Route::post('manager/area', 'App\Http\Controllers\Manager\AreaController@add_area')->name('add_area');
-    Route::get('manager/area/delete/{id}', 'App\Http\Controllers\Manager\AreaController@delete_area')->name('delete_area');
-
-    Route::post('manager/vicinity', 'App\Http\Controllers\Manager\AreaController@add_vicinity')->name('add_vicinity');
-    Route::get('manager/vicinity/delete/{id}', 'App\Http\Controllers\Manager\AreaController@delete_vicinity')->name('delete_vicinity');
-    
-
-    Route::get('manager/subscriber', 'App\Http\Controllers\Manager\SubscriberController@index')->name('subscriber');
-    Route::post('manager/subscriber', 'App\Http\Controllers\Manager\SubscriberController@filter')->name('filter');  
-    Route::post('manager/subscriber/settle_due', 'App\Http\Controllers\Manager\SubscriberController@settle_due')->name('settle_due'); 
-    Route::post('manager/subscriber/store', 'App\Http\Controllers\Manager\SubscriberController@store')->name('add_subscriber');
-    Route::get('manager/subscriber/getVicinity/{id}', 'App\Http\Controllers\Manager\SubscriberController@getVicinity')->name('getVicinity');
-    Route::get('manager/subscriber/{id}', 'App\Http\Controllers\Manager\SubscriberController@view')->name('view_subscriber');
-    Route::get('manager/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Manager\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
-    Route::get('manager/subscriber/billing/{id}', 'App\Http\Controllers\Manager\SubscriberController@subscriber_bills')->name('subscriber_bills');
-
-  
-    Route::get('manager/billing', 'App\Http\Controllers\Manager\BillingController@index')->name('billing');
-    Route::post('manager/billing', 'App\Http\Controllers\Manager\BillingController@filter')->name('filter');  
-    Route::get('manager/billing/generate', 'App\Http\Controllers\Manager\BillingController@generate')->name('generate');
-    Route::post('manager/billing/update', 'App\Http\Controllers\Manager\BillingController@update')->name('update');
-    Route::get('manager/billing/billcollection', 'App\Http\Controllers\Manager\BillingController@billcollection')->name('billcollection');
+    //Billing Routes
+    Route::get('manager/billing', 'App\Http\Controllers\Manager\BillingController@index');
+    Route::post('manager/billing', 'App\Http\Controllers\Manager\BillingController@filter_billing');
+    Route::get('manager/billing/generate', 'App\Http\Controllers\Manager\BillingController@generate_bills');
+    Route::post('manager/billing/update', 'App\Http\Controllers\Manager\BillingController@update_bills');
 
 
-    
-
-    Route::get('manager/memo', 'App\Http\Controllers\Manager\MemoController@index')->name('account');
-    Route::post('manager/memo', 'App\Http\Controllers\Manager\MemoController@store')->name('store');
-    Route::get('manager/memo/{id}', 'App\Http\Controllers\Manager\MemoController@view')->name('view');
-
-
-    Route::get('manager/account', 'App\Http\Controllers\Manager\AccountController@index')->name('account');
+    //Memo Routes
+    Route::get('manager/memo/history', 'App\Http\Controllers\Manager\MemoController@memo_history');
+    Route::get('manager/memo', 'App\Http\Controllers\Manager\MemoController@index');
+    Route::post('manager/memo', 'App\Http\Controllers\Manager\MemoController@add_memo');
+    Route::get('manager/memo/{id}', 'App\Http\Controllers\Manager\MemoController@view_memo');
 
 
-    //User Route
-    Route::get('manager/profile', 'App\Http\Controllers\Manager\UserController@admin_profile')->name('profile');
-    Route::post('manager/profile/update', 'App\Http\Controllers\Manager\UserController@admin_profile_update')->name('update_profile');
+    //Account Diary Controller
+    Route::get('manager/account_diary', 'App\Http\Controllers\Manager\AccountController@index');
+    Route::post('manager/account_diary/settle_account', 'App\Http\Controllers\Manager\AccountController@settle_account');
+    Route::get('manager/account_diary/settlements', 'App\Http\Controllers\Manager\AccountController@settlements');
 
-    
 
-    //Users Route
-    Route::get('manager/users', 'App\Http\Controllers\Manager\UserController@users')->name('users');
-    Route::post('manager/users/add', 'App\Http\Controllers\Manager\UserController@add_users')->name('add_users');
-    Route::get('manager/users/view/{id}', 'App\Http\Controllers\Manager\UserController@view_users')->name('view_users');
-    Route::post('manager/users/update', 'App\Http\Controllers\Manager\UserController@update_users')->name('edit_users');
-    Route::get('manager/users/delete/{id}', 'App\Http\Controllers\Manager\UserController@delete_users')->name('delete_users');
-    Route::post('manager/users/upload_image', 'App\Http\Controllers\Manager\UserController@upload_image')->name('upload_image');
-   
+    //Profile Route
+    Route::get('manager/my_profile', 'App\Http\Controllers\Manager\ProfileController@my_profile');
+    Route::post('manager/my_profile/update_profile', 'App\Http\Controllers\Manager\ProfileController@update_profile');
+    Route::post('manager/my_profile/upload_image', 'App\Http\Controllers\Manager\ProfileController@upload_image');
+
+    Route::get('manager/my_account', 'App\Http\Controllers\Manager\ProfileController@my_account');
+    Route::post('manager/my_account/update', 'App\Http\Controllers\Manager\ProfileController@update_account');
+    Route::post('manager/my_account/update_password', 'App\Http\Controllers\Manager\ProfileController@update_password');
+
 });
+
+
 
 
 //For Employee
 Route::group(['middleware' => ['auth', 'role:employee']], function () {
 
-    Route::get('employee', 'App\Http\Controllers\Employee\BillingController@index')->name('billcollection');
-    Route::post('employee/billing/update', 'App\Http\Controllers\Employee\BillingController@update')->name('update');
+
+    //Admin Side Nav Route
+    Route::get('employee', 'App\Http\Controllers\Employee\BillingController@bill_collection');
+
+    //Area and Vicinity Routes
+    Route::get('employee/area_vicinity', 'App\Http\Controllers\Employee\AreaController@index');
+    Route::post('employee/area/add', 'App\Http\Controllers\Employee\AreaController@add_area');
+    Route::get('employee/area/delete/{id}', 'App\Http\Controllers\Employee\AreaController@delete_area');
+    Route::post('employee/vicinity/add', 'App\Http\Controllers\Employee\AreaController@add_vicinity');
+    Route::get('employee/vicinity/delete/{id}', 'App\Http\Controllers\Employee\AreaController@delete_vicinity');
+
+    //Subscriber Routes
+    Route::get('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@index');
+    Route::post('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@filter_subscriber');
+    Route::post('employee/subscriber/settle_due', 'App\Http\Controllers\Employee\SubscriberController@settle_due');
+    Route::post('employee/subscriber/add', 'App\Http\Controllers\Employee\SubscriberController@add_subscriber');
+    Route::get('employee/subscriber/getVicinity/{id}', 'App\Http\Controllers\Employee\SubscriberController@getVicinity');
+    Route::get('employee/subscriber/{id}', 'App\Http\Controllers\Employee\SubscriberController@view_subscriber');
+    Route::get('employee/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Employee\SubscriberController@cut_lock_fund'); 
+    Route::get('employee/subscriber/billing/{id}', 'App\Http\Controllers\Employee\SubscriberController@subscriber_bills');
 
 
-    Route::get('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@index')->name('subscriber');
-    Route::post('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@filter')->name('filter');  
-    Route::get('employee/subscriber/{id}', 'App\Http\Controllers\Employee\SubscriberController@view')->name('view_subscriber');
-    Route::get('employee/subscriber/getVicinity/{id}', 'App\Http\Controllers\Employee\SubscriberController@getVicinity')->name('getVicinity');
-    Route::get('employee/subscriber/billing/{id}', 'App\Http\Controllers\Employee\SubscriberController@subscriber_bills')->name('subscriber_bills');
-    Route::get('employee/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Employee\SubscriberController@cut_lock_fund')->name('cut_lock_fund');
+    //Billing Routes
+    Route::get('employee/billing', 'App\Http\Controllers\Employee\BillingController@index');
+    Route::post('employee/billing', 'App\Http\Controllers\Employee\BillingController@filter_billing');
+    Route::get('employee/billing/generate', 'App\Http\Controllers\Employee\BillingController@generate_bills');
+    Route::post('employee/billing/update', 'App\Http\Controllers\Employee\BillingController@update_bills');
 
 
-    Route::get('employee/memo', 'App\Http\Controllers\Employee\MemoController@index')->name('account');
-    Route::post('employee/memo', 'App\Http\Controllers\Employee\MemoController@store')->name('store');
-    Route::get('employee/memo/{id}', 'App\Http\Controllers\Employee\MemoController@view')->name('view');
+    //Memo Routes
+    Route::get('employee/memo/history', 'App\Http\Controllers\Employee\MemoController@memo_history');
+    Route::get('employee/memo', 'App\Http\Controllers\Employee\MemoController@index');
+    Route::post('employee/memo', 'App\Http\Controllers\Employee\MemoController@add_memo');
+    Route::get('employee/memo/{id}', 'App\Http\Controllers\Employee\MemoController@view_memo');
+
+
+    //Profile Route
+    Route::get('employee/my_profile', 'App\Http\Controllers\Employee\ProfileController@my_profile');
+    Route::post('employee/my_profile/update_profile', 'App\Http\Controllers\Employee\ProfileController@update_profile');
+    Route::post('employee/my_profile/upload_image', 'App\Http\Controllers\Employee\ProfileController@upload_image');
+
+    Route::get('employee/my_account', 'App\Http\Controllers\Employee\ProfileController@my_account');
+    Route::post('employee/my_account/update', 'App\Http\Controllers\Employee\ProfileController@update_account');
+    Route::post('employee/my_account/update_password', 'App\Http\Controllers\Employee\ProfileController@update_password');
 
 });
 

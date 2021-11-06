@@ -10,11 +10,11 @@
 
                 <div class="field">
                     <label>Memo No</label>
-                    <input type="text" name="memo_no" class="form-control" id="memo_no" placeholder="Memo No" autocapitalize="off">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="memo_no" type="text" class="form-control" id="memo_no" placeholder="Memo No" autocapitalize="off">
                 </div>
 
                 <div class="field">
-                <div class="sixteen wide field role">
+ 
                     <label for="">Buyer Name</label>
                     <select id="buyer_id" class="ui dropdown uppercase required" name="buyer_id" required>
                         <option value="">Select Buyer Name</option>
@@ -24,7 +24,7 @@
                         @endforeach
 
                     </select>
-                </div>
+               
             </div>
 
 
@@ -36,23 +36,24 @@
 
                     <div class="field">
                         <label>Product Name</label>
-                        <input type="text" name="title[]" class="form-control" id="title" placeholder="পন্যের নাম" autocapitalize="off" required>
+                        <input type="text" name="title[]" class="form-control" id="title" placeholder="Product name" autocapitalize="off" required>
                     </div>
 
                     <div class="field">
                         <label>Single Unit Price</label>
-                        <input name="single_unit_price[]" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="single_unit_price" placeholder="Single Unit Price" autocapitalize="off" required>
+                        <input name="single_unit_price[]" type="number" class="form-control" id="single_unit_price" placeholder="Single Unit Price" autocapitalize="off" required>
                     </div>
 
                     <div class="field">
                         <label>Quantity</label>
-                        <input name="quantity[]" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="quantity" placeholder="Quantity" autocapitalize="off" required>
+                        <input name="quantity[]" class="form-control" type="number" id="quantity" placeholder="Quantity" autocapitalize="off" required>
                     </div>
 
                     <div class="field">
                         <label>Total Amount</label>
-                        <input name="total_amount[]" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" id="total_amount" placeholder="0" autocapitalize="off" required>
+                        <input name="total_amount[]" class="form-control" type="number" id="total_amount" placeholder="0" autocapitalize="off" required>
                     </div>
+
 
                 </div>
 

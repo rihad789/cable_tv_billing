@@ -1,7 +1,7 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>Billing | Dingedah Network</title>
+<title>Subscriber Bills| {{ $website_name }}</title>
 <meta name="description" content="Metro Bangla Operator">
 @endsection
 

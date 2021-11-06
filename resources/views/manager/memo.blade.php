@@ -1,7 +1,9 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>Account | Dingedah Network</title>
+
+<title>Memo | {{ $website_name }}</title>
+
 <meta name="description" content="Dingedah Network Memo">
 @endsection
 
@@ -11,22 +13,34 @@
 
 <div class="container-fluid" id="printableArea">
 
-    <div class="row">
+    <div class="box box-success">
 
-        <div class="col-md-12">
+        <div class="box-content">
 
-            <!-- Card user Count Data -->
+        <div class="row">
 
-            <div class="box box-success">
+<div class="col-md-12">
 
-                <div class="box-content">
+    <!-- Card user Count Data -->
 
-                    <p class="lead">&nbsp;&nbsp;SHOPPING DIARY
-                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Shopping Memo") }}</button>
+    <p class="lead">&nbsp;&nbsp;SHOPPING DIARY
 
-                    </p>
-                    <hr>
+         <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
+        <button onclick="location.href='/manager/memo/history'" class="ui btn btn-primary mini offsettop5 float-right"><i class="ui icon eye"></i> {{ __("Settled") }}</button>
+        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Memo") }}</button>
+        
+       
+    </p>
+
+    <hr>
+
+</div>
+
+        </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
 
                     <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
@@ -52,7 +66,7 @@
                                 <td>{{ $val->memo_no }}</td>
                                 <td>{{ $val->first_name }} , {{ $val->last_name }}</td>
                                 <td>{{ $val->products_total }} </td>
-                                <td>{{ $val->grand_amount }} ৳</td> 
+                                <td>{{ $val->grand_amount }} ৳</td>
                                 <td>{{ $val->creation_date }} </td>
 
 
@@ -159,8 +173,9 @@
             html += '<input type="number" name="total_amount[]" class="form-control" id="total_amount" placeholder="0" autocapitalize="off" required>';
             html += '</div>';
 
-            html += '<div class="input-group-append">';
-            html += '<button id="removeRow" type="button" class="btn btn-danger circular" ><i class="icon trash alternate outline"></i></button>';
+            html += '<div class="field">';
+            html += '<label>Action</label>';
+            html += '<button id="removeRow" type="button" class="btn btn-secondary circular" ><i class="icon trash alternate outline"></i>Remove</button>';
             html += '</div>';
 
             html += '</div>';
@@ -178,19 +193,6 @@
         });
 
 
-        // $('input[id=quantity]').on('keyup', function() {
-
-        //     //Get
-        //     var single_unit_price = $('#single_unit_price').val();
-        //     var quantity = $('#quantity').val();
-        //     var total_amount = single_unit_price * quantity;
-
-        //     //Set
-        //     $('#total_amount').val(total_amount);
-
-        // });
-
-
         $('#add_new_calculation').form({
             fields: {
 
@@ -198,28 +200,29 @@
                     identifier: 'memo_no',
                     rules: [{
                         type: 'empty',
-                        prompt: 'মেমো নং আবষ্যক ।'
+                        prompt: 'Memo no required.'
                     }]
                 },
-                buyer_name: {
-                    identifier: 'buyer_name',
+                buyer_id: {
+                    identifier: 'buyer_id',
                     rules: [{
                         type: 'empty',
-                        prompt: 'ক্রেতার নাম আবষ্যক ।'
+                        prompt: 'Buyer name required.'
                     }]
                 },
                 products_total: {
                     identifier: 'products_total',
                     rules: [{
                         type: 'empty',
-                        prompt: 'অনুগ্রহ করে মোট পন্য হিসাব করুন ।'
+                        prompt: 'Please calculate product total.'
                     }]
                 },
                 grand_amount: {
                     identifier: 'grand_amount',
                     rules: [{
                         type: 'empty',
-                        prompt: 'অনুগ্রহ করে সর্বমোট মূল্য হিসাব করুন ।'
+                        prompt: 'Please calculate grand amount.'
+
                     }]
                 }
 

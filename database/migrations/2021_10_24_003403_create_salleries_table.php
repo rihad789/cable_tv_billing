@@ -20,6 +20,7 @@ class CreateSalleriesTable extends Migration
             $table->integer('sallery_month');
             $table->integer('sallery_year');
             $table->boolean('payment_status')->default(false);
+            $table->boolean('is_settled')->default(false);
             $table->timestamps();
         });
     }

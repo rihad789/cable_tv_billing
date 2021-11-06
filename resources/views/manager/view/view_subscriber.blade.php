@@ -1,12 +1,12 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>View Station | Metro Bangla</title>
+<title>Subscriber | {{ $website_name }}</title>
 <meta name="description" content="Workday users, view all users, add, edit, delete users">
 @endsection
 
 @section('content')
-@include('manager.modals.add_subscriber')
+@include('owner.modals.add_subscriber')
 
 <div class="container-fluid">
 
@@ -133,14 +133,14 @@
 
                     @if($connection_status==1 && $due_bill >=3 )
                         
-                        <button onclick="location.href='/manager/subscriber/cut_lock_fund/@isset($val->client_id){{ $val->client_id }}@endisset'" class="btn btn-danger float-right"><i class="dollar sign icon"></i>Settle Due</button>
-                        <button onclick="location.href='/manager/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>     
+                        <button onclick="location.href='/manager/subscriber/cut_lock_fund/@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset'" class="btn btn-danger float-right"><i class="dollar sign icon"></i>Settle Due</button>
+                        <button onclick="location.href='/manager/subscriber/billing/@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>     
                     </p>
 
                     @else
                     
                         <button  class="btn btn-danger float-right" disabled><i class="dollar sign icon"></i>Settle Due</button>
-                        <button onclick="location.href='/manager/subscriber/billing/{{ $id }}'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>
+                        <button onclick="location.href='/manager/subscriber/billing/@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset'"  class="btn btn-info float-right"><i class="eye icon"></i>Complete Bills </button>
                         </p>
                     
                     @endif
@@ -215,5 +215,127 @@
     </div>
 
 </div>
+
+@endsection
+
+
+@section('scripts')
+
+<script>
+    $(document).ready(function() {
+
+
+        $("#area").change(function() {
+
+            var area = $(this).val();
+            // clear all values 
+            $('#vicinity option:not(:first)').remove();
+
+            $.ajax({
+                url: '/manager/subscriber/getVicinity/' + area,
+                type: 'get',
+                dataType: 'json',
+                success: function(response) {
+                    var len = 0;
+                    if (response.data != null) {
+                        len = response.data.length;
+                    }
+                    if (len > 0) {
+
+                        for (var i = 0; i < len; i++) {
+                            var id = response.data[i].id;
+                            var name = response.data[i].vicinity_name;
+
+                            var option = "<option value='" + id + "'>" + name + "</option>";
+
+                            $("#vicinity").append(option);
+
+                        }
+                    }
+                },
+
+            });
+        });
+
+        $('#add_subscriber_form').form({
+            fields: {
+
+                client_id: {
+                    identifier: 'client_id',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রাহকের কার্ড নং আবষ্যক ।'
+                    }]
+                },
+                initialization_date: {
+                    identifier: 'initialization_date',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'সংযোগের তারিখ আবষ্যক ।'
+                    }]
+                },
+                client_name: {
+                    identifier: 'client_name',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রাহকের নাম আবষ্যক ।'
+                    }]
+                },
+                client_father: {
+                    identifier: 'client_father',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রাহকের পিতার নাম আবষ্যক'
+                    }]
+                },
+                area: {
+                    identifier: 'area',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রামের নাম আবষ্যক ।'
+                    }]
+                },
+                vicinity: {
+                    identifier: 'vicinity',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'পাড়ার নাম আবষ্যক ।'
+                    }]
+                },
+                address: {
+                    identifier: 'address',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রাহকের ঠিকানা আবষ্যক ।'
+                    }]
+                },
+                mobile_no: {
+                    identifier: 'mobile_no',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রাহকের মোবাইল নং আবষ্যক ।'
+                    }]
+                },
+                locked_fund: {
+                    identifier: 'locked_fund',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'গ্রাহকের জামানত আবষ্যক ।'
+                    }]
+                },
+                bill_amount: {
+                    identifier: 'bill_amount',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'বিলের পরিমান আবষ্যক ।'
+                    }]
+                }
+
+            }
+        });
+
+    });
+
+</script>
 
 @endsection

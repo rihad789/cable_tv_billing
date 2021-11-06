@@ -17,17 +17,13 @@ class MemoController extends Controller
     public function index()
     {
         //
-        $memoData=DB::select( DB::raw("select memos.memo_no,memos.products_total,memos.grand_amount,memos.creation_date,users.first_name,users.last_name from memos INNER JOIN users on memos.buyer_id=users.id;"));
+        $memoData=DB::select( DB::raw("select memos.memo_no,memos.products_total,memos.grand_amount,memos.creation_date,users.first_name,users.last_name
+         from memos INNER JOIN users on memos.buyer_id=users.id where memos.is_settled = false;"));
         $userData = DB::table("users")->select('id','first_name','last_name')->get();
         return view('manager.memo',compact('memoData','userData'));
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
+    public function add_memo(Request $request)
     {
         //
         $dt = Carbon::now();
@@ -37,7 +33,7 @@ class MemoController extends Controller
 
         if($check_memo_no==1)
         {
-            return redirect("manager/memo")->with('error', trans("সরি!এই মেমো নং ডাটাবেজে জমা আছে!"));
+            return redirect("manager/memo")->with('error', trans("Sorry ! This memo no already exist in the database!"));
         }
         else
         {
@@ -65,11 +61,11 @@ class MemoController extends Controller
         }
 
 
-        return redirect("manager/memo")->with('error', trans("নতুন হিসাব যুক্ত সম্পুর্ন হয়েছে!"));
+        return redirect("manager/memo")->with('error', trans("New service cost memo added succsfully!"));
 
     }
 
-    public function view($id)
+    public function view_memo($id)
     {
         //
         $memoProducts=DB::table("memos")->select("memos.products_total")->where("memos.memo_no", "=", $id) ->first();
@@ -84,6 +80,22 @@ class MemoController extends Controller
 
         //return response()->json(['Response'=>$accountData]);
     }
+
+    public function memo_history(Request $request)
+    { 
+
+        $memoData=DB::select( DB::raw("select memos.memo_no,memos.products_total,memos.grand_amount,memos.creation_date,users.first_name,users.last_name
+        from memos INNER JOIN users on memos.buyer_id=users.id where memos.is_settled = true;"));
+
+       $userData = DB::table("users")->select('id','first_name','last_name')->get();
+       
+       return view('manager.memo',compact('memoData','userData'));
+
+   // return response()->json(['Response'=>'122544554456']);
+
+    }
+
+
 
 }
 

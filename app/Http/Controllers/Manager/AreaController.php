@@ -21,13 +21,6 @@ class AreaController extends Controller
         return view('manager.area',compact('areasData','vicinitiesData'));
     }
 
-    public function create(Request $request)
-    {
-        //
-
-
-    }
-
     public function add_area(Request $request)
     {
         //
@@ -37,7 +30,7 @@ class AreaController extends Controller
 
         if($check_area==1)
         {
-            return redirect("manager/area")->with('error', trans("সরি! এরিয়া ডাটাবেজে জমা আছে!"));
+            return redirect("manager/area_vicinity")->with('error', trans("Sorry!This area already exists in the database"));
         }
         else
         {
@@ -46,7 +39,7 @@ class AreaController extends Controller
             ]);
         }
 
-        return redirect("manager/area")->with('error', trans("নতুন এরিয়া জমা হয়েছে!"));
+        return redirect("manager/area_vicinity")->with('error', trans("New Area added sucessfully!"));
     }
 
     public function delete_area($id)
@@ -57,7 +50,7 @@ class AreaController extends Controller
 
             $affectedRow2 = Vicinity::where('id', $id)->delete();
 
-            return redirect('manager/area')->with('success', trans("Area Deleted successfully!"));
+            return redirect('manager/area_vicinity')->with('success', trans("Area Deleted successfully!"));
         
         }
 
@@ -74,7 +67,7 @@ class AreaController extends Controller
 
         if($check_vicinity==1)
         {
-            return redirect("manager/area")->with('error', trans("সরি! পাড়া ডাটাবেজে জমা আছে!"));
+            return redirect("manager/area_vicinity")->with('error', trans("Sorry! This vicinity already exist in the database"));
         }
         else
         {
@@ -84,7 +77,7 @@ class AreaController extends Controller
             ]);
         }
 
-        return redirect("manager/area")->with('error', trans("নতুন পাড়া জমা হয়েছে!"));
+        return redirect("manager/area_vicinity")->with('error', trans("New Vicinity added successfully!"));
     }
 
     public function delete_vicinity($id)
@@ -92,23 +85,11 @@ class AreaController extends Controller
         $affectedRow = Vicinity::where('id', $id)->delete();
 
         if ($affectedRow == 1) {
-            return redirect('manager/area')->with('success', trans("Vicinity Deleted successfully!"));
+            return redirect('manager/area_vicinity')->with('success', trans("Vicinity Deleted successfully!"));
         }
 
     }
 
-    public function edit(Area $area)
-    {
-        //
-    }
-
-    public function update(Request $request, Area $area)
-    {
-        //
-    }
-
-    public function destroy(Area $area)
-    {
-        //
-    }
 }
+
+

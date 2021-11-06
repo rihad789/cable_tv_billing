@@ -1,7 +1,7 @@
 <div class="ui modal medium add">
     <div class="header">{{ __("New Area Name") }}</div>
     <div class="content">
-        <form id="add_area_form" action="{{ url('manager/area') }}" class="ui form add-user" method="post" accept-charset="utf-8">
+        <form id="add_area_form" action="{{ url('manager/area/add') }}" class="ui form add-user" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="field">

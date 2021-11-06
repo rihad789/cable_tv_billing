@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->share('website_name','Dingedah Network');
         date_default_timezone_set('Asia/Dhaka');
         Builder::defaultStringLength(191);
     }

@@ -61,12 +61,10 @@ class BillingController extends Controller
 
         }
 
-
-
         return view('owner.billing', compact('billingData','paid_today','subscribersData','due_this_month','total_bill','total_this_month','paid_this_month')); 
     }
 
-    public function filter(Request $request)
+    public function filter_billing(Request $request)
     {
 
         $billing_time=$request->billing_time;
@@ -167,7 +165,7 @@ class BillingController extends Controller
 
     }
 
-    public function generate()
+    public function generate_bills()
     {
         //
         $timestamp = Carbon::now()->toDateString();
@@ -201,11 +199,11 @@ class BillingController extends Controller
                 }
             }
 
-            return redirect('owner/billing')->with('success', trans("বিল জেনারেট সম্পন্ন হয়েছে।"));
+            return redirect('owner/billing')->with('success', trans("Bill generated sucessfully।"));
         }
     }
 
-    public function update(Request $request)
+    public function update_bills(Request $request)
     {
         //
         $updated_by = auth()->user()->first_name . " " . auth()->user()->last_name;
@@ -220,15 +218,12 @@ class BillingController extends Controller
         $checkBill = DB::table("billings")->select('billing_status')->where('client_id', "=", $request->client_id)->where('bill_month', '=', $month)->where('bill_year', '=', $year)->first();
 
         if ($checkBill->billing_status == "1") {
-            return redirect('owner/billing/billcollection')->with('success', trans("Collection is already added to company account"));
+            return redirect('owner')->with('success', trans("Collection is already added to company account"));
         } else {
 
             $affectedRow = Billings::where('client_id', $request->client_id)
                 ->update(['billing_status' => $billing_status, "billing_date" => $timestamp, "updated_by" => $updated_by]);
-
-            if ($affectedRow == 1) {
-                return redirect('owner/billing/billcollection')->with('success', trans("বিল আইডেট সম্পুর্ন হয়েছে"));
-            }
+                return redirect('owner')->with('success', trans("Bill updated sucessfully"));
         }
 
 

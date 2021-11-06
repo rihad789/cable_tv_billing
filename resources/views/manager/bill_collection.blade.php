@@ -1,7 +1,9 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>Dashboard | Metro Bangla Rail</title>
+
+<title>Bill Collection | {{ $website_name }}</title>
+
 <meta name="description" content="Metro Bangla Operator">
 @endsection
 
@@ -23,9 +25,9 @@
 
                                                 <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
                                                 @if( $due_bill == 0)
-                                                <button onclick="window.alert('NO more due bills this Month')" class="ui btn btn-info mini offsettop5 float-right"><i class="plus icon"></i>{{ __("Bill Collection") }}</button>
+                                                <button onclick="window.alert('NO more due bills this Month')" class="ui btn btn-info mini offsettop5 float-right"><i class="plus icon"></i>{{ __("Collection") }}</button>
                                                 @else
-                                                <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="plus icon"></i>{{ __("Bill Collection") }}</button>
+                                                <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="plus icon"></i>{{ __("Collection") }}</button>
                                                 @endif
                                         </p>
                                         <hr>
@@ -39,14 +41,16 @@
                                         <table width="100%" class="table" data-order='[[ 0, "asc" ]]'>
                                                 <thead class="thead-light">
                                                         <tr>
-                                                                <th>{{ __("Current Month Total") }}</th>
+                                                                <th>{{ __("Total Bill")}}</th>
+                                                                <th>{{ __("Current Month") }}</th>
                                                                 <th>{{ __("Bill Paid") }}</th>
                                                                 <th>{{ __("Bill Due") }}</th>
-                                                                <th>{{ __("Todyas Collection") }}</th>
+                                                                <th>{{ __("Todays Collection") }}</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr>
+                                                                <td>{{ $total_bill }} Taka</td>
                                                                 <td> {{ $total_this_month }} Taka </td>
                                                                 <td>{{ $paid_this_month }} Taka</td>
                                                                 <td>{{ $due_this_month }} Taka</td>

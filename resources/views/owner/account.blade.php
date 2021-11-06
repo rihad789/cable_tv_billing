@@ -1,12 +1,13 @@
 @extends('layouts.owner')
 
 @section('meta')
-<title>Account | Dingedah Network</title>
+
+<title>Account | {{ $website_name }}</title>
+
 <meta name="description" content="Dingedah Network Billing">
 @endsection
 
 @section('content')
-
 
 
 <div class="container-fluid" id="printableArea">
@@ -22,7 +23,7 @@
 
                     <p class="lead">&nbsp;&nbsp;ACCOUNT
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button class="ui btn btn-info mini offsettop5 btn-edit float-right">{{ __("Settlment History") }}</button>
+                        <button onclick="location.href='/owner/account_diary/settlements'" class="ui btn btn-info mini offsettop5 float-right">{{ __("Settlment History") }}</button>
                     </p>
 
                     <hr>
@@ -46,7 +47,7 @@
                         <div class="box-content">
 
 
-                            <table width="100%" class="table" data-order='[[ 0, "asc" ]]'>
+                            <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
 
                                 <thead class="thead-light">
                                     <tr>
@@ -81,7 +82,7 @@
 
                         <div class="box-content">
 
-                            <table width="100%" class="table" data-order='[[ 0, "asc" ]]'>
+                            <table width="100%" class="table" id="dataTables-example1" data-order='[[ 0, "asc" ]]'>
                                 <thead class="thead-light">
                                     <tr>
                                         <th></th>
@@ -138,7 +139,7 @@
 
                 <div class="col-md-12">
                     <!-- Card user Count Data -->
-                    <table width="100%" class="table" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
 
                         <thead class="thead-light">
                             <tr>
@@ -176,7 +177,7 @@
 
 
                 <hr>
-
+ 
             </div>
 
             <div class="row">
@@ -184,10 +185,31 @@
                 <div class="col-md-12">
                     <hr>
 
-                 <p class="lead">
-                        <button class="ui btn btn-primary mini offsettop5 btn-edit float-right"><i class="handshake icon"></i>{{ __("Settle Payments") }}
-                        </button>
-                    </p>
+                    <form id="add_subscriber_form" action="{{ url('owner/account_diary/settle_account') }}" class="ui form add-user" method="post" accept-charset="utf-8">
+                        @csrf
+
+                        <input type="text" name="sallery_paid" class="form-control" id="sallery_paid" value="{{ $sallery_paid}}" hidden>
+                        <input type="text" name="locked_fund" class="form-control" id="locked_fund" value="{{ $locked_fund}}" hidden>
+                        <input type="text" name="bill_paid" class="form-control" id="bill_paid" value="{{ $bill_paid}}" hidden>
+                        <input type="text" name="grand_total" class="form-control" id="grand_total" value="{{ $grand_total}}" hidden>
+                        <input type="text" name="payable_balance" class="form-control" id="payable_balance" value="{{ $payable_balance}}" hidden>
+
+
+                        @if($sallery_status == $totalEmployee)
+
+                        <p class="lead">
+                            <button class="ui positive approve small button float-right" onclick="return confirm('You are about to pay {{ $payable_balance}} Taka to the owner.Do you want to settle accounts?')" type="submit" name="submit"><i class="ui handshake icon"></i> {{ __("Settle Payments") }}</button>
+                        </p>
+
+                        @else
+
+                        <p class="lead">
+                            <a onclick="window.alert('Sorry! Please pay employee sallery first.')" class="ui black grey small button float-right"><i class="ui handshake icon"></i> {{ __("Settle Payments") }}</a>
+                        </p>
+                        @endif
+
+                    </form>
+
                 </div>
                 <hr>
 
@@ -207,29 +229,8 @@
 
 @section('scripts')
 
-
 <script>
     $(document).ready(function() {
-
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 10,
-            ordering: false,
-            lengthChange: true,
-            dom: 'Blfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'pdfHtml5'
-
-            ],
-            lengthMenu: [
-                [10, 25, 50, -1],
-                ['10 rows', '25 rows', '50 rows', 'Show all']
-            ]
-        });
-
-
 
         $('#edit_biil_form').form({
             fields: {

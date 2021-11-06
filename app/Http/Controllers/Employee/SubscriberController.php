@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Employee;
+
 use App\Http\Controllers\Controller;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
@@ -33,58 +34,7 @@ class SubscriberController extends Controller
     }
 
 
-    public function view($id)
-    {
-        //
-        $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
-        
-        $status = DB::table("subscribers")->select('connection_status')->where('client_id','=',$id) ->first();
-
-        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
-
-        $total_bill=0;
-        $due_bill=0;
-
-        foreach ($billingData as $item) {
-            $total_bill=$total_bill+$item->bill_amount;
-            $due_bill = $due_bill + 1;
-        }
-
-        $connection_status=$status->connection_status;
-        $areasData = DB::table("areas") ->get();
-
-
-        //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
-        
-        return view('employee.view.view_subscriber',compact('id','areasData','subscriberData','billingData','total_bill','due_bill','connection_status'));
-        //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
-    }
-
-
-    public function subscriber_bills($id)
-    {
-
-        $billingData = DB::table("billings")
-        ->where("client_id", "=", $id)
-        ->orderBy("billing_status","asc")
-        ->get();
-        
-    
-        return view('employee.view.view_subscriber_bills',compact('billingData'));
-        //return response()->json(['Response'=>$billingData]);
-
-    }
-
-
-    public function getVicinity($id)
-    {
-
-        $vicinityData = DB::table("vicinities")->where('area_id', $id)->select('id', 'vicinity_name')->get();
-        return response()->json(['data' => $vicinityData]);
-
-    }
-
-    public function filter(Request $request)
+    public function filter_subscriber(Request $request)
     {
         //
 
@@ -125,7 +75,80 @@ class SubscriberController extends Controller
 
     }
 
+    public function add_subscriber(Request $request)
+    {
+        //
+        $client_id=DB::table("subscribers")->where('client_id','=',$request->client_id)->count();
+
+        if($client_id==1)
+        {
+            return redirect("employee/subscriber")->with('error', trans("সরি! গ্রাহকের আইডি আগে থেকে ডাটাবেজে আছে।"));
+        }
+        else
+        {
+
+        $areasData = DB::table("areas")->select('area_name')->where('id','=',$request->area) ->first();
+        $vicinityData = DB::table("vicinities")->select('vicinity_name') ->where('id','=',$request->vicinity) ->first();
+
+        $addressData= $request->address.' , '.$vicinityData->vicinity_name.' , '.$areasData->area_name;
+        $subscriber = Subscriber::create([
+
+            'client_id' => $request->client_id,
+            'client_name' => $request->client_name,
+            'client_father' => $request->client_father,
+            'area' => $request->area,
+            'vicinity' => $request->vicinity,
+            'address' => $addressData,
+            'initialization_date' => $request->initialization_date,
+            'mobile_no' => $request->mobile_no,
+            'bill_amount' =>$request->bill_amount,
+            'locked_fund' => $request->locked_fund,
+            'connection_status' =>'1'
+
+        ]);
+
+        return redirect("employee/subscriber")->with('success', trans("নতুন গ্রাহক যুক্ত হয়েছে।"));
+
+        }
+
+    }
+
     
+    public function getVicinity($id)
+    {
+
+        $vicinityData = DB::table("vicinities")->where('area_id', $id)->select('id', 'vicinity_name')->get();
+        return response()->json(['data' => $vicinityData]);
+
+    }
+
+    public function view_subscriber($id)
+    {
+        //
+        $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
+        
+        $status = DB::table("subscribers")->select('connection_status')->where('client_id','=',$id) ->first();
+
+        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
+
+        $total_bill=0;
+        $due_bill=0;
+
+        foreach ($billingData as $item) {
+            $total_bill=$total_bill+$item->bill_amount;
+            $due_bill = $due_bill + 1;
+        }
+
+        $connection_status=$status->connection_status;
+        $areasData = DB::table("areas") ->get();
+
+
+        //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
+        
+        return view('employee.view.view_subscriber',compact('id','areasData','subscriberData','billingData','total_bill','due_bill','connection_status'));
+        //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
+    }
+
     public function cut_lock_fund($id)
     {
 
@@ -167,5 +190,18 @@ class SubscriberController extends Controller
 
     }
 
+    public function subscriber_bills($id)
+    {
+
+        $billingData = DB::table("billings")
+        ->where("client_id", "=", $id)
+        ->orderBy("billing_status","asc")
+        ->get();
+        
+    
+        return view('employee.view.view_subscriber_bills',compact('billingData'));
+        //return response()->json(['Response'=>$billingData]);
+
+    }
 
 }

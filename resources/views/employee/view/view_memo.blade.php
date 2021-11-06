@@ -1,7 +1,7 @@
 @extends('layouts.employee')
 
 @section('meta')
-<title>Memo Details | Dingedah Network</title>
+<title>Memo Details | {{ $website_name }}</title>
 <meta name="description" content="Dingedah Network Memo Details">
 @endsection
 

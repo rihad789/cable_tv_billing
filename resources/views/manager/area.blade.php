@@ -1,7 +1,9 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>AREA & VICINITY | DINGEDSH NETWORK</title>
+
+<title>Area & Vicinity | {{ $website_name }}</title>
+
 <meta name="description" content="Metro Bangla Operator">
 @endsection
 
@@ -12,109 +14,109 @@
 
 <div class="container-fluid">
 
-<div class="row">
-                <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
 
-                <div class="box box-success">
+            <div class="box box-success">
 
                 <div class="box-content">
 
-                <p class="lead">&nbsp;&nbsp;AREA & VICINITY
+                    <p class="lead">&nbsp;&nbsp;AREA & VICINITY
 
-                <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("Vicinity") }}</button> 
-                <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Area") }}</button>
+                        <button class="ui btn btn-info mini offsettop5 btn-edit float-right"><i class="ui icon plus"></i>{{ __("Vicinity") }}</button>
+                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Area") }}</button>
 
-                </p>
-                <hr>
+                    </p>
+                    <hr>
 
-                <div class="row">
+                    <div class="row">
 
-<div class="col-md-5">
+                        <div class="col-md-5">
 
-    <!-- Card user Count Data -->
+                            <!-- Card user Count Data -->
 
-    <div class="box box-success">
+                            <div class="box box-success">
 
-        <div class="box-content">
+                                <div class="box-content">
 
 
-            <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                <thead class="thead-light">
-                    <tr>
+                                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                                        <thead class="thead-light">
+                                            <tr>
 
-                        <th>{{ __("Serial") }}</th>
-                        <th>{{ __("Area Name") }}</th>
+                                                <th>{{ __("Serial") }}</th>
+                                                <th>{{ __("Area Name") }}</th>
 
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php($serial=1)
-                    @isset($areasData)
-                    @foreach ($areasData as $val)
-                    <tr>
-                        <td>{{ $serial++}}</td>
-                        <td>{{ $val->area_name }}</td>
-                        <td class="align-right">
-                            <a href="{{ url('manager/area/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই গ্রাম মুছে ফেলতে চান? ফলস্বরূপ গ্রামের সাথে পাড়াসমূহ মূছে যাবে?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @endisset
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php($serial=1)
+                                            @isset($areasData)
+                                            @foreach ($areasData as $val)
+                                            <tr>
+                                                <td>{{ $serial++}}</td>
+                                                <td>{{ $val->area_name }}</td>
+                                                <td class="align-right">
+                                                    <a href="{{ url('owner/area/delete/'.$val->id) }}" onclick="return confirm('Are you sure,you want to delete area.This will delete all the vicinity related to it?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endisset
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-<div class="col-md-7">
+                        <div class="col-md-7">
 
-    <!-- Card user Count Data -->
+                            <!-- Card user Count Data -->
 
-    <div class="box box-success">
+                            <div class="box box-success">
 
-        <div class="box-content">
+                                <div class="box-content">
 
-            <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
-                <thead class="thead-light">
-                    <tr>
-                        <th>{{ __("Serial") }}</th>
-                        <th>{{ __("Vicinity Name") }}</th>
-                        <th>{{ __("Area Name")}}
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php($serial=1)
-                    @isset($vicinitiesData)
-                    @foreach ($vicinitiesData as $val)
-                    <tr>
-                        <td>{{ $serial++}}</td>
-                        <td>{{ $val->vicinity_name }}</td>
-                        <td>{{ $val->area_name }}</td>
+                                    <table width="100%" class="table" id="dataTables-example2" data-order='[[ 0, "asc" ]]'>
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>{{ __("Serial") }}</th>
+                                                <th>{{ __("Vicinity Name") }}</th>
+                                                <th>{{ __("Area Name")}}
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php($serial=1)
+                                            @isset($vicinitiesData)
+                                            @foreach ($vicinitiesData as $val)
+                                            <tr>
+                                                <td>{{ $serial++}}</td>
+                                                <td>{{ $val->vicinity_name }}</td>
+                                                <td>{{ $val->area_name }}</td>
 
-                        <td class="align-right">
-                            <a href="{{ url('manager/vicinity/delete/'.$val->id) }}" onclick="return confirm('আপনি কি সত্যিই পাড়া মুছে ফেলতে চান?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @endisset
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                                                <td class="align-right">
+                                                    <a href="{{ url('owner/vicinity/delete/'.$val->id) }}" onclick="return confirm('Are you sure,you want to delete vicintiy?')" class="ui circular basic icon button tiny"><i class="icon trash alternate outline"></i></a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endisset
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
 
-</div>
+                    </div>
 
 
                 </div>
-                </div>
-                    
-                   
-                </div>
-               
             </div>
+
+
+        </div>
+
+    </div>
 
 
 
@@ -123,12 +125,6 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-
-
-
-
-</script>
 
 <script>
     $(document).ready(function() {
@@ -176,7 +172,7 @@
                     identifier: 'area_name',
                     rules: [{
                         type: 'empty',
-                        prompt: 'এরিয়ার নাম আবষ্যক ।'
+                        prompt: 'Area name required ।'
                     }]
                 }
             }
@@ -188,14 +184,14 @@
                     identifier: 'area_id',
                     rules: [{
                         type: 'empty',
-                        prompt: 'এরিয়ার নাম পছন্দ করুন ।'
+                        prompt: 'Please select area name ।'
                     }]
                 },
                 vicinity_name: {
                     identifier: 'vicinity_name',
                     rules: [{
                         type: 'empty',
-                        prompt: 'পাড়ার নাম আবষ্যক ।'
+                        prompt: 'Vicinity name required ।'
                     }]
                 }
             }

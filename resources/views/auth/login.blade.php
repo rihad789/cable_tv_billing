@@ -46,11 +46,11 @@
                             @csrf
                             <div class="fields">
                                 <div class="sixteen wide field {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                    <label for="phone" class="color-white">{{ __('Phone') }}</label>
-                                    <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" value="{{ old('phone') }}" placeholder="{{ __('Enter your phone number') }}" required autofocus>
-                                    @if ($errors->has('phone'))
+                                    <label for="phone" class="color-white">{{ __('Email') }}</label>
+                                    <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Enter your email') }}" required autofocus>
+                                    @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif  
                                 </div>

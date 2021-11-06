@@ -1,7 +1,9 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>Billing | Dingedah Network</title>
+
+<title>Billing | {{ $website_name }}</title>
+
 <meta name="description" content="Dingedah Network Billing">
 @endsection
 
@@ -14,25 +16,15 @@
     <div class="box box-success">
 
         <div class="box-content">
-
-
             <div class="row">
-
                 <div class="col-md-12">
-
                     <p class="lead">&nbsp;&nbsp;BILLING DIARY
-
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
                         <button onclick="location.href='/manager/billing/generate'" class="ui btn btn-info mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process Bill") }}</button>
-
                     </p>
-
                     <hr>
-
                 </div>
-
                 <hr>
-
             </div>
 
 
@@ -45,7 +37,7 @@
                         <div class="two fields">
 
                             <div class="field">
-                                <select name="billing_time" id="billing_time" class="ui search dropdown getid">
+                                <select name="billing_time" id="billing_time" class="ui  dropdown getid">
                                     <option value="">{{ __("Billing Time") }}</option>
                                     <option value='1'>Current Month</option>
                                     <option value='2'>Past Month</option>
@@ -54,7 +46,7 @@
                             </div>
 
                             <div class="field">
-                                <select name="billing_status" id="billing_status" class="ui search dropdown getid">
+                                <select name="billing_status" id="billing_status" class="ui  dropdown getid">
                                     <option value="">{{ __("Billing Status") }}</option>
                                     <option value=1>{{ __("Paid") }}</option>
                                     <option value=0>{{ __("Due ") }}</option>

@@ -33,7 +33,7 @@
 
             <ul class="list-unstyled components">
                 <li class="">
-                    <h4 class="text-info text-center">{{ __('DINGEDAH  NETWORK') }}</h4>
+                    <h4 class="text-info text-center uppercase">{{ $website_name }}</h4>
                 </li>
                 <hr>
             </ul>
@@ -47,7 +47,7 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('manager/billing/billcollection') }}">
+                    <a href="{{ url('manager') }}">
                     <i class="calendar outline icon"></i>
                         <p>{{ __('Bill Collection') }}</p>
                     </a>
@@ -77,24 +77,17 @@
 
                 <li class="">
                     <a href="{{ url('manager/memo') }}">
-                        <i class="shopping basket icon"></i>
-                        <p>{{ __('shopping') }}</p>
+                        <i class="wrench icon"></i>
+                        <p>{{ __('Service Cost') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('manager/account') }}">
+                    <a href="{{ url('manager/account_diary') }}">
                         <i class="ui calculator icon"></i>
                         <p>{{ __('Account') }}</p>
                     </a>
                 </li>
-
-                <!-- <li class="">
-                    <a href="{{ url('manager/users') }}">
-                        <i class="users icon"></i>
-                        <p>{{ __('Employee') }}</p>
-                    </a>
-                </li> -->
 
                 <!-- <li class="">
                     <a href="{{ url('admin/report_view') }}">
@@ -146,8 +139,8 @@
                                     <i class="ui icon user outline"></i> <span class="navmenutext">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</span>
                                     <i class="dropdown icon"></i>
                                     <div class="menu" tabindex="-1">
-                                        <a href="{{ url('admin/profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
-                                        <a href="{{ url('admin/account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
+                                        <a href="{{ url('manager/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
+                                        <a href="{{ url('manager/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
                                         <div class="divider"></div>
                                         <a href="{{ route('logout') }}" class="item"><i class="ui icon power"></i>{{ __('Logout') }}</a>
 

@@ -1,7 +1,7 @@
 @extends('layouts.manager')
 
 @section('meta')
-<title>Subscriber | Dingedah Network</title>
+<title>Subscriber | {{ $website_name }}</title>
 <meta name="description" content="Dingedah Network Subscriber">
 @endsection
 
@@ -10,13 +10,13 @@
 
 <div class="container-fluid" id="printableArea">
 
-    <div class="box box-success">
+    <div class="box box-success"> 
         <div class="box-content">
             <div class="row">
                 <div class="col-md-12">
                     <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button onclick="location.href='/manager/area'" class="ui btn btn-secondary mini offsettop5 float-right"><i class="ui building icon"></i>{{ __("Area & Vicinity") }}</button>
+                        <button onclick="location.href='/manager/area_vicinity'" class="ui btn btn-secondary mini offsettop5 float-right"><i class="ui building icon"></i>{{ __("Area & Vicinity") }}</button>
                         <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Subscriber") }}</button>
                     </p>
                     <hr>
@@ -233,70 +233,70 @@
                     identifier: 'client_id',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের কার্ড নং আবষ্যক ।'
+                        prompt: 'Subscriber card no requried.'
                     }]
                 },
                 initialization_date: {
                     identifier: 'initialization_date',
                     rules: [{
                         type: 'empty',
-                        prompt: 'সংযোগের তারিখ আবষ্যক ।'
+                        prompt: 'Initialization date required.'
                     }]
                 },
                 client_name: {
                     identifier: 'client_name',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের নাম আবষ্যক ।'
+                        prompt: 'Subscriber name required.'
                     }]
                 },
                 client_father: {
                     identifier: 'client_father',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের পিতার নাম আবষ্যক'
+                        prompt: 'Subscriber fathers name required',
                     }]
                 },
                 area: {
                     identifier: 'area',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রামের নাম আবষ্যক ।'
+                        prompt: 'Subscriber area required.'
                     }]
                 },
                 vicinity: {
                     identifier: 'vicinity',
                     rules: [{
                         type: 'empty',
-                        prompt: 'পাড়ার নাম আবষ্যক ।'
+                        prompt: 'Subscriber vicinity required.'
                     }]
                 },
                 address: {
                     identifier: 'address',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের ঠিকানা আবষ্যক ।'
+                        prompt: 'Subscriber address required.'
                     }]
                 },
                 mobile_no: {
                     identifier: 'mobile_no',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের মোবাইল নং আবষ্যক ।'
+                        prompt: 'Subscriber contact no required.'
                     }]
                 },
                 locked_fund: {
                     identifier: 'locked_fund',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের জামানত আবষ্যক ।'
+                        prompt: 'Subscriber locked fund required.'
                     }]
                 },
                 bill_amount: {
                     identifier: 'bill_amount',
                     rules: [{
                         type: 'empty',
-                        prompt: 'বিলের পরিমান আবষ্যক ।'
+                        prompt: 'Bill amount required.'
                     }]
                 }
 
