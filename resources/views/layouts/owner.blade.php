@@ -122,11 +122,6 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto navmenu">
 
-                            <li class="nav-item">
-                                <div class="ui pointing link item">
-                                    <a href="{{ url('admin/notification') }}" class="ui circular basic icon  tiny "> <i class="tasks icon"></i> 5</a>
-                                </div>
-                            </li>
 
                             <!-- <li class="nav-item">
                                 <div class="ui pointing link dropdown item" tabindex="0">
