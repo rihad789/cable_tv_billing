@@ -116,7 +116,7 @@ class AccountController extends Controller
       
          $settleBills = Billings::where('billing_status', true)->delete();
         
-         $settleSallery=DB::table('salleries')->where('payment_status','=',true)->update(['is_Settled'=>1]);
+         $settleSallery=DB::table('salleries')->where('payment_status','=',true)->update(['is_settled'=>true]);
 
          $settleMemo=DB::table('memos')->where('is_settled','=',false)->update(['is_settled'=>true]);
  
