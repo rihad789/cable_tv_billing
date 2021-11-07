@@ -135,7 +135,7 @@ class AccountController extends Controller
          ]);
  
  
-         return redirect('owner/account')->with('success', trans("Account settled successfully!"));
+         return redirect('owner/account_diary')->with('success', trans("Account settled successfully!"));
 
         }
 
