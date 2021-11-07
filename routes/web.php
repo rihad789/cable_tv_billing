@@ -64,10 +64,11 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     //Memo Routes
-    Route::get('owner/memo/history', 'App\Http\Controllers\Owner\MemoController@memo_history');
+
     Route::get('owner/memo', 'App\Http\Controllers\Owner\MemoController@index');
-    Route::post('owner/memo/add', 'App\Http\Controllers\Owner\MemoController@add_memo');
+    Route::post('owner/memo', 'App\Http\Controllers\Owner\MemoController@add_memo');
     Route::get('owner/memo/{id}', 'App\Http\Controllers\Owner\MemoController@view_memo');
+    Route::get('owner/memo/history', 'App\Http\Controllers\Owner\MemoController@memo_history');
 
 
     //Account Diary Controller

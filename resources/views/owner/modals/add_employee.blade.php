@@ -1,7 +1,7 @@
 <div class="ui modal medium add">
     <div class="header">{{ __("New Employee") }}</div>
     <div class="content">
-        <form id="add_system_user_form" action="{{ url('owner/users/add') }}"  class="ui form add-user" autocomplete="off" method="post" accept-charset="utf-8">
+        <form id="add_system_user_form" action="{{ url('employee/users/add') }}"  class="ui form add-user" autocomplete="off" method="post" accept-charset="utf-8">
             @csrf
 
             <div class="two fields">
