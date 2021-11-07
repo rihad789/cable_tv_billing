@@ -81,7 +81,7 @@ class AccountController extends Controller
 
         $payable_balance=($locked_fund+$bill_paid)-($sallery_paid+$grand_total);
 
-        return view('manager.account', compact('locked_fund','totalEmployee','totalSallery','sallery_paid','sallery_due','sallery_status','totalMemo','payable_balance','total_bill','bill_paid','bill_due','total_products','grand_total')); 
+        return view('manager.account_diary', compact('locked_fund','totalEmployee','totalSallery','sallery_paid','sallery_due','sallery_status','totalMemo','payable_balance','total_bill','bill_paid','bill_due','total_products','grand_total')); 
 
     }
 
@@ -111,7 +111,7 @@ class AccountController extends Controller
       
          $settleBills = Billings::where('billing_status', true)->delete();
         
-         $settleSallery=DB::table('salleries')->where('payment_status','=',true)->update(['is_Settled'=>1]);
+         $settleSallery=DB::table('salleries')->where('payment_status','=',true)->update(['is_settled'=>1]);
 
          $settleMemo=DB::table('memos')->where('is_settled','=',false)->update(['is_settled'=>true]);
  
