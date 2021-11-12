@@ -8,133 +8,293 @@
 @section('content')
 @include('owner.modals.add_subscriber')
 
+<style>
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
 <div class="container-fluid" id="printableArea">
 
-    <div class="box box-success"> 
+    <div class="box box-success">
         <div class="box-content">
+
             <div class="row">
+
                 <div class="col-md-12">
-                    <p class="lead">&nbsp;&nbsp;SUBSCRIBER LIST
+
+
+                    <p class="lead">&nbsp;&nbsp;
+
                         <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button onclick="location.href='/owner/area_vicinity'" class="ui btn btn-secondary mini offsettop5 float-right"><i class="ui building icon"></i>{{ __("Area & Vicinity") }}</button>
-                        <button class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Subscriber") }}</button>
+                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Subscriber") }}</button>
+
                     </p>
                     <hr>
+
                 </div>
-                <hr>
+
+
             </div>
 
+
             <div class="row">
-                <div class="col-md-12">
-                    <form action="{{ url('owner/subscriber') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
-                        @csrf
-                        <div class="two fields">
-                            <div class="field">
-                                <div class="sixteen wide field role">
-                                    <select id="filter_input_area" class="ui dropdown uppercase required" name="filter_input_area" required>
-                                        <option value="">Select Area Name</option>
-                                        @isset($areasData)
-                                        @foreach ($areasData as $val)
-                                        <option value={{ $val->id }}>{{ $val->area_name }}</option>
-                                        @endforeach
-                                        @endisset
-                                    </select>
+
+                <div class="col-md-4">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <p class="lead text-center">&nbsp;&nbsp;SUBSCRIBER INFO</p>
+                            <hr>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <table width="100%" class="table table-bordered"  data-order='[[ 0, "asc" ]]'>
+
+                            <thead class="thead-light">
+
+                                <tr>
+                                    <th>Field Name</th>
+                                    <th>Field Value</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Subscriber Card NO</td>
+                                    <td>@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Initialization Date</td>
+                                    <td>@isset($subscriberData->initialization_date){{ $subscriberData->initialization_date }}@endisset</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Address</td>
+                                    <td>@isset($subscriberData->address){{ $subscriberData->address }}@endisset</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Subscriber Name</td>
+                                    <td>@isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Subscriber Fathers Name</td>
+                                    <td>@isset($subscriberData->client_father){{ $subscriberData->client_father }}@endisset</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Mobile No</td>
+                                    <td> <a type="button" href="tel:@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset">@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset <i class="icon call"></i></a></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Bill Amount</td>
+                                    <td>@isset($subscriberData->bill_amount){{ $subscriberData->bill_amount }}@endisset টাকা</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Locked Fund</td>
+                                    <td> @isset($subscriberData->locked_fund){{ $subscriberData->locked_fund }}@endisset টাকা</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <hr>
+                            <form action="{{ url('owner/subscriber') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
+                                @csrf
+                                <div class="two fields">
+
+                                    <div class="field">
+                                        <select name="client_id" id="client_id" class="ui search dropdown getid">
+                                            <option value="">{{ __("Select Subscriber ID") }}</option>
+                                            @foreach ($sub_client_id as $val)
+                                            <option value="{{ $val->client_id }}">{{ $val->client_id }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>  
+
+                                    <div class="field">
+                                        <button  type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon search alternate"></i> {{ __("Search") }}</button>
+                                    </div>
+
                                 </div>
-                            </div>
 
-                            <div class="field">
-                                <select id="filter_input_vicinity" class="ui dropdown uppercase required form-control" name="filter_input_vicinity" required>
-                                    <option value="">Select Vicinity Name</option>
-                                </select>
-                            </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-8">
 
 
-                            <div class="two fields">
-                                <div class="field">
-                                    <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
-                                </div>
-                            </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <p class="lead">&nbsp;&nbsp;COMPLETE BILLS
+                            
+                            </p>
+                            <hr>
 
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <table width="100%" class="table table-bordered" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+
+                            <thead class="thead-light">
+                                    <tr>
+                                        <th>{{ __("Serial")}}</th>
+                                        <th>{{ __("Month") }}</th>
+                                        <th>{{ __("Year") }}</th>
+                                        <th>{{ __("Amount")}}</th>
+                                        <th>{{ __("Status")}}</th>
+                                        
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @isset($billingData)
+                                    @php($serial=1)
+                                    @foreach ($billingData as $val)
+
+                                    
+                                    @if($val->billing_status=="1")
+                                        <tr class="text-white bg-primary">
+
+                                        <td> {{$serial++}}</td>
+
+                                        @if($val->bill_month=="1")
+                                        <td>January</td>
+                                        @elseif($val->bill_month=="2")
+                                        <td>February</td>
+                                        @elseif($val->bill_month=="3")
+                                        <td>March</td>
+                                        @elseif($val->bill_month=="4")
+                                        <td>April</td>
+                                        @elseif($val->bill_month=="5")
+                                        <td>May</td>
+                                        @elseif($val->bill_month=="6")
+                                        <td>June</td>
+                                        @elseif($val->bill_month=="7")
+                                        <td>July</td>
+                                        @elseif($val->bill_month=="8")
+                                        <td>August</td>
+                                        @elseif($val->bill_month=="9")
+                                        <td>September</td>
+                                        @elseif($val->bill_month=="10")
+                                        <td>Octobor</td>
+                                        @elseif($val->bill_month=="11")
+                                        <td>November</td>
+                                        @elseif($val->bill_month=="12")
+                                        <td>December</td>
+                                        @endif
+
+                                        <td>{{ $val->bill_year }}</td>
+                                        <td>{{ $val->bill_amount }}</td>
+
+                                        <td>Paid</td>
+
+                                        
+
+                                        </tr>
+
+                                        @elseif($val->billing_status=="0")
+
+                                        <tr class="text-white bg-danger">
+
+                                        <td> {{$serial++}}</td>
+                                        @if($val->bill_month=="1")
+                                        <td>January</td>
+                                        @elseif($val->bill_month=="2")
+                                        <td>February</td>
+                                        @elseif($val->bill_month=="3")
+                                        <td>March</td>
+                                        @elseif($val->bill_month=="4")
+                                        <td>April</td>
+                                        @elseif($val->bill_month=="5")
+                                        <td>May</td>
+                                        @elseif($val->bill_month=="6")
+                                        <td>June</td>
+                                        @elseif($val->bill_month=="7")
+                                        <td>July</td>
+                                        @elseif($val->bill_month=="8")
+                                        <td>August</td>
+                                        @elseif($val->bill_month=="9")
+                                        <td>September</td>
+                                        @elseif($val->bill_month=="10")
+                                        <td>Octobor</td>
+                                        @elseif($val->bill_month=="11")
+                                        <td>November</td>
+                                        @elseif($val->bill_month=="12")
+                                        <td>December</td>
+                                        @endif
+
+                                        <td>{{ $val->bill_year }}</td>
+                                        <td>{{ $val->bill_amount }}</td>
+
+                                        <td>
+                                            <a class="text-white" href="{{ url('/owner/sallery/settle/'.$val->id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Are you sure?')"><i class="icon plus"></i>Collect</a>
+                                        </td>
+
+                                        </tr>
+
+                                        @endif
+
+                                    @endforeach
+                                    @endisset
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+
+
                 </div>
+
             </div>
 
-            <div class="row">
+            
 
-<div class="col-md-12">
-
-    <!-- Card user Count Data -->
-
-    <table width="100%" class="table" class="" data-order='[[ 0, "asc" ]]'>
-        <thead class="thead-light">
-
-            <tr>
-                <th>{{ __("Total Subscriber") }}</th>
-                <th>{{ __("New Connection") }}</th>
-                <th>{{ __("Connection Running") }}</th>
-                <th>{{ __("Connection Disconnected") }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ $total_sub}}</td>
-                <td>{{ $subMonth}}</td>
-                <td>{{ $connected_sub }}</td>
-                <td>{{ $disconnect_sub }}</td>
-
-            </tr>
-        </tbody>
-    </table>
-</div>
-</div>
-            <div class="row">
-
-                <div class="col-md-12">
-
-                    <!-- Card user Count Data -->
-
-                    <table width="100%" id="dataTables-example" class="table" class="" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
-                                <th>{{ __("Serial") }}</th>
-                                <th>{{ __("Subscriber Card No") }}</th>
-                                <th>{{ __("Subscriber Name") }}</th>
-                                <th>{{ __("Initilization Date") }}</th>
-                                <th>{{ __("Phone")}}</th>
-                                <th>{{ __("Connection Status")}}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            @php($serial=1)
-                            @isset($subscriberData)
-                            @foreach ($subscriberData as $val)
-                            <tr>
-                                <td>{{ $serial++}}</td>
-                                <td>{{ $val->client_id}}</td>
-                                <td>{{ $val->client_name }}</td>
-                                <td>{{ $val->initialization_date }}</td>
-                                <td>{{ $val->mobile_no }}</td>
-
-                                @if($val->connection_status=="1")
-                                <td class="text-primary">Running</td>
-                                @elseif($val->connection_status=="0")
-                                <td class="text-danger">Disconnected</td>
-                                @endif
-                                <td class="align-right">
-                                    <a href="{{ url('/owner/subscriber/'.$val->client_id) }}" class="ui circular basic icon button tiny"><i class="icon eye"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endisset
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
+
 </div>
 
 @endsection
@@ -145,53 +305,51 @@
     $(document).ready(function() {
 
         $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 8,
-            ordering: false,
-            lengthChange: true,
-            dom: 'Blfrtip',
-            buttons: [
+        responsive: true,
+        pageLength: 10,
+        ordering: false,
+        lengthChange: true,
+        dom: 'Blfrtip',
+        buttons: [
 
-                'copyHtml5',
-                'excelHtml5',
-                'pdfHtml5'
-            ],
-            lengthMenu: [
-                [08, 25, 50, -1],
-                ['08 rows', '25 rows', '50 rows', 'Show all']
-            ]
-        });
+            'copyHtml5',
+            'excelHtml5',
+            'pdfHtml5'
+
+        ],
+        lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]
+    });
 
 
-        $("#filter_input_area").change(function() {
+    $('#dataTables-example1').DataTable({
+        responsive: true,
+        pageLength: 10,
+        ordering: false,
+        lengthChange: true,
+        dom: 'Blfrtip',
+        buttons: [
+
+            'copyHtml5',
+            'excelHtml5',
+            'pdfHtml5'
+
+        ],
+        lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]
+    });
+
+
+        $("#client_id").change(function() {
 
             var area = $(this).val();
 
-            // clear all values 
-            $('#filter_input_vicinity option:not(:first)').remove();
-            $.ajax({
-                url: '/owner/subscriber/getVicinity/' + area,
-                type: 'get',
-                dataType: 'json',
-                success: function(response) {
-                    var len = 0;
-                    if (response.data != null) {
-                        len = response.data.length;
-                    }
-                    if (len > 0) {
+            $id= area;
 
-                        for (var i = 0; i < len; i++) {
-                            var id = response.data[i].id;
-                            var name = response.data[i].vicinity_name;
-
-                            var option = "<option value='" + id + "'>" + name + "</option>";
-
-                            $("#filter_input_vicinity").append(option);
-                        }
-                    }
-                },
-
-            });
         });
 
         $("#area").change(function() {

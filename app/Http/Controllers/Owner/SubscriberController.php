@@ -11,66 +11,42 @@ class SubscriberController extends Controller
 {
     public function index()
     {
-        $subscriberData = DB::table("subscribers") ->get();
+
+        $subscriberData =[];
+        
+        $billingData = [];
+
+        $dueBilldata = [];
+
         $areasData = DB::table("areas") ->get();
 
+        $sub_client_id = DB::table("subscribers")->get();
 
-        $timestamp = Carbon::now()->toDateString();
-
-        //if($month.strlen(1)) {  $month="0".$month; }
-
-        $dateTime=Carbon::parse($timestamp)->year."-".Carbon::parse($timestamp)->month;
-
-        $total_sub = DB::table("subscribers")->count();
-        $disconnect_sub=DB::table("subscribers")->where('connection_status','=',0)->count();
-        $connected_sub=DB::table("subscribers")->where('connection_status','=',1)->count();
-                
-        //Retrieving Subscriber Count for this Month
-        $subMonth=DB::table("subscribers")->where("created_at", "like", "$dateTime%")->count();
-
-
-        return view('owner.subscriber',compact('subscriberData','subMonth','areasData','total_sub','disconnect_sub','connected_sub'));
+        //return response()->json([$id,$areasData,$subscriberData,$sub_client_id,$billingData,$dueBilldata]);
+        
+        return view('owner.subscriber',compact('areasData','subscriberData','sub_client_id','billingData','dueBilldata'));
     }
 
 
-    public function filter_subscriber(Request $request)
+    public function search_subscriber(Request $request)
     {
         //
 
-        $filter_input_area=$request->filter_input_area;
-        $filter_input_vicinity=$request->filter_input_vicinity;
-        $subscriberData="";
+        $id=$request->client_id;
 
-        if($filter_input_area != null && $filter_input_vicinity != null)
-        {
-            $subscriberData = DB::table("subscribers")->where('area','=',$filter_input_area)->where('vicinity','=',$filter_input_vicinity)->get();
-        }
-        else if($filter_input_area != null && $filter_input_vicinity == null)
-        {
-            $subscriberData = DB::table("subscribers")->where('area','=',$filter_input_area)->get();
-        }
-        else
-        {
-            $subscriberData = DB::table("subscribers") ->get();
-        }
+        $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
+        
+        $billingData = DB::table("billings")->where('client_id','=',$id)->get();
+
+        $dueBilldata = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',false)->get();
 
         $areasData = DB::table("areas") ->get();
 
-        $total_sub = DB::table("subscribers")->count();
-        $disconnect_sub=DB::table("subscribers")->where('connection_status','=',0)->count();
-        $connected_sub=DB::table("subscribers")->where('connection_status','=',1)->count();
+        $sub_client_id = DB::table("subscribers")->get();
 
+        //return response()->json([$id,$areasData,$subscriberData,$sub_client_id,$billingData,$dueBilldata]);
         
-        $timestamp = Carbon::now()->toDateString();
-
-        //if($month.strlen(1)) {  $month="0".$month; }
-
-        $dateTime=Carbon::parse($timestamp)->year."-".Carbon::parse($timestamp)->month;
-
-        //Retrieving Subscriber Count for this Month
-        $subMonth=DB::table("subscribers")->where("created_at", "like", "$dateTime%")->count();
-
-        return view('owner.subscriber',compact('subscriberData','subMonth','areasData','total_sub','disconnect_sub','connected_sub'));
+        return view('owner.subscriber',compact('id','areasData','subscriberData','sub_client_id','billingData','dueBilldata'));
 
     }
 
@@ -124,28 +100,50 @@ class SubscriberController extends Controller
     public function view_subscriber($id)
     {
         //
+
+
+
         $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
         
-        $status = DB::table("subscribers")->select('connection_status')->where('client_id','=',$id) ->first();
+        $billingData = DB::table("billings")->where('client_id','=',$id)->get();
 
-        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
+        $dueBilldata = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',false)->get();
 
-        $total_bill=0;
-        $due_bill=0;
 
-        foreach ($billingData as $item) {
-            $total_bill=$total_bill+$item->bill_amount;
-            $due_bill = $due_bill + 1;
-        }
-
-        $connection_status=$status->connection_status;
         $areasData = DB::table("areas") ->get();
 
 
-        //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
+        $sub_client_id = DB::table("subscribers")->get();
+
+
+        return response()->json(['subscriberData'=>$subscriberData,'billingData'=>$billingData,'sub_client_id'=>$sub_client_id,'dueBilldata'=>$dueBilldata,'areasData'=>$areasData ]);
+
+
+        // return view('owner.subscriber',compact('id','areasData','subscriberData','sub_client_id','billingData','dueBilldata'));
+
+
+        // $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
         
-        return view('owner.view.view_subscriber',compact('id','areasData','subscriberData','billingData','total_bill','due_bill','connection_status'));
-        //return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
+        // $status = DB::table("subscribers")->select('connection_status')->where('client_id','=',$id) ->first();
+
+        // $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',0)->get();
+
+        // $total_bill=0;
+        // $due_bill=0;
+
+        // foreach ($billingData as $item) {
+        //     $total_bill=$total_bill+$item->bill_amount;
+        //     $due_bill = $due_bill + 1;
+        // }
+
+        // $connection_status=$status->connection_status;
+        // $areasData = DB::table("areas") ->get();
+
+
+        // //$billingData = DB::table("billings")->where('client_id',"=",$id)->get();
+        
+        // //return view('owner.view.view_subscriber',compact('id','areasData','subscriberData','billingData','total_bill','due_bill','connection_status'));
+        // return response()->json(['Successfully posted.ID: '=>$subscriberData,$billingData,$total_bill,$due_bill,$connection_status ]);
     }
 
     public function cut_lock_fund($id)

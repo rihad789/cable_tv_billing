@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
     //Subscriber Routes
     Route::get('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@index');
-    Route::post('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@filter_subscriber');
+    Route::post('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@search_subscriber');
     Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due');
     Route::post('owner/subscriber/add', 'App\Http\Controllers\Owner\SubscriberController@add_subscriber');
     Route::get('owner/subscriber/getVicinity/{id}', 'App\Http\Controllers\Owner\SubscriberController@getVicinity');

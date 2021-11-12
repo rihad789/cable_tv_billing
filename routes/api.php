@@ -47,3 +47,5 @@ Route::post('update_card_pin','App\Http\Controllers\MetroCardAppController@updat
 Route::post('journey_Fare','App\Http\Controllers\MetroCardAppController@journey_Fare');
 
 Route::post('test_journey_Fare','App\Http\Controllers\MetroCardAppController@test_journey_Fare');
+
+Route::get('owner/subscriber/{id}', 'App\Http\Controllers\Owner\SubscriberController@view_subscriber');

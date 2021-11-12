@@ -48,50 +48,51 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('owner') }}">
+                    <a href="{{ url('manager') }}">
                     <i class="calendar outline icon"></i>
                         <p>{{ __('Bill Collection') }}</p>
                     </a>
                 </li>
 
+                <!-- <li class="">
+                    <a href="{{ url('admin/area') }}">
+                        <i class="ui building icon"></i>
+                        <p>{{ __('Area & Vicinity') }}</p>
+                    </a>
+                </li> -->
 
                 <li class="">
-                    <a href="{{ url('owner/subscriber') }}">
+                    <a href="{{ url('manager/subscriber') }}">
                         <i class="ui address book icon"></i>
                         <p>{{ __('Customer list') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('owner/billing') }}">
+                    <a href="{{ url('manager/billing') }}">
                         <i class="dollar sign icon"></i>
                         <p>{{ __('Dish Billing') }}</p>
                     </a>
                 </li>
 
+                
                 <li class="">
                     <a href="{{ url('owner/sallery') }}">
-                        <i class="smile icon"></i>
+                        <i class="wrench icon"></i>
                         <p>{{ __('Sallery') }}</p>
                     </a>
                 </li>
 
+
                 <li class="">
-                    <a href="{{ url('owner/memo') }}">
+                    <a href="{{ url('manager/memo') }}">
                         <i class="wrench icon"></i>
                         <p>{{ __('Service Cost') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('owner/employee') }}">
-                        <i class="users icon"></i>
-                        <p>{{ __('Employee') }}</p>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a href="{{ url('owner/account_diary') }}">
+                    <a href="{{ url('manager/account_diary') }}">
                         <i class="ui calculator icon"></i>
                         <p>{{ __('Account') }}</p>
                     </a>
@@ -123,7 +124,6 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto navmenu">
 
-
                             <!-- <li class="nav-item">
                                 <div class="ui pointing link dropdown item" tabindex="0">
                                     <i class="linkify icon"></i> <span class="navmenutext">Manage</span>
@@ -142,8 +142,8 @@
                                     <i class="ui icon user outline"></i> <span class="navmenutext">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</span>
                                     <i class="dropdown icon"></i>
                                     <div class="menu" tabindex="-1">
-                                        <a href="{{ url('owner/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
-                                        <a href="{{ url('owner/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
+                                        <a href="{{ url('manager/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
+                                        <a href="{{ url('manager/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
                                         <div class="divider"></div>
                                         <a href="{{ route('logout') }}" class="item"><i class="ui icon power"></i>{{ __('Logout') }}</a>
 
