@@ -48,7 +48,7 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('manager') }}">
+                    <a href="{{ url('owner') }}">
                     <i class="calendar outline icon"></i>
                         <p>{{ __('Bill Collection') }}</p>
                     </a>
@@ -62,14 +62,14 @@
                 </li> -->
 
                 <li class="">
-                    <a href="{{ url('manager/subscriber') }}">
+                    <a href="{{ url('owner/subscriber') }}">
                         <i class="ui address book icon"></i>
                         <p>{{ __('Customer list') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('manager/billing') }}">
+                    <a href="{{ url('owner/billing') }}">
                         <i class="dollar sign icon"></i>
                         <p>{{ __('Dish Billing') }}</p>
                     </a>
@@ -85,14 +85,14 @@
 
 
                 <li class="">
-                    <a href="{{ url('manager/memo') }}">
+                    <a href="{{ url('owner/memo') }}">
                         <i class="wrench icon"></i>
                         <p>{{ __('Service Cost') }}</p>
                     </a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('manager/account_diary') }}">
+                    <a href="{{ url('owner/account_diary') }}">
                         <i class="ui calculator icon"></i>
                         <p>{{ __('Account') }}</p>
                     </a>
