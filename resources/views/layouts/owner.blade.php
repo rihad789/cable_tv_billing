@@ -142,8 +142,8 @@
                                     <i class="ui icon user outline"></i> <span class="navmenutext">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</span>
                                     <i class="dropdown icon"></i>
                                     <div class="menu" tabindex="-1">
-                                        <a href="{{ url('manager/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
-                                        <a href="{{ url('manager/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
+                                        <a href="{{ url('owner/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
+                                        <a href="{{ url('owner/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
                                         <div class="divider"></div>
                                         <a href="{{ route('logout') }}" class="item"><i class="ui icon power"></i>{{ __('Logout') }}</a>
 
