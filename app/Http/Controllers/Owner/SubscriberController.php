@@ -27,39 +27,28 @@ class SubscriberController extends Controller
     public function search_body()
     {
         //
-
-        $subscriberData = [];
-        
-        $billingData = [];
-
-        $dueBilldata = [];
-
-        $sub_client_id = DB::table("subscribers")->select('')->get();
-
- 
-        return view('owner.update_bill',compact('subscriberData','sub_client_id','billingData','dueBilldata'));
-
+        return view('owner.search_bill');
     }
 
-    public function search_result(Request $request)
+    public function search_result($id)
     {
         //
-
-        $id=$request->client_id;
-
         $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
-        
-        $billingData = DB::table("billings")->where('client_id','=',$id)->get();
+        //$billingData = DB::table("billings")->where('client_id','=',$id)->orderByDesc('billing_status')->get();
+        $dueBilldata = DB::table("billings")->select('bill_amount')->where('client_id','=',$id)->where('billing_status','=',false)->get();
 
-        $dueBilldata = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',false)->get();
+        $due_bills=0;
+        $due_month=0;
 
-        $areasData = DB::table("areas") ->get();
+        foreach ($dueBilldata as $item) {
+            $due_bills=$due_bills+$item->bill_amount;
+            $due_month=$due_month+1;
+        }
 
-        $sub_client_id = DB::table("subscribers")->get();
-
-        //return response()->json([$id,$areasData,$subscriberData,$sub_client_id,$billingData,$dueBilldata]);
-        
-        return view('owner.subscriber',compact('id','areasData','subscriberData','sub_client_id','billingData','dueBilldata'));
+        $billingData = DB::table("billings")->where("client_id", "=", $id)->orderBy("billing_status","asc")->get();
+                
+    
+        return view('owner.search_bill',compact('id','due_month','due_bills','subscriberData','billingData','dueBilldata'));
 
     }
 

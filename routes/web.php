@@ -46,14 +46,19 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('owner/vicinity/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_vicinity');
 
     //Subscriber Routes
+
+    Route::get('owner/subscriber/search', 'App\Http\Controllers\Owner\SubscriberController@search_body');
+    Route::get('owner/subscriber/search/{id}', 'App\Http\Controllers\Owner\SubscriberController@search_result');
+
     Route::get('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@index');
     Route::post('owner/subscriber/add', 'App\Http\Controllers\Owner\SubscriberController@add_subscriber');
     Route::get('owner/subscriber/getVicinity/{id}', 'App\Http\Controllers\Owner\SubscriberController@getVicinity');
     Route::get('owner/subscriber/{id}', 'App\Http\Controllers\Owner\SubscriberController@view_subscriber');
 
-    Route::get('owner/subscriber/search', 'App\Http\Controllers\Owner\SubscriberController@search_body');
+
+
     Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due');
-    Route::get('owner/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Owner\SubscriberController@cut_lock_fund'); 
+    Route::get('owner/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Owner\SubscriberController@cut_lock_fund');
     Route::get('owner/subscriber/billing/{id}', 'App\Http\Controllers\Owner\SubscriberController@subscriber_bills');
 
 
@@ -126,7 +131,7 @@ Route::group(['middleware' => ['auth', 'role:manager']], function () {
     Route::post('manager/subscriber/add', 'App\Http\Controllers\Manager\SubscriberController@add_subscriber');
     Route::get('manager/subscriber/getVicinity/{id}', 'App\Http\Controllers\Manager\SubscriberController@getVicinity');
     Route::get('manager/subscriber/{id}', 'App\Http\Controllers\Manager\SubscriberController@view_subscriber');
-    Route::get('manager/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Manager\SubscriberController@cut_lock_fund'); 
+    Route::get('manager/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Manager\SubscriberController@cut_lock_fund');
     Route::get('manager/subscriber/billing/{id}', 'App\Http\Controllers\Manager\SubscriberController@subscriber_bills');
 
 
@@ -158,7 +163,6 @@ Route::group(['middleware' => ['auth', 'role:manager']], function () {
     Route::get('manager/my_account', 'App\Http\Controllers\Manager\ProfileController@my_account');
     Route::post('manager/my_account/update', 'App\Http\Controllers\Manager\ProfileController@update_account');
     Route::post('manager/my_account/update_password', 'App\Http\Controllers\Manager\ProfileController@update_password');
-
 });
 
 
@@ -187,7 +191,7 @@ Route::group(['middleware' => ['auth', 'role:employee']], function () {
 
 
     Route::post('employee/subscriber/settle_due', 'App\Http\Controllers\Employee\SubscriberController@settle_due');
-    Route::get('employee/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Employee\SubscriberController@cut_lock_fund'); 
+    Route::get('employee/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Employee\SubscriberController@cut_lock_fund');
     Route::get('employee/subscriber/billing/{id}', 'App\Http\Controllers\Employee\SubscriberController@subscriber_bills');
 
 
@@ -213,7 +217,4 @@ Route::group(['middleware' => ['auth', 'role:employee']], function () {
     Route::get('employee/my_account', 'App\Http\Controllers\Employee\ProfileController@my_account');
     Route::post('employee/my_account/update', 'App\Http\Controllers\Employee\ProfileController@update_account');
     Route::post('employee/my_account/update_password', 'App\Http\Controllers\Employee\ProfileController@update_password');
-
 });
-
-
