@@ -1,301 +1,159 @@
 @extends('layouts.owner')
 
 @section('meta')
+
 <title>Subscriber | {{ $website_name }}</title>
-<meta name="description" content="Dingedah Network Subscriber">
+
+<meta name="description" content="Metro Bangla Operator">
 @endsection
 
 @section('content')
-@include('owner.modals.add_subscriber')
 
-<style>
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
+<div class="card">
+    <div class="card-header py-3">
+        <h6 class="mb-0">Add Subscriber</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-lg-4 d-flex">
+                <div class="card border shadow-none w-100">
+                    <div class="card-body">
+                        <form class="row g-3" id="add_subscriber_form" action="{{ url('owner/subscriber/add') }}" method="post" accept-charset="utf-8">
+                            @csrf
+                            <div class="col-6">
+                                <label class="form-label">Card no</label>
+                                <input type="text" name="client_id" id="client_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Card No" required>
+                            </div>
 
-    ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
+                            <div class="col-6">
+                                <label class="form-label">Initialization Date</label>
+                                <input type="date" name="initialization_date" id="initialization_date" class="form-control" placeholder="Initialization Date" required>
+                            </div>
 
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
+                            <div class="col-12">
+                                <label class="form-label">Name</label>
+                                <input type="text" name="client_name" id="client_name" class="form-control" placeholder="Name" required>
+                            </div>
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-</style>
+                            <div class="col-12">
+                                <label class="form-label">Father's Name</label>
+                                <input type="text" name="client_father" id="client_father" class="form-control" placeholder="Father's Name" required>
+                            </div>
 
-<div class="container-fluid" id="printableArea">
+                            <div class="col-6">
+                                <label class="form-label">Area</label>
+                                <select class="form-select" name="area" id="area" required>
+                                    <option selected disabled value="">Select Area</option>
+                                    @foreach ($areasData as $val)
+                                    <option value={{ $val->id }}>{{ $val->area_name }}</option>
+                                    @endforeach
 
-    <div class="box box-success">
-        <div class="box-content">
+                                </select>
 
-            <div class="row">
+                            </div>
 
-                <div class="col-md-12">
-
-
-                    <p class="lead">&nbsp;&nbsp;
-
-                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button class="ui btn btn-info mini offsettop5 btn-add float-right"><i class="ui icon plus"></i>{{ __("Subscriber") }}</button>
-
-                    </p>
-                    <hr>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="row">
-
-                <div class="col-md-4">
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            <p class="lead text-center">&nbsp;&nbsp;SUBSCRIBER INFO</p>
-                            <hr>
-                        </div>
+                            <div class="col-6">
+                                <label class="form-label">Vicinity</label>
+                                <select class="form-select" name="vicinity" id="vicinity" required>
+                                    <option selected disabled value="">Select Vicinity</option>
 
 
-                    </div>
 
-                    <div class="row">
+                                </select>
+                            </div>
 
-                        <table width="100%" class="table table-bordered"  data-order='[[ 0, "asc" ]]'>
+                            <div class="col-12">
+                                <label class="form-label">Address</label>
+                                <input type="text" name="address" id="address" class="form-control" placeholder="Address" required>
+                            </div>
 
-                            <thead class="thead-light">
+                            <div class="col-12">
+                                <label class="form-label">Mobile</label>
+                                <input type="text" name="mobile_no" id="mobile_no" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern="[0-9]{11}" class="form-control" placeholder="Mobile No" required>
+                            </div>
 
-                                <tr>
-                                    <th>Field Name</th>
-                                    <th>Field Value</th>
-                                </tr>
-                            </thead>
+                            <div class="col-6">
+                                <label class="form-label">Locked Fund</label>
+                                <input type="text" name="locked_fund" id="locked_fund" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Locked Fund" required>
+                            </div>
 
-                            <tbody>
-                                <tr>
-                                    <td>Subscriber Card NO</td>
-                                    <td>@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset</td>
-                                </tr>
+                            <div class="col-6">
+                                <label class="form-label">Bill Amount</label>
+                                <input type="text" name="bill_amount" id="bill_amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Bill Amount" required>
+                            </div>
 
-                                <tr>
-                                    <td>Initialization Date</td>
-                                    <td>@isset($subscriberData->initialization_date){{ $subscriberData->initialization_date }}@endisset</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Address</td>
-                                    <td>@isset($subscriberData->address){{ $subscriberData->address }}@endisset</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Subscriber Name</td>
-                                    <td>@isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Subscriber Fathers Name</td>
-                                    <td>@isset($subscriberData->client_father){{ $subscriberData->client_father }}@endisset</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Mobile No</td>
-                                    <td> <a type="button" href="tel:@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset">@isset($subscriberData->mobile_no){{ $subscriberData->mobile_no }}@endisset <i class="icon call"></i></a></td>
-                                </tr>
-
-                                <tr>
-                                    <td>Bill Amount</td>
-                                    <td>@isset($subscriberData->bill_amount){{ $subscriberData->bill_amount }}@endisset টাকা</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Locked Fund</td>
-                                    <td> @isset($subscriberData->locked_fund){{ $subscriberData->locked_fund }}@endisset টাকা</td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            <hr>
-                            <form action="{{ url('owner/subscriber') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
-                                @csrf
-                                <div class="two fields">
-
-                                    <div class="field">
-                                        <select name="client_id" id="client_id" class="ui search dropdown getid">
-                                            <option value="">{{ __("Select Subscriber ID") }}</option>
-                                            @foreach ($sub_client_id as $val)
-                                            <option value="{{ $val->client_id }}">{{ $val->client_id }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>  
-
-                                    <div class="field">
-                                        <button  type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon search alternate"></i> {{ __("Search") }}</button>
-                                    </div>
-
+                            <div class="col-12">
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Add Subscriber</button>
                                 </div>
-
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
+            </div>
+            <div class="col-12 col-lg-8 d-flex">
+                <div class="card border shadow-none w-100">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example2" class="table table-striped table-bordered" style="width:100%">
 
-                <div class="col-md-8">
-
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-
-                            <p class="lead">&nbsp;&nbsp;COMPLETE BILLS
-                            
-                            </p>
-                            <hr>
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-
-                            <table width="100%" class="table table-bordered" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-
-                            <thead class="thead-light">
+                                <thead class="table-light">
                                     <tr>
-                                        <th>{{ __("Serial")}}</th>
-                                        <th>{{ __("Month") }}</th>
-                                        <th>{{ __("Year") }}</th>
-                                        <th>{{ __("Amount")}}</th>
-                                        <th>{{ __("Status")}}</th>
-                                        
+                                        <th>Serial</th>
+                                        <th>Card No</th>
+                                        <th>Name</th>
+                                        <th>Ini. Date</th>
+                                        <th>Mobile</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
 
-                                    @isset($billingData)
                                     @php($serial=1)
-                                    @foreach ($billingData as $val)
+                                    @isset($subscriberData)
+                                    @foreach ($subscriberData as $val)
+                                    <tr>
+                                        <td>{{ $serial++}}</td>
+                                        <td>{{ $val->client_id}}</td>
+                                        <td>{{ $val->client_name }}</td>
+                                        <td>{{ $val->initialization_date }}</td>
+                                        <td>{{ $val->mobile_no }}</td>
 
-                                    
-                                    @if($val->billing_status=="1")
-                                        <tr class="text-white bg-primary">
-
-                                        <td> {{$serial++}}</td>
-
-                                        @if($val->bill_month=="1")
-                                        <td>January</td>
-                                        @elseif($val->bill_month=="2")
-                                        <td>February</td>
-                                        @elseif($val->bill_month=="3")
-                                        <td>March</td>
-                                        @elseif($val->bill_month=="4")
-                                        <td>April</td>
-                                        @elseif($val->bill_month=="5")
-                                        <td>May</td>
-                                        @elseif($val->bill_month=="6")
-                                        <td>June</td>
-                                        @elseif($val->bill_month=="7")
-                                        <td>July</td>
-                                        @elseif($val->bill_month=="8")
-                                        <td>August</td>
-                                        @elseif($val->bill_month=="9")
-                                        <td>September</td>
-                                        @elseif($val->bill_month=="10")
-                                        <td>Octobor</td>
-                                        @elseif($val->bill_month=="11")
-                                        <td>November</td>
-                                        @elseif($val->bill_month=="12")
-                                        <td>December</td>
+                                        @if($val->connection_status=="1")
+                                        <td class="text-primary">সংযোগ চালু আছে</td>
+                                        @elseif($val->connection_status=="0")
+                                        <td class="text-danger">সংযোগ বন্ধ আছে</td>
                                         @endif
+                                        <td class="align-right">
 
-                                        <td>{{ $val->bill_year }}</td>
-                                        <td>{{ $val->bill_amount }}</td>
+                                            <div class="d-flex align-items-center gap-3 fs-6">
+                                                <a href="{{ url('/owner/subscriber/'.$val->client_id) }}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
+                                            </div>
 
-                                        <td>Paid</td>
-
-                                        
-
-                                        </tr>
-
-                                        @elseif($val->billing_status=="0")
-
-                                        <tr class="text-white bg-danger">
-
-                                        <td> {{$serial++}}</td>
-                                        @if($val->bill_month=="1")
-                                        <td>January</td>
-                                        @elseif($val->bill_month=="2")
-                                        <td>February</td>
-                                        @elseif($val->bill_month=="3")
-                                        <td>March</td>
-                                        @elseif($val->bill_month=="4")
-                                        <td>April</td>
-                                        @elseif($val->bill_month=="5")
-                                        <td>May</td>
-                                        @elseif($val->bill_month=="6")
-                                        <td>June</td>
-                                        @elseif($val->bill_month=="7")
-                                        <td>July</td>
-                                        @elseif($val->bill_month=="8")
-                                        <td>August</td>
-                                        @elseif($val->bill_month=="9")
-                                        <td>September</td>
-                                        @elseif($val->bill_month=="10")
-                                        <td>Octobor</td>
-                                        @elseif($val->bill_month=="11")
-                                        <td>November</td>
-                                        @elseif($val->bill_month=="12")
-                                        <td>December</td>
-                                        @endif
-
-                                        <td>{{ $val->bill_year }}</td>
-                                        <td>{{ $val->bill_amount }}</td>
-
-                                        <td>
-                                            <a class="text-white" href="{{ url('/owner/sallery/settle/'.$val->id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Are you sure?')"><i class="icon plus"></i>Collect</a>
                                         </td>
 
-                                        </tr>
-
-                                        @endif
-
+                                    </tr>
                                     @endforeach
                                     @endisset
                                 </tbody>
+
                             </table>
-
                         </div>
-
-
                     </div>
 
-
-
                 </div>
-
             </div>
-
-            
-
         </div>
+        <!--end row-->
     </div>
-
 </div>
+
+<!--fiuhfoiafj -->
+
+
+
+<!--fgijafaf-->
 
 @endsection
 
@@ -304,57 +162,13 @@
 <script>
     $(document).ready(function() {
 
-        $('#dataTables-example').DataTable({
-        responsive: true,
-        pageLength: 10,
-        ordering: false,
-        lengthChange: true,
-        dom: 'Blfrtip',
-        buttons: [
 
-            'copyHtml5',
-            'excelHtml5',
-            'pdfHtml5'
-
-        ],
-        lengthMenu: [
-            [10, 25, 50, -1],
-            ['10 rows', '25 rows', '50 rows', 'Show all']
-        ]
-    });
-
-
-    $('#dataTables-example1').DataTable({
-        responsive: true,
-        pageLength: 10,
-        ordering: false,
-        lengthChange: true,
-        dom: 'Blfrtip',
-        buttons: [
-
-            'copyHtml5',
-            'excelHtml5',
-            'pdfHtml5'
-
-        ],
-        lengthMenu: [
-            [10, 25, 50, -1],
-            ['10 rows', '25 rows', '50 rows', 'Show all']
-        ]
-    });
-
-
-        $("#client_id").change(function() {
-
-            var area = $(this).val();
-
-            $id= area;
-
-        });
+        
 
         $("#area").change(function() {
 
             var area = $(this).val();
+
             // clear all values 
             $('#vicinity option:not(:first)').remove();
 
@@ -363,6 +177,7 @@
                 type: 'get',
                 dataType: 'json',
                 success: function(response) {
+
                     var len = 0;
                     if (response.data != null) {
                         len = response.data.length;
@@ -384,95 +199,8 @@
             });
         });
 
-        $('#add_subscriber_form').form({
-            fields: {
-
-                client_id: {
-                    identifier: 'client_id',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber card no requried.'
-                    }]
-                },
-                initialization_date: {
-                    identifier: 'initialization_date',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Initialization date required.'
-                    }]
-                },
-                client_name: {
-                    identifier: 'client_name',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber name required.'
-                    }]
-                },
-                client_father: {
-                    identifier: 'client_father',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber fathers name required',
-                    }]
-                },
-                area: {
-                    identifier: 'area',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber area required.'
-                    }]
-                },
-                vicinity: {
-                    identifier: 'vicinity',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber vicinity required.'
-                    }]
-                },
-                address: {
-                    identifier: 'address',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber address required.'
-                    }]
-                },
-                mobile_no: {
-                    identifier: 'mobile_no',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber contact no required.'
-                    }]
-                },
-                locked_fund: {
-                    identifier: 'locked_fund',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Subscriber locked fund required.'
-                    }]
-                },
-                bill_amount: {
-                    identifier: 'bill_amount',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Bill amount required.'
-                    }]
-                }
-
-            }
-        });
 
     });
-
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
-    }
 </script>
 
 @endsection

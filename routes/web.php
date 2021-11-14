@@ -38,7 +38,8 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('owner', 'App\Http\Controllers\Owner\BillingController@billcollection');
 
     //Area and Vicinity Routes
-    Route::get('owner/area_vicinity', 'App\Http\Controllers\Owner\AreaController@index');
+    Route::get('owner/area', 'App\Http\Controllers\Owner\AreaController@area');
+    Route::get('owner/vicinity', 'App\Http\Controllers\Owner\AreaController@vicinity');
     Route::post('owner/area/add', 'App\Http\Controllers\Owner\AreaController@add_area');
     Route::get('owner/area/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_area');
     Route::post('owner/vicinity/add', 'App\Http\Controllers\Owner\AreaController@add_vicinity');
@@ -46,11 +47,12 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
     //Subscriber Routes
     Route::get('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@index');
-    Route::post('owner/subscriber', 'App\Http\Controllers\Owner\SubscriberController@search_subscriber');
-    Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due');
     Route::post('owner/subscriber/add', 'App\Http\Controllers\Owner\SubscriberController@add_subscriber');
     Route::get('owner/subscriber/getVicinity/{id}', 'App\Http\Controllers\Owner\SubscriberController@getVicinity');
     Route::get('owner/subscriber/{id}', 'App\Http\Controllers\Owner\SubscriberController@view_subscriber');
+
+    Route::get('owner/subscriber/search', 'App\Http\Controllers\Owner\SubscriberController@search_body');
+    Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due');
     Route::get('owner/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Owner\SubscriberController@cut_lock_fund'); 
     Route::get('owner/subscriber/billing/{id}', 'App\Http\Controllers\Owner\SubscriberController@subscriber_bills');
 
@@ -60,7 +62,6 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::post('owner/billing', 'App\Http\Controllers\Owner\BillingController@filter_billing');
     Route::get('owner/billing/generate', 'App\Http\Controllers\Owner\BillingController@generate_bills');
     Route::post('owner/billing/update', 'App\Http\Controllers\Owner\BillingController@update_bills');
-
 
 
     //Memo Routes
@@ -97,7 +98,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     //Employee Sallery Route
-    Route::get('owner/sallery', 'App\Http\Controllers\Owner\SalleryController@index');
+    Route::get('employee-sallery', 'App\Http\Controllers\Owner\SalleryController@index');
     Route::post('owner/sallery/add', 'App\Http\Controllers\Owner\SalleryController@add_sallery');
     Route::get('owner/sallery/settle/{id}', 'App\Http\Controllers\Owner\SalleryController@settle');
 });
@@ -180,10 +181,12 @@ Route::group(['middleware' => ['auth', 'role:employee']], function () {
     //Subscriber Routes
     Route::get('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@index');
     Route::post('employee/subscriber', 'App\Http\Controllers\Employee\SubscriberController@filter_subscriber');
-    Route::post('employee/subscriber/settle_due', 'App\Http\Controllers\Employee\SubscriberController@settle_due');
     Route::post('employee/subscriber/add', 'App\Http\Controllers\Employee\SubscriberController@add_subscriber');
     Route::get('employee/subscriber/getVicinity/{id}', 'App\Http\Controllers\Employee\SubscriberController@getVicinity');
     Route::get('employee/subscriber/{id}', 'App\Http\Controllers\Employee\SubscriberController@view_subscriber');
+
+
+    Route::post('employee/subscriber/settle_due', 'App\Http\Controllers\Employee\SubscriberController@settle_due');
     Route::get('employee/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Employee\SubscriberController@cut_lock_fund'); 
     Route::get('employee/subscriber/billing/{id}', 'App\Http\Controllers\Employee\SubscriberController@subscriber_bills');
 

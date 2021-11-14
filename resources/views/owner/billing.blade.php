@@ -4,82 +4,26 @@
 
 <title>Billing | {{ $website_name }}</title>
 
-<meta name="description" content="Dingedah Network Billing">
+<meta name="description" content="Metro Bangla Operator">
 @endsection
 
 @section('content')
-@include('owner.modals.edit_bill')
 
+<div class="card">
+    <div class="card-header py-3">
+        <h6 class="mb-0">Bill Process</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 col-lg-4 d-flex">
+                <div class="card border shadow-none w-100">
+                    <div class="card-body">
 
-<div class="container-fluid" id="printableArea">
+                    <div class="row g-3">
 
-    <div class="box box-success">
-
-        <div class="box-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="lead">&nbsp;&nbsp;BILLING DIARY
-                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button onclick="location.href='/owner/billing/generate'" class="ui btn btn-info mini offsettop5 float-right"><i class="dollar sign icon"></i>{{ __("Process Bill") }}</button>
-                    </p>
-                    <hr>
-                </div>
-                <hr>
-            </div>
-
-
-            <div class="row">
-
-                <div class="col-md-12">
-
-                    <form action="{{ url('owner/billing') }}" method="post" accept-charset="utf-8" class="ui small form form-filter" id="filterform">
-                        @csrf
-                        <div class="two fields">
-
-                            <div class="field">
-                                <select name="billing_time" id="billing_time" class="ui  dropdown getid">
-                                    <option value="">{{ __("Billing Time") }}</option>
-                                    <option value='1'>Current Month</option>
-                                    <option value='2'>Past Month</option>
-                                    <option value='3'>All of them</option>
-                                </select>
-                            </div>
-
-                            <div class="field">
-                                <select name="billing_status" id="billing_status" class="ui  dropdown getid">
-                                    <option value="">{{ __("Billing Status") }}</option>
-                                    <option value=1>{{ __("Paid") }}</option>
-                                    <option value=0>{{ __("Due ") }}</option>
-                                </select>
-                            </div>
-
-
-                            <div class="two fields">
-
-                                <div class="field">
-
-                                    <button type="submit" name="submit" class="ui icon button blue small inline-button"><i class="ui icon filter alternate"></i> {{ __("Filter") }}</button>
-                                </div>
-
-
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-                </div>
-
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-6">
+                    <div class="col-md-12">
                     <!-- Card user Count Data -->
-                    <table width="100%" class="table text-center" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
                                 <th>{{ __("Bill Total") }}</th>
@@ -98,9 +42,9 @@
                     </table>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- Card user Count Data -->
-                    <table width="100%" class="table text-center" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
                                 <th>{{ __("Corrent Month Total") }}</th>
@@ -119,42 +63,61 @@
                     </table>
                 </div>
 
-                <hr>
+                    </div>
 
-            </div>
+                        <form class="row g-3" id="add_area_form" action="{{ url('owner/billing') }}" method="post" accept-charset="utf-8">
+                            @csrf
 
-            <div class="row">
+                            <div class="col-12">
+                                <label class="form-label">Billing Time</label>
+                                   <select name="billing_time" id="billing_time" class="form-select">
+                                    <option value="">{{ __("Billing Time") }}</option>
+                                    <option value='1'>Current Month</option>
+                                    <option value='2'>Past Month</option>
+                                    <option value='3'>All of them</option>
+                                </select>
+                            </div>
 
-                <div class="col-md-12">
+                            <div class="col-12">
+                                <label class="form-label">Billing Status</label>
 
-                    <hr>
+                                <select name="billing_status" id="billing_status" class="form-select">
+                                    <option value="">{{ __("Billing Status") }}</option>
+                                    <option value=1>{{ __("Paid") }}</option>
+                                    <option value=0>{{ __("Due ") }}</option>
+                                </select>
+                            </div>
 
+                            <div class="col-12">
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
             </div>
+            <div class="col-12 col-lg-8 d-flex">
+                <div class="card border shadow-none w-100">
 
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="example2" class="table table-striped table-bordered" style="width:100%">
 
-            <div class="row">
-
-                <div class="col-md-12">
-
-                    <!-- Card user Count Data -->
-
-                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
-                        <thead class="thead-light">
-                            <tr>
-                                <th>{{ __("Serial") }}</th>
+                                <thead class="table-light">
+                                    <tr>
+                                    <th>{{ __("Serial") }}</th>
                                 <th>{{ __("Client Card No") }}</th>
                                 <th>{{ __("Client Name") }}</th>
                                 <th>{{ __("Bill Month") }}</th>
                                 <th>{{ __("Bill Year") }}</th>
                                 <th>{{ __("Bill Amount")}}</th>
                                 <th>{{ __("Billing Status")}}</th>
-                            </tr>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        </thead>
-                        <tbody>
-                            @php($serial=1)
+                                @php($serial=1)
                             @isset($billingData)
                             @foreach ($billingData as $val)
                             <tr>
@@ -199,76 +162,65 @@
                             </tr>
                             @endforeach
                             @endisset
-                        </tbody>
-                    </table>
+                                                        </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
-
             </div>
-
         </div>
-
+        <!--end row-->
     </div>
-
 </div>
+
+<!--fiuhfoiafj -->
+
+
+
+<!--fgijafaf-->
 
 @endsection
 
 @section('scripts')
 
-
 <script>
     $(document).ready(function() {
 
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 10,
-            ordering: false,
-            lengthChange: true,
-            dom: 'Blfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'pdfHtml5'
 
-            ],
-            lengthMenu: [
-                [10, 25, 50, -1],
-                ['10 rows', '25 rows', '50 rows', 'Show all']
-            ]
+        $('#add_area_form').form({
+            fields: {
+                area_name: {
+                    identifier: 'area_name',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Area name required ।'
+                    }]
+                }
+            }
         });
 
-
-
-        $('#edit_biil_form').form({
+        $('#add_vicinity_form').form({
             fields: {
-                client_id: {
-                    identifier: 'client_id',
+                area_id: {
+                    identifier: 'area_id',
                     rules: [{
                         type: 'empty',
-                        prompt: 'গ্রাহকের আইডি পছন্দ করুন ।'
+                        prompt: 'Please select area name ।'
                     }]
                 },
-                billing_status: {
-                    identifier: 'billing_status',
+                vicinity_name: {
+                    identifier: 'vicinity_name',
                     rules: [{
                         type: 'empty',
-                        prompt: 'বিলিং স্ট্যাটাস পরিবর্তন করুন ।'
+                        prompt: 'Vicinity name required ।'
                     }]
                 }
             }
         });
 
     });
-
-
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
 </script>
 
 @endsection

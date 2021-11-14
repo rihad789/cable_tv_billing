@@ -1,92 +1,119 @@
 <!doctype html>
-<html lang="en" class="fullscreen-bg">
+<html lang="en" class="light-theme">
 
 <head>
-    <title>Sign in | {{ $website_name }}</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('/images/img/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/images/img/favicon-32x32.png') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('/images/img/favicon.ico') }}">
-    <link href="{{ asset('/vendor/semantic-ui/semantic.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/auth.css') }}" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/bootstrap-extended.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <style>
+    <!-- loader-->
+    <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
 
-
-.no-arrow {
-  -moz-appearance: textfield;
-}
-.no-arrow::-webkit-inner-spin-button {
-  display: none;
-}
-.no-arrow::-webkit-outer-spin-button,
-.no-arrow::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-    </style>
-
+    <title>Sign in | {{ $website_name }}</title>
 </head>
 
 <body>
-    <div id="wrapper">
-        <div class="vertical-align-wrap">
-            <div class="vertical-align-middle">
-                <div class="auth-box">
-                    <div class="content">
-                        <div class="header">
 
-                            <!-- <div class="logo align-center"><h1 class="lead">{{ __('আপনার একাউন্টে লগ ইন করুন') }}</h1></div> -->
-                            <p class="lead">{{ __('আপনার একাউন্টে লগ ইন করুন') }}</p>
-                        </div>
-                        <form class="form-auth-small ui form" action="{{ route('login') }}" method="POST">
-                            @csrf
-                            <div class="fields">
-                                <div class="sixteen wide field {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                    <label for="phone" class="color-white">{{ __('Email') }}</label>
-                                    <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('Enter your email') }}" required autofocus>
-                                    @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif  
-                                </div>
+    <!--start wrapper-->
+    <div class="wrapper">
+
+        <!--start content-->
+        <main class="authentication-content">
+            <div class="container-fluid">
+                <div class="authentication-card">
+
+                    <div class="card rounded-0 overflow-hidden shadow-none border mb-5 mb-lg-0">
+                        <div class="row g-0">
+                            <div class="col-12 order-1 col-xl-6 d-flex align-items-center justify-content-center border-end">
+                                <img src="assets/images/error/auth-img-7.png" class="img-fluid" alt="">
                             </div>
-                            <div class="fields">
-                                <div class="sixteen wide field {{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <label for="password" class="color-white">{{ __('Password') }}</label>
-                                    <input id="password" type="password" class="" name="password" placeholder="{{ __('Enter your password') }}" required>
-                                    @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="fields">
-                                <div class="sixteen wide field">
-                                    <div class="ui checkbox">
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <label for ="remember" class="color-white">{{ __('Remember me') }}</label>
+                            <div class="col-12 col-xl-6 order-xl-2">
+
+                                <div class="card-body">
+                                    <div class="border p-3 rounded">
+                                        <h6 class="mb-0 text-uppercase">Wellcome,Please sign in to continue </h6>
+                                        <hr />
+                                        <form class="row g-3" action="{{ route('login') }}" method="POST">
+                                        @csrf
+                                            <div class="col-12">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <div class="ms-auto position-relative">
+                                                    <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
+                                                    <input type="email" class="form-control ps-5" id="email" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+
+                                                    @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="password" class="form-label">Password</label>
+                                                <div class="ms-auto position-relative">
+                                                    <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
+                                                    <input type="password" class="form-control ps-5" id="password" name="password" placeholder="Password">
+
+                                                    @if ($errors->has('password'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('password') }}</strong>
+                                                    </span>
+                                                    @endif
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="remember">Remember me</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <a href="javascript:;">Forgot Password?</a>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-grid">
+                                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                                </div>
+                                            </div>
+
+                                        </form>
                                     </div>
                                 </div>
+
+
                             </div>
-                            <button type="submit" class="ui green button large fluid">{{ __('SIGN IN') }}</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </main>
 
-    <script src="{{ asset('/assets/vendor/jquery/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('/assets/vendor/semantic-ui/semantic.min.js') }}"></script>
-    <script>
-        $('.ui.checkbox').checkbox('uncheck', 'toggle');
-    </script>
+        <!--end page main-->
+
+        <footer class="bg-white border-top p-3 text-center fixed-bottom">
+            <p class="mb-0">Copyright © 2021. All right reserved.</p>
+        </footer>
+
+    </div>
+    <!--end wrapper-->
+
+    <!-- Bootstrap bundle JS -->
+    <script src="assets/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!--plugins-->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pace.min.js') }}"></script>
+
 </body>
 
 </html>

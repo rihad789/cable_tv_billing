@@ -12,23 +12,36 @@ class SubscriberController extends Controller
     public function index()
     {
 
-        $subscriberData =[];
+        $subscriberData = DB::table("subscribers") ->get();
+        $areasData = DB::table("areas") ->get();
+
+        $total_sub = DB::table("subscribers")->count();
+        $disconnect_sub=DB::table("subscribers")->where('connection_status','=',0)->count();
+        $connected_sub=DB::table("subscribers")->where('connection_status','=',1)->count();
+
+
+        return view('owner.subscriber',compact('subscriberData','areasData','total_sub','disconnect_sub','connected_sub'));
+    }
+
+    
+    public function search_body()
+    {
+        //
+
+        $subscriberData = [];
         
         $billingData = [];
 
         $dueBilldata = [];
 
-        $areasData = DB::table("areas") ->get();
+        $sub_client_id = DB::table("subscribers")->select('')->get();
 
-        $sub_client_id = DB::table("subscribers")->get();
+ 
+        return view('owner.update_bill',compact('subscriberData','sub_client_id','billingData','dueBilldata'));
 
-        //return response()->json([$id,$areasData,$subscriberData,$sub_client_id,$billingData,$dueBilldata]);
-        
-        return view('owner.subscriber',compact('areasData','subscriberData','sub_client_id','billingData','dueBilldata'));
     }
 
-
-    public function search_subscriber(Request $request)
+    public function search_result(Request $request)
     {
         //
 
@@ -100,8 +113,6 @@ class SubscriberController extends Controller
     public function view_subscriber($id)
     {
         //
-
-
 
         $subscriberData = DB::table("subscribers")->where('client_id','=',$id) ->first();
         
