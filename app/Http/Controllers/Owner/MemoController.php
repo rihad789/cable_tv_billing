@@ -23,12 +23,14 @@ class MemoController extends Controller
         return view('owner.memo',compact('memoData','userData'));
     }
 
-    public function create()
+    public function add_memo_form()
     {
         //
+        $userData = DB::table("users")->select('id','first_name','last_name')->get();
+        return view('owner.add_memo',compact('userData'));
     }
 
-    public function add_memo(Request $request)
+    public function add_memo_op(Request $request)
     {
         //
         $dt = Carbon::now();

@@ -72,9 +72,10 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     //Memo Routes
 
     Route::get('owner/memo', 'App\Http\Controllers\Owner\MemoController@index');
-    Route::post('owner/memo', 'App\Http\Controllers\Owner\MemoController@add_memo');
-    Route::get('owner/memo/{id}', 'App\Http\Controllers\Owner\MemoController@view_memo');
+    Route::get('owner/memo/add', 'App\Http\Controllers\Owner\MemoController@add_memo_form');
+    Route::post('owner/memo/add', 'App\Http\Controllers\Owner\MemoController@add_memo_op');
     Route::get('owner/memo/history', 'App\Http\Controllers\Owner\MemoController@memo_history');
+    Route::get('owner/memo/{id}', 'App\Http\Controllers\Owner\MemoController@view_memo');
 
 
     //Account Diary Controller
@@ -103,7 +104,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     //Employee Sallery Route
-    Route::get('employee-sallery', 'App\Http\Controllers\Owner\SalleryController@index');
+    Route::get('owner/employee-sallery', 'App\Http\Controllers\Owner\SalleryController@index');
     Route::post('owner/sallery/add', 'App\Http\Controllers\Owner\SalleryController@add_sallery');
     Route::get('owner/sallery/settle/{id}', 'App\Http\Controllers\Owner\SalleryController@settle');
 });

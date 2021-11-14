@@ -50,7 +50,7 @@
                 <div class="card border shadow-none w-100">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table align-middle" id="example2" data-order='[[ 0, "asc" ]]'>
+                            <table class="table table-striped table-bordered" id="example2" data-order='[[ 0, "asc" ]]'>
                                 <thead class="table-light">
                                     <tr>
                                         <th>Serial</th>

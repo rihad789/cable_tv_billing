@@ -156,7 +156,7 @@
                                     @elseif($val->billing_status=="0")
 
                                         <td class="bg-danger">
-                                            <a class="text-white" href="{{ url('/owner/sallery/settle/'.$val->id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Would you like to continue?')"><i class="icon plus"></i>Collect</a>
+                                            <a class="text-white" href="{{ url('/owner/subscriber/collect_bills/'.$val->id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Would you like to continue?')"><i class="icon plus"></i>Collect</a>
                                         </td>
 
                                     </tr>
@@ -187,11 +187,14 @@
                         </thead>  
                         <tbody>
                             <tr>
+                            @isset($billingData)
                                 <td>{{ $due_month }} Months</td>
                                 <td> {{ $due_bills }} Taka </td>
                                 <td>
                                             <a class="text-primary" href="{{ url('/owner/subscriber/settle_bills') }}" onclick="return confirm('You are about to collect {{ $due_bills }} Taka from @isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset.Would you like to continue?')"><i class="icon plus"></i>Collect All</a>
                                         </td>
+
+                                        @endisset
 
                             </tr>
                         </tbody>
