@@ -20,27 +20,27 @@
                     <div class="card-body">
                         <form class="row g-3" id="add_subscriber_form" action="{{ url('owner/subscriber/add') }}" method="post" accept-charset="utf-8">
                             @csrf
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Card no</label>
                                 <input type="text" name="client_id" id="client_id" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Card No" required>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Initialization Date</label>
                                 <input type="date" name="initialization_date" id="initialization_date" class="form-control" placeholder="Initialization Date" required>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Name</label>
                                 <input type="text" name="client_name" id="client_name" class="form-control" placeholder="Name" required>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Father's Name</label>
                                 <input type="text" name="client_father" id="client_father" class="form-control" placeholder="Father's Name" required>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Area</label>
                                 <select class="form-select" name="area" id="area" required>
                                     <option selected disabled value="">Select Area</option>
@@ -52,7 +52,7 @@
 
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Vicinity</label>
                                 <select class="form-select" name="vicinity" id="vicinity" required>
                                     <option selected disabled value="">Select Vicinity</option>
@@ -62,27 +62,27 @@
                                 </select>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Address</label>
                                 <input type="text" name="address" id="address" class="form-control" placeholder="Address" required>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Mobile</label>
                                 <input type="text" name="mobile_no" id="mobile_no" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" pattern="[0-9]{11}" class="form-control" placeholder="Mobile No" required>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Locked Fund</label>
                                 <input type="text" name="locked_fund" id="locked_fund" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Locked Fund" required>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Bill Amount</label>
                                 <input type="text" name="bill_amount" id="bill_amount" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" class="form-control" placeholder="Bill Amount" required>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="d-grid">
                                     <button class="btn btn-primary">Add Subscriber</button>
                                 </div>

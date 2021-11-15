@@ -38,7 +38,6 @@
                             </tr>
                         </thead>
 
-                       
                         <tbody>
                             @php($serial=1)
                             @isset($settlementsData)

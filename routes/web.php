@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
     //Admin Side Nav Route
-    Route::get('owner', 'App\Http\Controllers\Owner\BillingController@billcollection');
+    Route::get('owner', 'App\Http\Controllers\Owner\DashboardController@index');
 
     //Area and Vicinity Routes
     Route::get('owner/area', 'App\Http\Controllers\Owner\AreaController@area');

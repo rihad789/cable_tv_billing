@@ -22,23 +22,23 @@
                             @csrf
 
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">First Name</label>
                                 <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" required>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <label class="form-label">Last Name</label>
                                 <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" required>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Email</label>
                                 <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
                             </div>
 
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Employee Role</label>
                                 <select class="form-select" name="role_id" id="role_id" required>
                                     <option selected disabled value="">Select Role</option>
@@ -48,7 +48,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Password</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                             </div>

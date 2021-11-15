@@ -26,6 +26,8 @@
 
                         <div class="row g-3">
 
+                        <div class="table-responsive">
+
                             <table class="table table-striped table-bordered" style="width:100%">
 
                                 <thead class="thead-light">
@@ -47,6 +49,8 @@
                                 </tbody>
 
                             </table>
+                        </div>
+
 
                         </div>
 
@@ -56,6 +60,9 @@
                         </div>
 
                         <div class="row g-3">
+
+                        
+                        <div class="table-responsive">
 
                             <table class="table table-striped table-bordered" style="width:100%">
 
@@ -87,6 +94,9 @@
 
 
                             </table>
+                        </div>
+
+
 
                         </div>
 
@@ -133,6 +143,12 @@
 
                         <div class="row g-3">
 
+                        
+                        <div class="table-responsive">
+
+                        </div>
+
+
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" style="width:100%">
 
@@ -166,6 +182,7 @@
                         </div>
 
                         <div class="row g-3">
+                            
 
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" style="width:100%">

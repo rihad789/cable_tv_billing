@@ -20,12 +20,12 @@
                     <div class="card-body">
                         <form class="row g-3" id="add_area_form" action="{{ url('owner/area/add') }}" method="post" accept-charset="utf-8">
                             @csrf
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <label class="form-label">Area Name</label>
                                 <input type="text" name="area_name" id="area_name" class="form-control" placeholder="Area name">
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-12">
                                 <div class="d-grid">
                                     <button class="btn btn-primary">Add Area</button>
                                 </div>

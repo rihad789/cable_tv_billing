@@ -21,15 +21,15 @@
                         <form class="row g-3" id="add_subscriber_form" action="{{ url('owner/memo/add') }}" method="post" accept-charset="utf-8">
                             @csrf
 
-                            <div class="col-12">
+                            <div class="col-md-12 table-responsive">
 
                                 <div class="row g-3" id="inputFormRow">
 
-                                    <div class="col-6">
+                                    <div class="col-md-5">
                                         <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" name="memo_no" class="form-control" id="memo_no" placeholder="Memo No" required >
                                     </div>
 
-                                    <div class="col-5">
+                                    <div class="col-md-5">
                                         <select id="buyer_id" class="form-select" name="buyer_id" required>
                                             <option selected disabled value="">Select Buyer Name</option>
 
@@ -40,32 +40,33 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-1">
+                                    <div class="col-md-2">
                                         <button id="addRow" class="form-control"><i class="bi bi-plus"></i>{{ __("Add Row") }}</button>
                                     </div>
 
                                 </div>
 
+                                
 
                                 <div class="row g-3" style="margin-top: 10px;">
 
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <input type="text" name="title[]" class="form-control" id="title" placeholder="Product name" autocapitalize="off" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <input name="single_unit_price[]" type="number" class="form-control" id="single_unit_price" placeholder="Single Unit Price" autocapitalize="off" required>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-md-2">
                                         <input name="quantity[]" class="form-control" type="number" id="quantity" placeholder="Quantity" autocapitalize="off" required>
                                     </div>
 
-                                    <div class="col-3">
+                                    <div class="col-md-3">
                                         <input name="total_amount[]" class="form-control" type="number" id="total_amount" placeholder="0" autocapitalize="off" required>
                                     </div>
 
-                                    <div class="col-1">
+                                    <div class="col-md-1">
                                         <button id="removeRow" type="button" class="btn btn-secondary">Remove</button>
                                     </div>
 
@@ -79,11 +80,11 @@
                             
                             <div class="row g-3">
 
-                                <div class="col-6">
+                                <div class="col-md-6">
                                 <input name="products_total" class="form-control text-right" id="products_total" placeholder="Total Product" readonly>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-md-6">
                                 <input name="grand_amount" class="form-control text-right" id="grand_amount" placeholder="Grand Total" readonly>
                                 </div>
 
@@ -91,7 +92,7 @@
 
                             <div class="row g-3">
 
-                                <div class="col-12">                                 
+                                <div class="col-md-12">                                 
                                         <button type="button" onclick="getValues()" class="btn btn-info">Calculate Total</button>   
                                         <button type="submit" class="btn btn-primary">Add Memo</button>                                 
                                 </div>
@@ -148,23 +149,23 @@ function getValues() {
 
             html += '<div class="row g-3" style="margin-top: 10px;" id="inputFormRow">';
 
-            html += '<div class="col-3">';
+            html += '<div class="col-md-3">';
             html += '<input type="text" name="title[]" class="form-control" id="title" placeholder="Product name" autocapitalize="off" required>';
             html += '</div>';
 
-            html += '<div class="col-3">';
+            html += '<div class="col-md-3">';
             html += '<input name="single_unit_price[]" type="number" class="form-control" id="single_unit_price" placeholder="Single Unit Price" autocapitalize="off" required>';
             html += '</div>';
 
-            html += '<div class="col-2">';
+            html += '<div class="col-md-2">';
             html += '<input name="quantity[]" class="form-control" type="number" id="quantity" placeholder="Quantity" autocapitalize="off" required>';
             html += '</div>';
 
-            html += '<div class="col-3">';
+            html += '<div class="col-md-3">';
             html += '<input name="total_amount[]" class="form-control" type="number" id="total_amount" placeholder="0" autocapitalize="off" required>';
             html += '</div>';
 
-            html += '<div class="col-1">';
+            html += '<div class="col-md-1">';
             html += '<button id="removeRow" type="button" class="btn btn-secondary">Remove</button>';
             html += '</div>';
 
