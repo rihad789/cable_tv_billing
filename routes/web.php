@@ -34,19 +34,21 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth', 'role:owner']], function () {
 
 
-    //Admin Side Nav Route
+    //Dashboard Routes
     Route::get('owner', 'App\Http\Controllers\Owner\DashboardController@index');
 
     //Area and Vicinity Routes
     Route::get('owner/area', 'App\Http\Controllers\Owner\AreaController@area');
-    Route::get('owner/vicinity', 'App\Http\Controllers\Owner\AreaController@vicinity');
     Route::post('owner/area/add', 'App\Http\Controllers\Owner\AreaController@add_area');
     Route::get('owner/area/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_area');
-    Route::post('owner/vicinity/add', 'App\Http\Controllers\Owner\AreaController@add_vicinity');
-    Route::get('owner/vicinity/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_vicinity');
+
+
+        //Area and Vicinity Routes
+        Route::get('owner/vicinity', 'App\Http\Controllers\Owner\AreaController@vicinity');
+        Route::post('owner/vicinity/add', 'App\Http\Controllers\Owner\AreaController@add_vicinity');
+        Route::get('owner/vicinity/delete/{id}', 'App\Http\Controllers\Owner\AreaController@delete_vicinity');
 
     //Subscriber Routes
-
     Route::get('owner/subscriber/search', 'App\Http\Controllers\Owner\SubscriberController@search_body');
     Route::get('owner/subscriber/search/{id}', 'App\Http\Controllers\Owner\SubscriberController@search_result');
 
@@ -54,8 +56,6 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::post('owner/subscriber/add', 'App\Http\Controllers\Owner\SubscriberController@add_subscriber');
     Route::get('owner/subscriber/getVicinity/{id}', 'App\Http\Controllers\Owner\SubscriberController@getVicinity');
     Route::get('owner/subscriber/{id}', 'App\Http\Controllers\Owner\SubscriberController@view_subscriber');
-
-
 
     Route::post('owner/subscriber/settle_due', 'App\Http\Controllers\Owner\SubscriberController@settle_due');
     Route::get('owner/subscriber/cut_lock_fund/{id}', 'App\Http\Controllers\Owner\SubscriberController@cut_lock_fund');

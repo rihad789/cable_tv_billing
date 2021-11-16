@@ -143,12 +143,7 @@
 
                         <div class="row g-3">
 
-                        
-                        <div class="table-responsive">
-
-                        </div>
-
-
+                    
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" style="width:100%">
 

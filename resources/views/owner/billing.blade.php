@@ -44,11 +44,14 @@
 
                 <div class="col-md-12">
                     <!-- Card user Count Data -->
+
+                    <div class="table-responsive">
+                        
                     <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
-                                <th>{{ __("Corrent Month Total") }}</th>
-                                <th>{{ __("Corrent Month Due") }}</th>
+                                <th>{{ __("This Month Total") }}</th>
+                                <th>{{ __("This Month Due") }}</th>
                                 <th>{{ __("Todays Collection") }}</th>
                             </tr>
                         </thead>
@@ -61,6 +64,10 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    </div>
+
+
                 </div>
 
                     </div>
