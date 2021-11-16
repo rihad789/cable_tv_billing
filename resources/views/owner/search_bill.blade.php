@@ -156,7 +156,7 @@
                                             @elseif($val->billing_status=="0")
 
                                             <td class="bg-danger">
-                                                <a class="text-white" href="{{ url('/owner/subscriber/collect_bills/'.$val->id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Would you like to continue?')"><i class="icon plus"></i>Collect</a>
+                                                <a class="text-white" href="{{ url('owner/billing/collect_bill/'.$val->id.'/'.$subscriberData->client_id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Would you like to continue?')"><i class="icon plus"></i>Collect</a>
                                             </td>
 
                                         </tr>
@@ -190,9 +190,16 @@
                                             @isset($billingData)
                                             <td>{{ $due_month }} Months</td>
                                             <td> {{ $due_bills }} Taka </td>
+
+                                            @if($due_month==0)
+                                            <td class="text-info">No due bills</td>
+                                            @else
+
                                             <td>
-                                                <a class="text-primary" href="{{ url('/owner/subscriber/settle_bills') }}" onclick="return confirm('You are about to collect {{ $due_bills }} Taka from @isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset.Would you like to continue?')"><i class="icon plus"></i>Collect All</a>
+                                                <a class="text-primary" href="{{ url('owner/billing/collect_bills/'.$subscriberData->client_id) }}" onclick="return confirm('You are about to collect {{ $due_bills }} Taka from @isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset.Would you like to continue?')"><i class="icon plus"></i>Collect All</a>
                                             </td>
+
+                                            @endif
 
                                             @endisset
 

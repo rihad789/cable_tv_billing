@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('owner/billing', 'App\Http\Controllers\Owner\BillingController@index');
     Route::post('owner/billing', 'App\Http\Controllers\Owner\BillingController@filter_billing');
     Route::get('owner/billing/generate', 'App\Http\Controllers\Owner\BillingController@generate_bills');
+    Route::get('owner/billing/collect_bill/{id}/{client_id}', 'App\Http\Controllers\Owner\BillingController@collect_bill');
+    Route::get('owner/billing/collect_bills/{client_id}', 'App\Http\Controllers\Owner\BillingController@collect_bills');
     Route::post('owner/billing/update', 'App\Http\Controllers\Owner\BillingController@update_bills');
 
 

@@ -167,17 +167,19 @@
                 </li>
 
                 <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bi bi-receipt"></i>
+                    <a href="{{ url('owner/billing') }}">
+                        <div class="parent-icon"><i class="bi bi-cash-stack"></i>
                         </div>
-                        <div class="menu-title">Dish Billing</div>
+                        <div class="menu-title">Billings</div>
                     </a>
-                    <ul>
-                        <li> <a href="{{ url('owner/billing') }}"><i class="bi bi-cash-stack"></i>Bill Process</a>
-                        </li>
-                        <li> <a href="{{ url('owner/subscriber/search') }}"><i class="bi bi-search"></i>Search Customer</a>
-                        </li>
-                    </ul>
+                </li>
+
+                <li>
+                    <a href="{{ url('owner/subscriber/search') }}">
+                        <div class="parent-icon"><i class="bi bi-search"></i>
+                        </div>
+                        <div class="menu-title">Search Bills</div>
+                    </a>
                 </li>
 
                 <li>
@@ -214,18 +216,21 @@
                 </li>
 
                 <li>
-                    <a href="javascript:;" class="has-arrow">
+                    <a href="{{ url('owner/account_diary') }}">
                         <div class="parent-icon"><i class="bi bi-receipt"></i>
                         </div>
                         <div class="menu-title">Account Diary</div>
                     </a>
-                    <ul>
-                        <li> <a href="{{ url('owner/account_diary') }}"><i class="bi bi-card-checklist"></i>Settle Account</a>
-                        </li>
-                        <li> <a href="{{ url('owner/account_diary/settlements') }}"><i class="bi bi-clock-history"></i>Settlement History</a>
-                        </li>
-                    </ul>
                 </li>
+
+                <li>
+                    <a href="{{ url('owner/account_diary/settlements') }}">
+                        <div class="parent-icon"><i class="bi bi-clock-history"></i>
+                        </div>
+                        <div class="menu-title">Settlement History</div>
+                    </a>
+                </li>
+
 
             </ul>
             <!--end navigation-->

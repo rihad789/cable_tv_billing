@@ -165,6 +165,35 @@ class BillingController extends Controller
 
     }
 
+    public function collect_bill($id,$client_id)
+    {
+
+        $updated_by = auth()->user()->first_name . " " . auth()->user()->last_name;
+
+        $updated_by = $updated_by;
+
+        $timestamp = Carbon::now()->toDateString();
+
+        $affectedRow = Billings::where('id', $id)->update(['billing_status' => true, "billing_date" => $timestamp, "updated_by" => $updated_by]);
+
+        return redirect('owner/subscriber/search/'.$client_id)->with('success', trans("Bill Collected Successfully"));
+    }
+
+
+    public function collect_bills($client_id)
+    {
+
+        $updated_by = auth()->user()->first_name . " " . auth()->user()->last_name;
+
+        $updated_by = $updated_by;
+
+        $timestamp = Carbon::now()->toDateString();
+
+        $affectedRow = DB::table('billings')->where('client_id', $client_id)->where('billing_status',false)->update(['billing_status' => true, "billing_date" => $timestamp, "updated_by" => $updated_by]);
+
+        return redirect('owner/subscriber/search/'.$client_id)->with('success', trans("Bills Collected Successfully"));
+    }
+
     public function generate_bills()
     {
         //
