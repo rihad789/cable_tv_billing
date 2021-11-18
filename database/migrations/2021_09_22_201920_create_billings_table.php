@@ -23,7 +23,7 @@ class CreateBillingsTable extends Migration
             $table->string('billing_date')->nullable();
             $table->boolean('billing_status')->default(false);
             $table->boolean('is_settled')->default(false);
-            $table->string('updated_by')->nullable();
+            $table->string('collected_by')->nullable();
             $table->timestamps();
         });
     }

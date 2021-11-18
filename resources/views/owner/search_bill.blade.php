@@ -245,19 +245,19 @@
 @section('scripts')
 
 <script>
-    $(document).ready(function() {
 
-    function search_subscriber() {
+function search_subscriber() {
 
-        var client_id = $('#client_id').val();
+var client_id = $('#client_id').val();
 
-        var url = '/owner/subscriber/search/' + client_id;
-        if (url) { // require a URL
-            window.location = url; // redirect
-        }
-        return false;
+var url = '/owner/subscriber/search/' + client_id;
+if (url) { // require a URL
+    window.location = url; // redirect
+}
+return false;
 
-    }
+}
+
 </script>
 
 @endsection
