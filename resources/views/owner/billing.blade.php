@@ -100,6 +100,14 @@
                                 </div>
                             </div>
                         </form>
+
+                        <div class="col-12" style="margin-top: 20px;">
+                                <div class="d-grid">
+                                    <button onclick="location.href='/owner/billing/generate'" class="btn btn-primary">Generate Bills</button>
+                                </div>
+                            </div>
+
+
                     </div>
                 </div>
             </div>
@@ -180,11 +188,5 @@
         <!--end row-->
     </div>
 </div>
-
-<!--fiuhfoiafj -->
-
-
-
-<!--fgijafaf-->
 
 @endsection

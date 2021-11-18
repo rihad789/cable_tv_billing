@@ -49,7 +49,7 @@ class SalleryController extends Controller
 
             ]);
 
-            return redirect('owner/sallery')->with('success', trans("Sallery Added Successfully"));
+            return redirect('owner/employee-sallery')->with('success', trans("Sallery Added Successfully"));
         } else {
             $payment_status = DB::table("salleries")->where('user_id', "=", $request->employee_id)->select('payment_status')->first();
 
@@ -63,7 +63,7 @@ class SalleryController extends Controller
                     ->count();
 
                 if ($current_sallery_count == 1) {
-                    return redirect('owner/sallery')->with('success', trans("Current Month Sallery Already Added"));
+                    return redirect('owner/employee-sallery')->with('success', trans("Current Month Sallery Already Added"));
                 } else {
                     $sallery = Sallery::create([
 
@@ -75,11 +75,9 @@ class SalleryController extends Controller
 
                     ]);
                 }
-
-
-                return redirect('owner/sallery')->with('success', trans("Sallery Updated Successfully"));
+                return redirect('owner/employee-sallery')->with('success', trans("Sallery Updated Successfully"));
             } else {
-                return redirect('owner/sallery')->with('error', trans("Sorry ,Previous Sallery Due"));
+                return redirect('owner/employee-sallery')->with('error', trans("Sorry ,Previous Sallery Due"));
             }
         }
     }
@@ -130,6 +128,6 @@ class SalleryController extends Controller
 
         // return response()->json(['Response'=>$id]);
 
-        return redirect('owner/sallery')->with('success', trans("Employee sallery settled sucessfully"));
+        return redirect('owner/employee-sallery')->with('success', trans("Employee sallery settled sucessfully"));
     }
 }

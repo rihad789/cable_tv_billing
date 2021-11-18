@@ -19,6 +19,7 @@ class MemoController extends Controller
         //
         $memoData=DB::select( DB::raw("select memos.memo_no,memos.products_total,memos.grand_amount,memos.creation_date,users.first_name,users.last_name
          from memos INNER JOIN users on memos.buyer_id=users.id where memos.is_settled = false;"));
+
         $userData = DB::table("users")->select('id','first_name','last_name')->get();
         return view('owner.memo',compact('memoData','userData'));
     }
@@ -75,15 +76,19 @@ class MemoController extends Controller
     public function view_memo($id)
     {
         //
-        $memoProducts=DB::table("memos")->select("memos.products_total")->where("memos.memo_no", "=", $id) ->first();
+       // $memoProducts=DB::table("memos")->where("memos.memo_no", "=", $id) ->first();
 
-        $memoData=$memoProducts->products_total;
 
+        $memoProducts=DB::table("memos")->Join("users", function($join){$join->on("users.id", "=", "memos.buyer_id");})
+        ->select("memos.id", "memos.memo_no", "memos.products_total", "memos.grand_amount", "memos.creation_date", "users.first_name", "users.last_name")
+        ->first();
+        
+        
         $memoDetails=DB::table("memo_details")->where("memo_details.memo_no", "=", $id)->get();
         $total_amount  = DB::table("memo_details")->where("memo_details.memo_no", "=" , $id)->sum("total_amount");
 
 
-        return view('owner.view.view_memo',compact('memoDetails','memoData','total_amount'));
+        return view('owner.view.view_memo',compact('memoDetails','memoProducts','total_amount'));
 
         //return response()->json(['Response'=>$accountData]);
     }

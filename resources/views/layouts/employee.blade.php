@@ -1,154 +1,225 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en" class="light-theme">
 
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
+    <!--plugins-->
+    <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/bootstrap-extended.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <!-- <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/img/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/img/favicon-32x32.png') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/img/favicon.ico') }}"> -->
+    <!-- loader-->
+    <!-- <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" /> --> manager 
+
+    <!--Theme Styles-->
+    <link href="{{ asset('assets/css/dark-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/light-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/semi-dark.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/header-colors.css') }}" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="{{ asset('vendor/DataTables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/DataTables/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/flag-icon-css/css/flag-icon.min.css') }}">
+
+    <style>
+        body {
+
+            font-family: Times New Roman;
+
+        }
+    </style>
+
 
     @yield('meta')
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/semantic-ui/semantic.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/datatables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/DataTables/buttons.dataTables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-
-
-    @yield('styles')
 
 </head>
 
 <body>
 
+
+    <!--start wrapper-->
     <div class="wrapper">
+        <!--start top header-->
+        <header class="top-header">
+            <nav class="navbar navbar-expand">
+                <div class="mobile-toggle-icon d-xl-none">
+                    <i class="bi bi-list"></i>
+                </div>
+                <div class="top-navbar d-none d-xl-block">
 
-        <nav id="sidebar" class="active">
+                </div>
+                <div class="d-xl-none ms-auto">
 
-            <ul class="list-unstyled components">
-                <li class="">
-                    <h4 class="text-info text-center uppercase">{{ $website_name }}</h4>
-                </li>
-                <hr>
-            </ul>
+                </div>
+                <form class=" d-none d-xl-flex ms-auto">
 
-            <ul class="list-unstyled components">
-
-                <li class="">
-                    <a href="{{ url('/') }}">
-                    <i class="calendar outline icon"></i>
-                        <p>{{ __('Bill Collection') }}</p>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a href="{{ url('employee/subscriber') }}">
-                        <i class="ui address book icon"></i>
-                        <p>{{ __('Customer list') }}</p>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a href="{{ url('employee/memo') }}">
-                        <i class="shopping basket icon"></i>
-                        <p>{{ __('Service Cost') }}</p>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
-
-        <div id="body" class="active">
-            <nav class="navbar navbar-expand-lg navbar-light bg-lightblue">
-                <div class="container-fluid">
-
-                    <button id="slidesidebar" class="ui icon button btn-light-outline">
-                        <i class="ui icon bars"></i> <span class="toggle-sidebar-menu">{{ __('Menu') }}</span>
-                    </button>
-
-                    <button onclick="location.href='/'" class="ui icon button btn-light-outline">
-                        <i class="ui icon home"></i> <span class="toggle-sidebar-menu">{{ __('Dashboard') }}</span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto navmenu">
-<!-- 
-                            <li class="nav-item">
-                                <div class="ui pointing link item">
-                                    <a href="{{ url('admin/notification') }}" class="ui circular basic icon  tiny "> <i class="tasks icon"></i> 5</a>
+                </form>
+                <div class="top-navbar-right ms-3">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item dropdown dropdown-large">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                                <div class="user-setting d-flex align-items-center gap-1">
+                                    <img src="{{ asset('assets/images/avatars/avatar-1.png') }}" class="user-img" alt="">
+                                    <div class="user-name d-none d-sm-block">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</div>
                                 </div>
-                            </li> -->
-<!-- 
-                            <li class="nav-item">
-                                <div class="ui pointing link dropdown item" tabindex="0">
-                                    <i class="linkify icon"></i> <span class="navmenutext">Manage</span>
-                                    <i class="dropdown icon"></i>
-                                    <div class="menu" tabindex="-1">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="#" style="pointer-events: none">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 dropdown-user-name">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</h6>
+                                                <small class="mb-0 dropdown-user-designation text-secondary">Employee</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('employee/my_profile') }}">
+                                        <div class="d-flex align-items-center">
+                                            <div class="setting-icon"><i class="bi bi-person-fill"></i></div>
+                                            <div class="setting-text ms-3"><span>My Account</span></div>
+                                        </div>
+                                    </a>
+                                </li>
 
-                                        <a href="{{ url('admin/users') }}" class="item"><i class="ui icon users"></i>{{ __('Operator') }}</a>
-                                        <a href="{{ url('admin/fare') }}" class="item"><i class="money bill alternate outline icon"></i>{{ __('Fare') }}</a>
 
-                                    </div>
-                                </div>
-                            </li> -->
+                                <li>
+                                    <a class="dropdown-item" href="{{ url('logout') }}">
+                                        <div class="d-flex align-items-center">
+                                            <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
+                                            <div class="setting-text ms-3"><span>Logout</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                            <li class="nav-item">
-                                <div class="ui pointing link dropdown item" tabindex="0">
-                                    <i class="ui icon user outline"></i> <span class="navmenutext">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</span>
-                                    <i class="dropdown icon"></i>
-                                    <div class="menu" tabindex="-1">
-                                        <a href="{{ url('employee/my_profile') }}" class="item"><i class="address book icon"></i>{{ __('My Profile') }}</a>
-                                        <a href="{{ url('employee/my_account') }}" class="item"><i class="ui icon user"></i>{{ __('My Account') }}</a>
-                                        <div class="divider"></div>
-                                        <a href="{{ route('logout') }}" class="item"><i class="ui icon power"></i>{{ __('Logout') }}</a>
-
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
             </nav>
+        </header>
+        <!--end top header-->
 
-            <div class="content">
-                @yield('content')
+        <!--start sidebar -->
+        <aside class="sidebar-wrapper" data-simplebar="true">
+            <div class="sidebar-header">
+                <div>
+                    <img src="{{ asset('assets/images/favicon-32x32.png') }}" class="logo-icon" alt="logo icon">
+                </div>
+                <div>
+                    <h6 class="logo-text">{{ $website_name }}</h6>
+                </div>
+                <div class="toggle-icon ms-auto"><i class="bi bi-chevron-double-left"></i>
+                </div>
+            </div>
+            <!--navigation-->
+            <ul class="metismenu" id="menu">
+
+                <li>
+                    <a href="{{ url('employee') }}">
+                        <div class="parent-icon"><i class="bi bi-search"></i>
+                        </div>
+                        <div class="menu-title">Search Bills</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class="bi bi-receipt-cutoff"></i>
+                        </div>
+                        <div class="menu-title">Service Cost</div>
+                    </a>
+                    <ul>
+                        <li> <a href="{{ url('employee/memo/add') }}"><i class="bi bi-plus"></i>Add Memo</a>
+                        </li>
+                        <li> <a href="{{ url('employee/memo') }}"><i class="bi bi-list-check"></i>Memo List</a>
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
+            <!--end navigation-->
+        </aside>
+        <!--end sidebar -->
+
+        <!--start content-->
+        <main class="page-content">
+
+            <div class="col">
+
+                <div class="card-body">
+
+                    @yield('content')
+
+                </div>
+
             </div>
 
-            <input type="hidden" id="_url" value="{{url('/')}}">
-            <script>
-                var y = '@isset($var){{$var}}@endisset';
-            </script>
-        </div>
+        </main>
+        <!--end page main-->
+
+        <!--start overlay-->
+        <div class="overlay nav-toggle-icon"></div>
+        <!--end overlay-->
+
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+        <!--End Back To Top Button-->
+
     </div>
+    <!--end wrapper-->
 
-    <script src="{{ asset('vendor/jquery/jquery-3.5.1.min.js') }}"></script>
+
+    <!-- Bootstrap bundle JS -->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/easyPieChart/jquery.easypiechart.js') }}"></script>
+    <script src="{{ asset('assets/plugins/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+
+    <!-- <script src="{{ asset('assets/js/pace.min.js') }}"></script> -->
+
+    <!-- <script src="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ asset('assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script> -->
+
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/js/table-datatable.js') }}"></script>
+    <!--app-->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+
+
+
     <script src="{{ asset('vendor/jquery/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('vendor/semantic-ui/semantic.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
-    <script src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-
-    <script src="{{ asset('vendor/DataTables/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('vendor/DataTables/jszip.min.js') }}"></script>
-    <script src="{{ asset('vendor/DataTables/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('vendor/DataTables/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('vendor/DataTables/buttons.html5.min.js') }}"></script>
 
 
     @if ($success = Session::get('success'))
     <script>
         $(document).ready(function() {
             $.notify({
-                icon: 'ui icon check',
                 message: "{{ $success }}"
             }, {
                 type: 'success',
@@ -162,7 +233,6 @@
     <script>
         $(document).ready(function() {
             $.notify({
-                icon: 'ui icon times',
                 message: "{{ $error }}"
             }, {
                 type: 'danger',
@@ -171,6 +241,7 @@
         });
     </script>
     @endif
+
 
     @yield('scripts')
 

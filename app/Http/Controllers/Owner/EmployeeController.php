@@ -39,7 +39,7 @@ class EmployeeController extends Controller
         $emailExist = DB::table("users")->where("email", "=", $request->email)->count();
 
         if ($emailExist >= 1) {
-            return back()->with('error', trans("User already registered!"))->withInput();
+            return back()->with('error', trans("Employee already registered!"))->withInput();
         } else {
             $user = User::create([
                 'first_name' => $request->first_name,
@@ -50,7 +50,7 @@ class EmployeeController extends Controller
 
             $user->attachRole($request->role_id);
 
-            return redirect('owner/employee')->with('success', trans("User registered successfully!"));
+            return redirect('owner/employee')->with('success', trans("Employee registered successfully!"));
         }
     }
 
@@ -60,57 +60,18 @@ class EmployeeController extends Controller
         $userEmail = Auth::user()->email;
 
         $userData = DB::table("users")->select("users.id","users.email","users.phone","users.first_name","users.last_name","users.gender","users.civilstatus","users.division",
-        "users.district","users.thana","users.street","users.postal_code","image_url")->where("id", "=", $id)->first();
+        "users.district","users.thana","users.street","users.postal_code")->where("id", "=", $id)->first();
 
-        if ($userData->image_url == null) {
-            $image = "Untitled-2.png";
-        } else {
-            $image = $userData->image_url;
-        }
-
-        return view('owner.view.view_employee', compact('userData', 'image'))->with('message');
+        return view('owner.view.view_employee', compact('userData'));
 
         //return response()->json(['userData'=>$userData]);
-    }
-
-    public function upload_employee_image(Request $request)
-    {
-
-        //$imageName = $request->image;  
-
-        $image_url = DB::table("users")->select('phone')->where("id", "=", $request->id)->first();
-
-        $imageName = $image_url->phone . '.' . $request->image->getClientOriginalExtension();
-
-
-        if (file_exists(public_path('images/img/.$imageName'))) {
-
-            unlink(public_path('images/img/.$imageName'));
-
-            $request->image->move(public_path('images/img'), $imageName);
-        } else {
-
-            $request->image->move(public_path('images/img'), $imageName);
-        }
-
-        //$request->image->move(public_path('images/img'), $imageName);
-
-        /* Store $imageName name in DATABASE from HERE */
-
-        $affectedRow = DB::update("UPDATE users SET image_url = '$imageName' WHERE id= '$request->id'");
-
-        if ($affectedRow == 1) {
-            return redirect('owner/employee/' . $request->id)->with('success', trans("Profile Image Updated Successfully!"));
-        }
-
-        // return response()->json(['Response'=>$affectedRow]);
-
     }
 
     public function update_employee(Request $request)
     {
 
         $id = $request->id;
+        $email=$request->email;
         $phone = $request->phone;
 
         $first_name = $request->first_name;
@@ -124,16 +85,16 @@ class EmployeeController extends Controller
         $street = $request->street;
         $postal_code = $request->postal_code;
 
-        $affectedRow = DB::update("UPDATE users SET phone = '$phone', first_name = '$first_name',last_name = '$last_name', gender = '$gender', 
+        $affectedRow = DB::update("UPDATE users SET email='$email', phone = '$phone', first_name = '$first_name',last_name = '$last_name', gender = '$gender', 
         civilstatus = '$civilstatus',division = '$division', district = '$district', thana = '$thana', street = '$street', postal_code = '$postal_code' WHERE id= $id");
 
         //return response()->json(['contact_email' => $contact_email, 'phone' => $phone, 'altphone' => $altphone, 'first_name' => $first_name, 'last_name' => $last_name, 'gender' => $gender, 'civilstatus' => $civilstatus,'division' => $division, 'district' => $district, 'thana' => $thana, 'street' => $street, 'postal_code' => $postal_code,'pres_division' => $pres_division, 'pres_district' => $pres_district, 'pres_thana' => $pres_thana, 'pres_postal_code' => $pres_postal_code, 'pres_street' => $pres_street]);
 
 
         if ($affectedRow == 1) {
-            return redirect('owner/employee/' . $id)->with('success', trans("Operator Profile Updated Successfully!"));
+            return redirect('owner/employee/' . $id)->with('success', trans("Employee Profile Updated Successfully!"));
         } else {
-            return back()->with('error', trans("Profile is Already Updated!"));
+            return back()->with('error', trans("Employee Profile is Already Updated!"));
         }
     }
 
@@ -150,7 +111,7 @@ class EmployeeController extends Controller
 
             if ($affectedRowRole == 1) {
 
-                return redirect('owner/employee')->with('success', trans("Users Deleted successfully!"));
+                return redirect('owner/employee')->with('success', trans("Employee Deleted successfully!"));
             }
         }
     }

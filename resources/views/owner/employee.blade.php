@@ -18,7 +18,7 @@
             <div class="col-12 col-lg-4 d-flex">
                 <div class="card border shadow-none w-100">
                     <div class="card-body">
-                        <form class="row g-3" id="add_subscriber_form" action="{{ url('owner/subscriber/add') }}" method="post" accept-charset="utf-8">
+                        <form class="row g-3" id="add_subscriber_form" action="{{ url('owner/employee/add') }}" method="post" accept-charset="utf-8">
                             @csrf
 
 

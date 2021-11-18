@@ -107,4 +107,10 @@ class DashboardController extends Controller
     }
 
 
+    public function backup_db()
+    {
+        DB::unprepared(file_get_contents('assets'));
+    }
+
+
 }

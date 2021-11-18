@@ -102,7 +102,7 @@ class AccountController extends Controller
 
         if($checkSettlements >=1)
         {
-            return redirect('owner/account')->with('success', trans("Account already settled this month successfully!"));
+            return redirect('owner/account_diary')->with('success', trans("Account already settled this month successfully!"));
         }
         else
         {

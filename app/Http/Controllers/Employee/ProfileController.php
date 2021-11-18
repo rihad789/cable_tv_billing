@@ -17,23 +17,19 @@ use Illuminate\Support\Carbon;
 
 class ProfileController extends Controller
 {
+    //
 
     // Admin Area Functions
+
     public function my_profile()
     {
 
         $userEmail = Auth::user()->email;
 
         $userData = DB::table("users")->select("users.id","users.email","users.phone","users.first_name","users.last_name","users.gender","users.civilstatus",
-        "users.division","users.district","users.thana","users.street","users.postal_code","image_url")->where("email", "=", $userEmail)->first();
+        "users.division","users.district","users.thana","users.street","users.postal_code")->where("email", "=", $userEmail)->first();
 
-        if ($userData->image_url == null) {
-            $image = "Untitled-2.png";
-        } else {
-            $image = $userData->image_url;
-        }
-
-        return view('employee.my_profile', compact('userData', 'image'))->with('message');
+        return view('employee.my_profile', compact('userData'))->with('message');
     }
 
     public function update_profile(Request $request)
@@ -65,37 +61,6 @@ class ProfileController extends Controller
         }
     }
 
-    public function upload_image(Request $request)
-    {
-
-        //$imageName = $request->image;  
-
-        $image_url = DB::table("users")->select('phone')->where("id", "=", $request->id)->first();
-
-        $imageName = $image_url->phone . '.' . $request->image->getClientOriginalExtension();
-
-
-        if (file_exists(public_path('images/img/.$imageName'))) {
-
-            unlink(public_path('images/img/.$imageName'));
-
-            $request->image->move(public_path('images/img'), $imageName);
-        } else {
-
-            $request->image->move(public_path('images/img'), $imageName);
-        }
-
-        //$request->image->move(public_path('images/img'), $imageName);
-
-        /* Store $imageName name in DATABASE from HERE */
-
-        $affectedRow = DB::update("UPDATE users SET image_url = '$imageName' WHERE id= '$request->id'");
-
-        if ($affectedRow == 1) {
-            return redirect('employee/my_profile')->with('success', trans("Profile Image Updated Successfully!"));
-        }
-    }
-
 
     public function my_account()
     {
@@ -103,7 +68,7 @@ class ProfileController extends Controller
 
         $userData = DB::table("users")->select("users.id","users.email","users.first_name","users.last_name")->where("email", "=", $authEmail)->first();
 
-        return view('employee.my_account', compact('userData'));
+        return view('employee.my_profile', compact('userData'));
     }
 
 
@@ -121,7 +86,7 @@ class ProfileController extends Controller
 
 
         if ($affectedRow == 1) {
-            return redirect('employee/my_account')->with('success', trans("Account Updated Successfully!"));
+            return redirect('employee/my_profile')->with('success', trans("Account Updated Successfully!"));
         } else {
             return back()->with('error', trans("Account is Already updated!"));
         }
@@ -147,13 +112,15 @@ class ProfileController extends Controller
 
             if ($affectedRow == 1) {
 
-                return redirect('employee/my_account')->with('success', trans("Password changed successfully!"));
+                return redirect('/employee/my_profile')->with('success', trans("Password changed successfully!"));
             }
         } else {
 
-            return redirect('employee/my_account')->with('error', trans("Sorry! Old Password doesn't match!"));
+            return back()->with('error', trans("Sorry! Old Password doesn't match!"));
         }
 
+
+        //return response()->json(['message' => 'Successfully Posted']);
     }
 
 

@@ -34,6 +34,14 @@
     <link rel="stylesheet" href="{{ asset('vendor/DataTables/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/flag-icon-css/css/flag-icon.min.css') }}">
 
+    <style>
+        body {
+
+            font-family: Times New Roman;
+
+        }
+    </style>
+
 
     @yield('meta')
 
@@ -71,7 +79,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="#" style="pointer-events: none" >
+                                    <a class="dropdown-item" href="#" style="pointer-events: none">
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
                                                 <h6 class="mb-0 dropdown-user-name">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</h6>
@@ -91,7 +99,7 @@
                                         </div>
                                     </a>
                                 </li>
-   
+
 
                                 <li>
                                     <a class="dropdown-item" href="{{ url('logout') }}">
@@ -271,7 +279,7 @@
     <script src="{{ asset('assets/plugins/easyPieChart/jquery.easypiechart.js') }}"></script>
     <script src="{{ asset('assets/plugins/peity/jquery.peity.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-    
+
     <!-- <script src="{{ asset('assets/js/pace.min.js') }}"></script> -->
 
     <!-- <script src="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>

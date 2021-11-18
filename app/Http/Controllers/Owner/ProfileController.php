@@ -68,7 +68,7 @@ class ProfileController extends Controller
 
         $userData = DB::table("users")->select("users.id","users.email","users.first_name","users.last_name")->where("email", "=", $authEmail)->first();
 
-        return view('owner.my_account', compact('userData'));
+        return view('owner.my_profile', compact('userData'));
     }
 
 
@@ -86,7 +86,7 @@ class ProfileController extends Controller
 
 
         if ($affectedRow == 1) {
-            return redirect('owner/my_account')->with('success', trans("Account Updated Successfully!"));
+            return redirect('owner/my_profile')->with('success', trans("Account Updated Successfully!"));
         } else {
             return back()->with('error', trans("Account is Already updated!"));
         }
@@ -112,11 +112,11 @@ class ProfileController extends Controller
 
             if ($affectedRow == 1) {
 
-                return redirect('/owner/my_account')->with('success', trans("Password changed successfully!"));
+                return redirect('/owner/my_profile')->with('success', trans("Password changed successfully!"));
             }
         } else {
 
-            return redirect('/owner/my_account')->with('error', trans("Sorry! Old Password doesn't match!"));
+            return back()->with('error', trans("Sorry! Old Password doesn't match!"));
         }
 
 

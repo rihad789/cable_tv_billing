@@ -177,12 +177,12 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Old Password</label>
-                                <input id="old_password" class="form-control" type="password" value="@if(Session::has('old_password')){{Session::get('old_password')}}@endif" name="old_password" required />
+                                <input id="old_password" class="form-control" type="password" value="{{ old('old_password') }}" name="old_password" required />
                         </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">New Password</label>
-                                <input id="new_password" class="form-control" type="password" value="@if(Session::has('new_password')){{Session::get('new_password')}}@endif" name="new_password" required/>
+                                <input id="new_password" class="form-control" type="password" value="{{ old('new_password') }}" name="new_password" required/>
                        </div>
 
 
