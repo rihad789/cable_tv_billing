@@ -19,14 +19,7 @@
 
                 <div class="box-content">
 
-                    <p class="lead">&nbsp;&nbsp;MEMO DETAILS
-                        <button onclick="printDiv('printableArea')" class="ui btn btn-primary mini offsettop5 btn-add float-right"><i class="print icon"></i>{{ __("Print") }}</button>
-                        <button onclick="history.back()" class="ui btn btn-secondary mini offsettop5 float-right"><i class="arrow left icon"></i>{{ __("Go Back") }}</button>
-                    
-                    </p>
-                    <hr>
-
-                    <table width="100%" class="table" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
                                 @isset($memoData)
@@ -45,7 +38,7 @@
 
                     </table>
 
-                    <table width="100%" class="table" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
+                    <table width="100%" class="table table-striped table-bordered" id="dataTables-example" data-order='[[ 0, "asc" ]]'>
                         <thead class="thead-light">
                             <tr>
 
@@ -106,6 +99,7 @@
 
 @section('scripts')
 <script type="text/javascript">
+    
     $('#dataTables-example').DataTable({
         responsive: true,
         pageLength: 10,

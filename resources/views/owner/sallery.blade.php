@@ -142,7 +142,24 @@
 <script>
     $(document).ready(function() {
 
+        $('#dataTables-example').DataTable({
+        responsive: true,
+        pageLength: 10,
+        ordering: false,
+        lengthChange: true,
+        dom: 'Blfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5',
+        ],
 
+        lengthMenu: [
+            [10, 25, 50, -1],
+            ['10 rows', '25 rows', '50 rows', 'Show all']
+        ]
+    });
 
 
         $("#area").change(function() {

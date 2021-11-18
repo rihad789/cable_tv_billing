@@ -66,8 +66,8 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('owner/billing', 'App\Http\Controllers\Owner\BillingController@index');
     Route::post('owner/billing', 'App\Http\Controllers\Owner\BillingController@filter_billing');
     Route::get('owner/billing/generate', 'App\Http\Controllers\Owner\BillingController@generate_bills');
-    Route::get('owner/billing/collect_bill/{id}/{client_id}', 'App\Http\Controllers\Owner\BillingController@collect_bill');
-    Route::get('owner/billing/collect_bills/{client_id}', 'App\Http\Controllers\Owner\BillingController@collect_bills');
+    Route::post('owner/billing/collect_bills', 'App\Http\Controllers\Owner\BillingController@collect_bills');
+    Route::get('owner/billing/bill_collection', 'App\Http\Controllers\Owner\BillingController@billcollection');
     Route::post('owner/billing/update', 'App\Http\Controllers\Owner\BillingController@update_bills');
 
 
@@ -89,7 +89,6 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     //Profile Route
     Route::get('owner/my_profile', 'App\Http\Controllers\Owner\ProfileController@my_profile');
     Route::post('owner/my_profile/update_profile', 'App\Http\Controllers\Owner\ProfileController@update_profile');
-    Route::post('owner/my_profile/upload_image', 'App\Http\Controllers\Owner\ProfileController@upload_image');
 
     Route::get('owner/my_account', 'App\Http\Controllers\Owner\ProfileController@my_account');
     Route::post('owner/my_account/update', 'App\Http\Controllers\Owner\ProfileController@update_account');

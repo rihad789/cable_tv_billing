@@ -98,6 +98,65 @@
                 <div class="card border shadow-none w-100">
                     <div class="card-body">
 
+                        <form class="row g-3" id="add_subscriber_form" action="{{ url('owner/billing/collect_bills') }}" method="post" accept-charset="utf-8">
+
+                        @csrf
+                            <div class="row g-3">
+
+                                <div class="col-md-12">
+
+                                    <label class="form-label">Collected By</label>
+                                    <select id="collected_by" class="form-select" name="collected_by" required>
+                                        <option selected disabled value="">Select Collected By</option>
+                                        @isset($userData)
+                                        @foreach ($userData as $val)
+                                        <option value='{{ $val->first_name }} , {{ $val->last_name }}'>{{ $val->first_name }} , {{ $val->last_name }}</option>
+                                        @endforeach
+                                        @endisset
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-12">
+                                    <!-- Card user Count Data -->
+                                    <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Due Months</th>
+                                                <th>Due Total</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @isset($billingData)
+                                                <td>{{ $due_month }} Months</td>
+                                                <td> {{ $due_bills }} Taka </td>
+                                                @if($due_month==0)
+                                                <td class="text-info">No due bills</td>
+                                                @else
+                                                <td>
+                                                    <input type="text" name="client_id" id="client_id" value="@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset" readonly hidden>
+                                                    <button class="btn btn-mini text-primary" onclick="return confirm('You are about to collect {{ $due_bills }} Taka from @isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset.Would you like to continue?')"><i class="icon plus"></i>Collect Bills</button>
+                                                </td>
+                                                @endif
+                                                @endisset
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+
+                        
                         <div class="row g-3">
 
                             <div class="table-responsive">
@@ -150,61 +209,17 @@
                                             <td>{{ $val->bill_amount }}</td>
 
                                             @if($val->billing_status=="1")
-
                                             <td class="text-primary">Paid</td>
-
                                             @elseif($val->billing_status=="0")
-
-                                            <td class="bg-danger">
-                                                <a class="text-white" href="{{ url('owner/billing/collect_bill/'.$val->id.'/'.$subscriberData->client_id) }}" onclick="return confirm('You are about to collect {{ $val->bill_amount }} Taka from {{ $val->client_name }}.Would you like to continue?')"><i class="icon plus"></i>Collect</a>
-                                            </td>
-
+                                            <td class="bg-danger text-white">Due</td>
                                         </tr>
 
                                         @endif
-
                                         @endforeach
                                         @endisset
+
                                     </tbody>
 
-                                </table>
-                            </div>
-
-                        </div>
-
-                        <div class="row g-3" style="margin-top: 20px;">
-
-                            <div class="col-md-12">
-                                <!-- Card user Count Data -->
-                                <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th>{{ __("Due Months") }}</th>
-                                            <th>{{ __("Due Total") }}</th>
-                                            <th>{{ __("Action") }}</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            @isset($billingData)
-                                            <td>{{ $due_month }} Months</td>
-                                            <td> {{ $due_bills }} Taka </td>
-
-                                            @if($due_month==0)
-                                            <td class="text-info">No due bills</td>
-                                            @else
-
-                                            <td>
-                                                <a class="text-primary" href="{{ url('owner/billing/collect_bills/'.$subscriberData->client_id) }}" onclick="return confirm('You are about to collect {{ $due_bills }} Taka from @isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset.Would you like to continue?')"><i class="icon plus"></i>Collect All</a>
-                                            </td>
-
-                                            @endif
-
-                                            @endisset
-
-                                        </tr>
-                                    </tbody>
                                 </table>
                             </div>
 
@@ -230,6 +245,8 @@
 @section('scripts')
 
 <script>
+    $(document).ready(function() {
+
     function search_subscriber() {
 
         var client_id = $('#client_id').val();

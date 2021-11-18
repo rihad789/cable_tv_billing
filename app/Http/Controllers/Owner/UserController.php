@@ -73,39 +73,6 @@ class UserController extends Controller
         //return response()->json(['userData'=>$userData]);
     }
 
-    public function upload_image(Request $request)
-    {
-
-        //$imageName = $request->image;  
-
-        $image_url = DB::table("users")->select('phone')->where("id", "=", $request->id)->first();
-
-        $imageName = $image_url->phone . '.' . $request->image->getClientOriginalExtension();
-
-
-        if (file_exists(public_path('images/img/.$imageName'))) {
-
-            unlink(public_path('images/img/.$imageName'));
-
-            $request->image->move(public_path('images/img'), $imageName);
-        } else {
-
-            $request->image->move(public_path('images/img'), $imageName);
-        }
-
-        //$request->image->move(public_path('images/img'), $imageName);
-
-        /* Store $imageName name in DATABASE from HERE */
-
-        $affectedRow = DB::update("UPDATE users SET image_url = '$imageName' WHERE id= '$request->id'");
-
-        if ($affectedRow == 1) {
-            return redirect('owner/users/view/' . $request->id)->with('success', trans("Profile Image Updated Successfully!"));
-        }
-
-        // return response()->json(['Response'=>$affectedRow]);
-
-    }
 
     public function update_users(Request $request)
     {
@@ -202,38 +169,6 @@ class UserController extends Controller
             return back()->with('error', trans("Owner profile is already updated!"));
         }
     }
-
-    public function owner_upload_image(Request $request)
-    {
-
-        //$imageName = $request->image;  
-
-        $image_url = DB::table("users")->select('phone')->where("id", "=", $request->id)->first();
-
-        $imageName = $image_url->phone . '.' . $request->image->getClientOriginalExtension();
-
-
-        if (file_exists(public_path('images/img/.$imageName'))) {
-
-            unlink(public_path('images/img/.$imageName'));
-
-            $request->image->move(public_path('images/img'), $imageName);
-        } else {
-
-            $request->image->move(public_path('images/img'), $imageName);
-        }
-
-        //$request->image->move(public_path('images/img'), $imageName);
-
-        /* Store $imageName name in DATABASE from HERE */
-
-        $affectedRow = DB::update("UPDATE users SET image_url = '$imageName' WHERE id= '$request->id'");
-
-        if ($affectedRow == 1) {
-            return redirect('owner/my_profile')->with('success', trans("Profile Image Updated Successfully!"));
-        }
-    }
-
 
     public function my_account()
     {

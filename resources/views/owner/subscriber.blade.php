@@ -162,9 +162,6 @@
 <script>
     $(document).ready(function() {
 
-
-        
-
         $("#area").change(function() {
 
             var area = $(this).val();

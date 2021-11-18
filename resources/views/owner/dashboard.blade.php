@@ -33,8 +33,8 @@
                                                                         <thead class="thead-light">
                                                                                 <tr>
                                                                                         <th>Total Subs.</th>
-                                                                                        <th>Connection This Year</th>
-                                                                                        <th>Connection This Month</th>
+                                                                                        <th>Conn. This Year</th>
+                                                                                        <th>Conn. This Month</th>
                                                                                         <th>New Connection</th>
                                                                                 </tr>
                                                                         </thead>

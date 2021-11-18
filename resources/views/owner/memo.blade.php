@@ -21,51 +21,51 @@
 
                         <div class="row g-3">
 
-                        <div class="table-responsive">
-
-                        
-                        <table class="table table-striped table-bordered"  id="example2" style="width:100%">
-
-<thead class="thead-light">
-<tr>
-
-    <th>{{ __("Serial") }}</th>
-    <th>{{ __("Memo No") }}</th>
-    <th>{{ __("Buyer Name") }}</th>
-    <th>{{ __("Total Product") }}</th>
-    <th>{{ __("Total Value") }}</th>
-    <th>{{ __("Date") }}</th>
-    <th>Action</th>
-
-</tr>
-</thead>
-
-<tbody>
-@php($serial=1)
-@isset($memoData)
-@foreach ($memoData as $val)
-<tr>
-    <td>{{ $serial++}}</td>
-    <td>{{ $val->memo_no }}</td>
-    <td>{{ $val->first_name }} , {{ $val->last_name }}</td>
-    <td>{{ $val->products_total }} </td>
-    <td>{{ $val->grand_amount }} ৳</td>
-    <td>{{ $val->creation_date }} </td>
+                            <div class="table-responsive">
 
 
-    <td class="align-right">
-        <a href="{{ url('/owner/memo/'.$val->memo_no) }}" class="text-primary" title="Views"><i class="bi bi-eye-fill"></i></a>
-    </td>
+                                <table class="table table-striped table-bordered" id="example2" style="width:100%">
 
-</tr>
-@endforeach
-@endisset
-</tbody>
+                                    <thead class="thead-light">
+                                        <tr>
 
-</table>
+                                            <th>{{ __("Serial") }}</th>
+                                            <th>{{ __("Memo No") }}</th>
+                                            <th>{{ __("Buyer Name") }}</th>
+                                            <th>{{ __("Total Product") }}</th>
+                                            <th>{{ __("Total Value") }}</th>
+                                            <th>{{ __("Date") }}</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @php($serial=1)
+                                        @isset($memoData)
+                                        @foreach ($memoData as $val)
+                                        <tr>
+                                            <td>{{ $serial++}}</td>
+                                            <td>{{ $val->memo_no }}</td>
+                                            <td>{{ $val->first_name }} , {{ $val->last_name }}</td>
+                                            <td>{{ $val->products_total }} </td>
+                                            <td>{{ $val->grand_amount }} ৳</td>
+                                            <td>{{ $val->creation_date }} </td>
 
 
-                        </div>
+                                            <td class="align-right">
+                                                <a href="{{ url('/owner/memo/'.$val->memo_no) }}" class="text-primary" title="Views"><i class="bi bi-eye-fill"></i></a>
+                                            </td>
+
+                                        </tr>
+                                        @endforeach
+                                        @endisset
+                                    </tbody>
+
+                                </table>
+
+
+                            </div>
 
 
                         </div>

@@ -73,7 +73,6 @@
                                 <li>
                                     <a class="dropdown-item" href="#" style="pointer-events: none" >
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset('assets/images/avatars/avatar-1.png') }}" alt="" class="rounded-circle" width="60" height="60">
                                             <div class="ms-3">
                                                 <h6 class="mb-0 dropdown-user-name">@isset(Auth::user()->first_name){{ Auth::user()->first_name }}@endisset</h6>
                                                 <small class="mb-0 dropdown-user-designation text-secondary">Owner</small>
@@ -88,22 +87,12 @@
                                     <a class="dropdown-item" href="{{ url('owner/my_profile') }}">
                                         <div class="d-flex align-items-center">
                                             <div class="setting-icon"><i class="bi bi-person-fill"></i></div>
-                                            <div class="setting-text ms-3"><span>Profile</span></div>
+                                            <div class="setting-text ms-3"><span>My Account</span></div>
                                         </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ url('owner/my_account') }}">
-                                        <div class="d-flex align-items-center">
-                                            <div class="setting-icon"><i class="bi bi-gear-fill"></i></div>
-                                            <div class="setting-text ms-3"><span>Setting</span></div>
-                                        </div>
-                                    </a>
-                                </li>
+   
 
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ url('logout') }}">
                                         <div class="d-flex align-items-center">
@@ -167,11 +156,17 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('owner/billing') }}">
+                    <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-cash-stack"></i>
                         </div>
                         <div class="menu-title">Billings</div>
                     </a>
+                    <ul>
+                        <li> <a href="{{ url('owner/billing') }}"><i class="bi bi-currency-dollar"></i>Bill Process</a>
+                        </li>
+                        <li> <a href="{{ url('owner/billing/bill_collection') }}"><i class="bi bi-list-check"></i>Bill Collection</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li>
@@ -288,7 +283,7 @@
     <script src="{{ asset('assets/js/table-datatable.js') }}"></script>
     <!--app-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('assets/js/index.js') }}"></script>
+
 
 
     <script src="{{ asset('vendor/jquery/jquery.validate.min.js') }}"></script>

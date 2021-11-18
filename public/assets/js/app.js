@@ -10,7 +10,6 @@ $(function() {
     })
 
 
-
     $(".nav-toggle-icon").on("click", function() {
 		$(".wrapper").toggleClass("toggled")
 	})
@@ -113,8 +112,6 @@ $(function() {
 	})
 
 
-	new PerfectScrollbar(".header-message-list")
-    new PerfectScrollbar(".header-notifications-list")
 
 
 

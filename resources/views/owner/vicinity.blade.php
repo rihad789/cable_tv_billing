@@ -73,7 +73,6 @@
                                             <div class="d-flex align-items-center gap-3 fs-6">
                                                 <a href="{{ url('owner/vicinity/delete/'.$val->id) }}" onclick="return confirm('Are you sure,you want to delete vicintiy?')" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
                                             </div>
-
                                         </td>
                                     </tr>
                                     @endforeach
@@ -89,46 +88,5 @@
         <!--end row-->
     </div>
 </div>
-
-@endsection
-
-@section('scripts')
-
-<script>
-    $(document).ready(function() {
-
-        $('#add_area_form').form({
-            fields: {
-                area_name: {
-                    identifier: 'area_name',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Area name required ।'
-                    }]
-                }
-            }
-        });
-
-        $('#add_vicinity_form').form({
-            fields: {
-                area_id: {
-                    identifier: 'area_id',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Please select area name ।'
-                    }]
-                },
-                vicinity_name: {
-                    identifier: 'vicinity_name',
-                    rules: [{
-                        type: 'empty',
-                        prompt: 'Vicinity name required ।'
-                    }]
-                }
-            }
-        });
-
-    });
-</script>
 
 @endsection

@@ -27,15 +27,9 @@ class ProfileController extends Controller
         $userEmail = Auth::user()->email;
 
         $userData = DB::table("users")->select("users.id","users.email","users.phone","users.first_name","users.last_name","users.gender","users.civilstatus",
-        "users.division","users.district","users.thana","users.street","users.postal_code","image_url")->where("email", "=", $userEmail)->first();
+        "users.division","users.district","users.thana","users.street","users.postal_code")->where("email", "=", $userEmail)->first();
 
-        if ($userData->image_url == null) {
-            $image = "Untitled-2.png";
-        } else {
-            $image = $userData->image_url;
-        }
-
-        return view('owner.my_profile', compact('userData', 'image'))->with('message');
+        return view('owner.my_profile', compact('userData'))->with('message');
     }
 
     public function update_profile(Request $request)
@@ -64,37 +58,6 @@ class ProfileController extends Controller
             return redirect('owner/my_profile')->with('success', trans("Owner profile updated successfully!"));
         } else {
             return back()->with('error', trans("Owner profile is already updated!"));
-        }
-    }
-
-    public function upload_image(Request $request)
-    {
-
-        //$imageName = $request->image;  
-
-        $image_url = DB::table("users")->select('phone')->where("id", "=", $request->id)->first();
-
-        $imageName = $image_url->phone . '.' . $request->image->getClientOriginalExtension();
-
-
-        if (file_exists(public_path('images/img/.$imageName'))) {
-
-            unlink(public_path('images/img/.$imageName'));
-
-            $request->image->move(public_path('images/img'), $imageName);
-        } else {
-
-            $request->image->move(public_path('images/img'), $imageName);
-        }
-
-        //$request->image->move(public_path('images/img'), $imageName);
-
-        /* Store $imageName name in DATABASE from HERE */
-
-        $affectedRow = DB::update("UPDATE users SET image_url = '$imageName' WHERE id= '$request->id'");
-
-        if ($affectedRow == 1) {
-            return redirect('owner/my_profile')->with('success', trans("Profile Image Updated Successfully!"));
         }
     }
 

@@ -45,10 +45,15 @@ class SubscriberController extends Controller
             $due_month=$due_month+1;
         }
 
-        $billingData = DB::table("billings")->where("client_id", "=", $id)->orderBy("billing_status","asc")->get();
+        // $billingData = DB::table("billings")->where("client_id", "=", $id)->orderBy("billing_status","asc")->get();
+
+        $billingData = DB::table("billings")->where('client_id','=',$id)->where('billing_status','=',false)->get();
+
+
+        $userData = DB::table("users")->select('id','first_name','last_name')->get();
                 
     
-        return view('owner.search_bill',compact('id','due_month','due_bills','subscriberData','billingData','dueBilldata'));
+        return view('owner.search_bill',compact('id','due_month','due_bills','subscriberData','userData','billingData','dueBilldata'));
 
     }
 

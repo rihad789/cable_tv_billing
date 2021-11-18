@@ -20,6 +20,7 @@
                 <div class="card border shadow-none w-100">
                     <div class="card-body">
                         <div class="table-responsive">
+                            
                             <table id="example2" class="table table-striped table-bordered" style="width:100%">
 
                             <thead class="thead-light">
@@ -103,3 +104,4 @@
 <!--fgijafaf-->
 
 @endsection
+
