@@ -49,22 +49,25 @@
                                     </tr>
                                     @endforeach
 
+
                                     <tr class="bg-secondary text-white">
+                                       <td>{{ $serial++}}</td>
                                         <td> Memo No</td>
                                         <td> Buyer Name</td>
                                         <td> Total</td>
-                                        <td> Grand Total</td>
                                         <td> Buying Date</td>
                                     </tr>
 
                                     <tr>
+                                        
+                                        <td>{{ $serial++}}</td> 
                                         <td> @isset($memoProducts->memo_no){{ $memoProducts->memo_no }}@endisset</td>
                                         <td> @isset($memoProducts->first_name){{ $memoProducts->first_name }}@endisset , @isset($memoProducts->last_name){{ $memoProducts->last_name }}@endisset</td>
                                         <td> @isset($memoProducts->products_total){{ $memoProducts->products_total }}@endisset</td>
-                                        <td> @isset($memoProducts->grand_amount){{ $memoProducts->grand_amount }}@endisset Taka</td>
                                         <td> @isset($memoProducts->creation_date){{ $memoProducts->creation_date }}@endisset</td>
+
                                     </tr>
-                                    
+
                                     @endisset
                                 </tbody>
                             </table>
