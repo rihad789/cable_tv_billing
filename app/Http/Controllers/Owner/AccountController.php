@@ -100,6 +100,15 @@ class AccountController extends Controller
 
         $checkSettlements = DB::table("settlements")->where('settled_month','=',$month)->where('settled_year','=',$year)->count();
 
+        $checkColletors=DB::table('collectors')->where('is_settled',false)->count();
+
+        if($checkColletors>0)
+        {
+            return redirect('owner/account_diary')->with('success', trans("Please Collect all Collection first"));
+        }
+        else
+        {
+
         if($checkSettlements >=1)
         {
             return redirect('owner/account_diary')->with('success', trans("Account already settled this month successfully!"));
@@ -137,6 +146,8 @@ class AccountController extends Controller
          return redirect('owner/account_diary')->with('success', trans("Account settled successfully!"));
 
         }
+
+    }
 
     }
 

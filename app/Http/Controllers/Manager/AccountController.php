@@ -100,44 +100,54 @@ class AccountController extends Controller
 
         $checkSettlements = DB::table("settlements")->where('settled_month','=',$month)->where('settled_year','=',$year)->count();
 
-        if($checkSettlements >=1)
+        $checkColletors=DB::table('collectors')->where('is_settled',false)->count();
+
+        if($checkColletors>0)
         {
-            return redirect('manager/account_diary')->with('success', trans("Account already settled this month successfully!"));
+            return redirect('manager/account_diary')->with('success', trans("Please Collect all Collection first"));
         }
         else
         {
 
-         $sallery_paid=$request->sallery_paid;
-         $locked_fund =$request->locked_fund;
-         $bill_paid =$request->bill_paid;
-         $grand_total=$request->grand_total;
-         $balance_paid=$request->payable_balance;
-      
-         $settleBills = Billings::where('billing_status', true)->delete();
-        
-         $settleSallery=DB::table('salleries')->where('payment_status','=',true)->update(['is_settled'=>true]);
-
-         $settleMemo=DB::table('memos')->where('is_settled','=',false)->update(['is_settled'=>true]);
- 
-         $settleSubscriber=DB::table('subscribers')->where('is_settled','=',false)->update(['is_settled'=>true]);
- 
-         $subscriber = Settlements::create([
-
-             'sallery_paid' => $sallery_paid,
-             'locked_fund' => $locked_fund,
-             'collected_bills' => $bill_paid,
-             'cost_in_service' => $grand_total,
-             'balance_paid' => $balance_paid,
-             'settled_month'=> $month,
-             'settled_year'=> $year
-
-         ]);
- 
- 
-         return redirect('manager/account_diary')->with('success', trans("Account settled successfully!"));
+            if($checkSettlements >=1)
+            {
+                return redirect('manager/account_diary')->with('success', trans("Account already settled this month successfully!"));
+            }
+            else
+            {
+    
+             $sallery_paid=$request->sallery_paid;
+             $locked_fund =$request->locked_fund;
+             $bill_paid =$request->bill_paid;
+             $grand_total=$request->grand_total;
+             $balance_paid=$request->payable_balance;
+          
+             $settleBills = Billings::where('billing_status', true)->delete();
+            
+             $settleSallery=DB::table('salleries')->where('payment_status','=',true)->update(['is_settled'=>true]);
+    
+             $settleMemo=DB::table('memos')->where('is_settled','=',false)->update(['is_settled'=>true]);
+     
+             $settleSubscriber=DB::table('subscribers')->where('is_settled','=',false)->update(['is_settled'=>true]);
+     
+             $subscriber = Settlements::create([
+    
+                 'sallery_paid' => $sallery_paid,
+                 'locked_fund' => $locked_fund,
+                 'collected_bills' => $bill_paid,
+                 'cost_in_service' => $grand_total,
+                 'balance_paid' => $balance_paid,
+                 'settled_month'=> $month,
+                 'settled_year'=> $year
+    
+             ]);
+     
+     
+             return redirect('manager/account_diary')->with('success', trans("Account settled successfully!"));
+    
+            }
 
         }
-
 
     }
 
