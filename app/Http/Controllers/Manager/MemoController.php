@@ -34,8 +34,7 @@ class MemoController extends Controller
     public function add_memo_op(Request $request)
     {
         //
-        $dt = Carbon::now();
-        $creation_date=$dt->toFormattedDateString();
+        $creation_date=Carbon::tomorrow()->format('l m-d-Y');
 
         $check_memo_no = DB::table("memos")->where("memos.memo_no", "=", $request->memo_no)->count();
 
@@ -45,18 +44,10 @@ class MemoController extends Controller
         }
         else
         {
-            $memo=Memo::create([
-
-                'memo_no' => $request->memo_no,
-                'buyer_id' => $request->buyer_id,
-                'products_total' => $request->products_total,
-                'grand_amount' => $request->grand_amount,
-                'creation_date' => $creation_date,
-    
-            ]);
+            $grand_amount = 0;
+            $products_total = 0;
 
             foreach ( $request->title as $index => $id ) {
-
                 $account = MemoDetails::create([
                     'title' => $request->title[$index],
                     'quantity' => $request->quantity[$index],
@@ -64,8 +55,17 @@ class MemoController extends Controller
                     'total_amount' => $request->total_amount[$index],
                     'memo_no' => $request->memo_no
                 ]);
-                
+
+                $products_total=$products_total+$request->quantity[$index];
+                $grand_amount=$grand_amount+$request->total_amount[$index];  
              }
+             $memo=Memo::create([
+                'memo_no' => $request->memo_no,
+                'buyer_id' => $request->buyer_id,
+                'products_total' => $products_total,
+                'grand_amount' => $grand_amount,
+                'creation_date' => $creation_date,
+            ]);
         }
 
 
