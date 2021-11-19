@@ -22,7 +22,9 @@
                                                 <div class="row g-3">
 
                                                         <div class="col-md-6">
-                                                                <!-- Card user Count Data -->
+
+                                                        <div class="table-responsive">
+                                                                                                                           <!-- Card user Count Data -->
                                                                 <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                                                                         <thead class="thead-light">
                                                                                 <tr>
@@ -40,9 +42,12 @@
                                                                         </tbody>
                                                                 </table>
                                                         </div>
+     
+                                                        </div>
 
                                                         <div class="col-md-6">
                                                                 <!-- Card user Count Data -->
+                                                                
 
                                                                 <div class="table-responsive">
 
@@ -139,7 +144,7 @@
                                                                         <div class="card-body">
                                                                                 <div class="table-responsive">
                                                                                         <!-- Card user Count Data -->
-                                                                                        <table id="dataTables-example" width="100%"  class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
+                                                                                        <table id="example2" width="100%"  class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                                                                                                 <thead class="thead-light">
                                                                                                         <tr>
                                                                                                                 <th>{{ __("Collector") }}</th>

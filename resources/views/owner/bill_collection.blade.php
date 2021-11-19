@@ -18,12 +18,11 @@
                         <div class="col-12 col-lg-12 d-flex">
                                 <div class="card border shadow-none w-100">
                                         <div class="card-body">
-
                                                 <div class="row g-3">
-
                                                         <div class="col-md-6">
                                                                 <!-- Card user Count Data -->
-                                                                <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
+                                                                <div class="table-responsive">
+                                                                      <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                                                                         <thead class="thead-light">
                                                                                 <tr>
                                                                                         <th>{{ __("This Month Total") }}</th>
@@ -39,6 +38,8 @@
                                                                                 </tr>
                                                                         </tbody>
                                                                 </table>
+                                                                </div>
+   
                                                         </div>
 
                                                         <div class="col-md-6">
@@ -139,7 +140,7 @@
                                                                         <div class="card-body">
                                                                                 <div class="table-responsive">
                                                                                         <!-- Card user Count Data -->
-                                                                                        <table id="dataTables-example" width="100%"  class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
+                                                                                        <table id="example" width="100%"  class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                                                                                                 <thead class="thead-light">
                                                                                                         <tr>
                                                                                                                 <th>{{ __("Collector") }}</th>
@@ -192,28 +193,3 @@
 @endsection
 
 
-@section('scripts')
-
-
-<script>
-    $(document).ready(function() {
-
-        $('#dataTables-example').DataTable({
-            responsive: true,
-            pageLength: 10,
-            ordering: false,
-            lengthChange: true,
-            dom: 'Blfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'pdfHtml5'
-
-            ]
-        });
-    });
-
-
-</script>
-
-@endsection
