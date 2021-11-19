@@ -110,7 +110,7 @@
                                         <option selected disabled value="">Select Collected By</option>
                                         @isset($userData)
                                         @foreach ($userData as $val)
-                                        <option value='{{ $val->first_name }} , {{ $val->last_name }}'>{{ $val->first_name }} , {{ $val->last_name }}</option>
+                                        <option value='{{ $val->id }}'>{{ $val->first_name }} , {{ $val->last_name }}</option>
                                         @endforeach
                                         @endisset
                                     </select>
@@ -141,6 +141,7 @@
                                                 @else
                                                 <td>
                                                     <input type="text" name="client_id" id="client_id" value="@isset($subscriberData->client_id){{ $subscriberData->client_id }}@endisset" readonly hidden>
+                                                    <input type="text" name="due_bills" id="due_bills" value="{{ $due_bills }}" readonly hidden>
                                                     <button class="btn btn-mini text-primary" onclick="return confirm('You are about to collect {{ $due_bills }} Taka from @isset($subscriberData->client_name){{ $subscriberData->client_name }}@endisset.Would you like to continue?')"><i class="icon plus"></i>Collect Bills</button>
                                                 </td>
                                                 @endif

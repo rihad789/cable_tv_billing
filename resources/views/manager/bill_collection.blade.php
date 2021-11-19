@@ -26,16 +26,16 @@
                                                                 <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                                                                         <thead class="thead-light">
                                                                                 <tr>
-                                                                                        <th>{{ __("Bill Total") }}</th>
-                                                                                        <th>{{ __("Bill Paid ") }}</th>
-                                                                                        <th>{{ __("Bill Due") }}</th>
+                                                                                        <th>{{ __("This Month Total") }}</th>
+                                                                                        <th>{{ __("This Month Due") }}</th>
+                                                                                        <th>{{ __("Todays Collection") }}</th>
                                                                                 </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                                 <tr>
-                                                                                        <td>{{ $total_bill }} Taka </td>
-                                                                                        <td>{{ $paid_bills }} Taka</td>
-                                                                                        <td>{{ $due_bill }} Taka</td>
+                                                                                        <td> {{ $total_this_month }} Taka </td>
+                                                                                        <td>{{ $due_this_month }} Taka</td>
+                                                                                        <td>{{ $paid_today }} Taka</td>
                                                                                 </tr>
                                                                         </tbody>
                                                                 </table>
@@ -46,36 +46,37 @@
 
                                                                 <div class="table-responsive">
 
+                                                                        <!-- Card user Count Data -->
                                                                         <table width="100%" class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
                                                                                 <thead class="thead-light">
                                                                                         <tr>
-                                                                                                <th>{{ __("This Month Total") }}</th>
-                                                                                                <th>{{ __("This Month Due") }}</th>
-                                                                                                <th>{{ __("Todays Collection") }}</th>
+                                                                                                <th>{{ __("Bill Total") }}</th>
+                                                                                                <th>{{ __("Bill Paid ") }}</th>
+                                                                                                <th>{{ __("Bill Due") }}</th>
                                                                                         </tr>
                                                                                 </thead>
                                                                                 <tbody>
                                                                                         <tr>
-                                                                                                <td> {{ $total_this_month }} Taka </td>
-                                                                                                <td>{{ $due_this_month }} Taka</td>
-                                                                                                <td>{{ $paid_today }} Taka</td>
+                                                                                                <td>{{ $total_bill }} Taka </td>
+                                                                                                <td>{{ $paid_bills }} Taka</td>
+                                                                                                <td>{{ $due_bill }} Taka</td>
                                                                                         </tr>
                                                                                 </tbody>
                                                                         </table>
+
                                                                 </div>
                                                         </div>
 
                                                 </div>
 
                                                 <div class="row g-3">
-                                                        <div class="col-12 col-lg-12 d-flex">
+                                                        <div class="col-12 col-lg-7 d-flex">
                                                                 <div class="card border shadow-none w-100">
                                                                         <div class="card-body">
                                                                                 <div class="table-responsive">
                                                                                         <table id="example2" class="table table-striped table-bordered" style="width:100%">
                                                                                                 <thead class="table-light">
                                                                                                         <tr>
-                                                                                                                <th>Serial</th>
                                                                                                                 <th>Card No</th>
                                                                                                                 <th>Client Name</th>
                                                                                                                 <th>Bill Month</th>
@@ -87,11 +88,9 @@
                                                                                                 </thead>
                                                                                                 <tbody>
 
-                                                                                                        @php($serial=1)
                                                                                                         @isset($billingData)
                                                                                                         @foreach ($billingData as $val)
                                                                                                         <tr>
-                                                                                                                <td>{{ $serial++}}</td>
                                                                                                                 <td>{{ $val->client_id}}</td>
                                                                                                                 <td>{{ $val->client_name}}</td>
                                                                                                                 @if($val->bill_month=="1")
@@ -134,6 +133,51 @@
                                                                 </div>
                                                         </div>
 
+
+                                                        <div class="col-12 col-lg-5 d-flex">
+                                                                <div class="card border shadow-none w-100">
+                                                                        <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                        <!-- Card user Count Data -->
+                                                                                        <table id="dataTables-example" width="100%"  class="table table-striped table-bordered" data-order='[[ 0, "asc" ]]'>
+                                                                                                <thead class="thead-light">
+                                                                                                        <tr>
+                                                                                                                <th>{{ __("Collector") }}</th>
+                                                                                                                <th>{{ __("Amount") }} </th>
+                                                                                                                <th>{{ __("Date") }}</th>
+                                                                                                                <th>{{ __("Actions") }} </th>
+                                                                                                        </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+
+                                                                                                        @php($serial=1)
+                                                                                                        @isset($collectors)
+                                                                                                        @foreach ($collectors as $val)
+                                                                                                        <tr>
+                                                                                                                <td>{{ $val->first_name}} , {{ $val->last_name}}</td>
+                                                                                                                <td>{{ $val->amount}} Taka</td>
+                                                                                                                <td>{{ $val->day}}</td>
+
+                                                                                                                @if( $val->is_settled==false)
+                                                                                                                <td><a href="{{ url('/manager/billing/collect_collection/'.$val->id) }}" onclick="return confirm('You are about to receive {{ $val->amount}} Taka from  {{ $val->first_name}} , {{ $val->last_name}} . Collection day: {{ $val->day}} ')" class="ui circular basic icon button tiny" class="text-primary">Collect Bills</a></td>
+                                                                                                                @else
+                                                                                                                <td>Collected</td>
+                                                                                                                @endif
+                                                                                                        </tr>
+                                                                                                        @endforeach
+                                                                                                        @endisset
+
+                                                                                                </tbody>
+                                                                                        </table>
+
+                                                                                </div>
+
+                                                                        </div>
+                                                                </div>
+
+
+                                                        </div>
+
                                                 </div>
                                         </div>
                                 </div>
@@ -145,8 +189,31 @@
 
 <!--fiuhfoiafj -->
 
+@endsection
 
 
-<!--fgijafaf-->
+@section('scripts')
+
+
+<script>
+    $(document).ready(function() {
+
+        $('#dataTables-example').DataTable({
+            responsive: true,
+            pageLength: 10,
+            ordering: false,
+            lengthChange: true,
+            dom: 'Blfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'pdfHtml5'
+
+            ]
+        });
+    });
+
+
+</script>
 
 @endsection

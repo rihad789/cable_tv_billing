@@ -107,7 +107,6 @@ class AccountController extends Controller
         else
         {
 
-            
          $sallery_paid=$request->sallery_paid;
          $locked_fund =$request->locked_fund;
          $bill_paid =$request->bill_paid;
@@ -138,7 +137,6 @@ class AccountController extends Controller
          return redirect('owner/account_diary')->with('success', trans("Account settled successfully!"));
 
         }
-
 
     }
 

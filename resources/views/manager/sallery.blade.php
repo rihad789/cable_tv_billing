@@ -105,7 +105,7 @@
 
                                         @if($val->payment_status=="1")
                                         <td class="align-right">
-                                            <a onclick="window.alert('Sallery Already settled')" class="ui circular basic icon button tiny">Paid</a>
+                                            <a onclick="window.alert('Sallery Already settled')" class="text-secondary">Paid</a>
                                         </td>
                                         @elseif($val->payment_status=="0")
                                         <td class="align-right">

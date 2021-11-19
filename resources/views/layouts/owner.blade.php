@@ -141,6 +141,40 @@
                         <div class="menu-title">Dashboard</div>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ url('owner/subscriber/search') }}">
+                        <div class="parent-icon"><i class="bi bi-search"></i>
+                        </div>
+                        <div class="menu-title">Search Bills</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('owner/billing/bill_collection') }}">
+                        <div class="parent-icon"><i <i class="bi bi-list-check"></i></i>
+                        </div>
+                        <div class="menu-title">Bill Collection</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('owner/billing') }}">
+                        <div class="parent-icon"><i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <div class="menu-title">Bill Process</div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{{ url('owner/employee-sallery') }}">
+                        <div class="parent-icon"><i class="bi bi-cash-coin"></i>
+                        </div>
+                        <div class="menu-title">Sallery</div>
+                    </a>
+                </li>
+
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bi bi-star"></i>
@@ -160,36 +194,6 @@
                         <div class="parent-icon"><i class="bi bi-people-fill"></i>
                         </div>
                         <div class="menu-title">Subscriber</div>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bi bi-cash-stack"></i>
-                        </div>
-                        <div class="menu-title">Billings</div>
-                    </a>
-                    <ul>
-                        <li> <a href="{{ url('owner/billing') }}"><i class="bi bi-currency-dollar"></i>Bill Process</a>
-                        </li>
-                        <li> <a href="{{ url('owner/billing/bill_collection') }}"><i class="bi bi-list-check"></i>Bill Collection</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="{{ url('owner/subscriber/search') }}">
-                        <div class="parent-icon"><i class="bi bi-search"></i>
-                        </div>
-                        <div class="menu-title">Search Bills</div>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('owner/employee-sallery') }}">
-                        <div class="parent-icon"><i class="bi bi-cash-coin"></i>
-                        </div>
-                        <div class="menu-title">Sallery</div>
                     </a>
                 </li>
 

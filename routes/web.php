@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'role:owner']], function () {
     Route::get('owner/billing/generate', 'App\Http\Controllers\Owner\BillingController@generate_bills');
     Route::post('owner/billing/collect_bills', 'App\Http\Controllers\Owner\BillingController@collect_bills');
     Route::get('owner/billing/bill_collection', 'App\Http\Controllers\Owner\BillingController@billcollection');
-    Route::post('owner/billing/update', 'App\Http\Controllers\Owner\BillingController@update_bills');
+    Route::get('owner/billing/collect_collection/{id}', 'App\Http\Controllers\Owner\BillingController@collect_collection');
 
     //Memo Routes
     Route::get('owner/memo', 'App\Http\Controllers\Owner\MemoController@index');
@@ -135,7 +135,7 @@ Route::group(['middleware' => ['auth', 'role:manager']], function () {
     Route::get('manager/billing/generate', 'App\Http\Controllers\Manager\BillingController@generate_bills');
     Route::post('manager/billing/collect_bills', 'App\Http\Controllers\Manager\BillingController@collect_bills');
     Route::get('manager/billing/bill_collection', 'App\Http\Controllers\Manager\BillingController@billcollection');
-    Route::post('manager/billing/update', 'App\Http\Controllers\Manager\BillingController@update_bills');
+    Route::get('manager/billing/collect_collection/{id}', 'App\Http\Controllers\Manager\BillingController@collect_collection');
 
     //Memo Routes
     Route::get('manager/memo', 'App\Http\Controllers\Manager\MemoController@index');
