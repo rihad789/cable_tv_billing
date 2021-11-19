@@ -194,7 +194,7 @@ class BillingController extends Controller
             {
                 $CollectorID = Collector::create([
                     'user_id' => $collected_by,
-                    'Amount' => $due_bills,
+                    'amount' => $due_bills,
                     'is_settled' => false,
                     'day' => Carbon::tomorrow()->format('l m-d-Y')
                 ]);

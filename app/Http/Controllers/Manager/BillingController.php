@@ -6,6 +6,7 @@ use App\Models\billing;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Billings;
+use App\Models\Collector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -195,13 +196,38 @@ class BillingController extends Controller
     public function collect_bills(Request $request)
     {
 
-        $collected_by=$request->collected_by;
-        $client_id=$request->client_id;
+        $collected_by = $request->collected_by;
+        $client_id = $request->client_id;
+        $due_bills=$request->due_bills;
 
         $timestamp = Carbon::now()->toDateString();
 
-        $affectedRow = DB::table('billings')->where('client_id', $client_id)->where('billing_status',false)
-                                            ->update(['billing_status' => true, "billing_date" => $timestamp, "collected_by" => $collected_by]);
+        $affectedRow = DB::table('billings')->where('client_id', $client_id)->where('billing_status', false)
+            ->update(['billing_status' => true, "billing_date" => $timestamp, "collected_by" => $collected_by]);
+
+       $day=Carbon::tomorrow()->format('l m-d-Y');
+
+        if ($affectedRow >= 1) {
+
+            $countColl=DB::table('collectors')->where('user_id',$collected_by)->where('day', 'like', $day. '%')->count();
+
+            if($countColl ==1)
+            {
+                $getAmount=DB::table('collectors')->select('amount')->where('user_id',$collected_by)->where('day', 'like', $day . '%')->first();
+                $ediTamount=$getAmount->amount + $due_bills;
+                $updateColl=DB::table('collectors')->where('user_id',$collected_by)->where('day', 'like', $day . '%')->update(['amount'=>$ediTamount]);
+            }
+            else
+            {
+                $CollectorID = Collector::create([
+                    'user_id' => $collected_by,
+                    'amount' => $due_bills,
+                    'is_settled' => false,
+                    'day' => Carbon::tomorrow()->format('l m-d-Y')
+                ]);
+            }
+
+        }
 
         return redirect('manager/subscriber/search/'.$client_id)->with('success', trans("Bills Collected Successfully"));
     }
