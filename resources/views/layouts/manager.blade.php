@@ -241,15 +241,7 @@
         <main class="page-content">
 
             <div class="col">
-
-                <div class="card-body">
-
                     @yield('content')
-
-                </div>
-
-            </div>
-
         </main>
         <!--end page main-->
 
