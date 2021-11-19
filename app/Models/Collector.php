@@ -14,7 +14,7 @@ class Collector extends Model
     protected $fillable = [
     
         'user_id',
-        'Amount',
+        'amount',
         'is_settled',
         'day'
     ];
