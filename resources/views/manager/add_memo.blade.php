@@ -77,19 +77,6 @@
 
                             </div>
 
-                            
-                            <div class="row g-3">
-
-                                <div class="col-md-6">
-                                <input name="products_total" class="form-control text-right" id="products_total" placeholder="Total Product" required readonly>
-                                </div>
-
-                                <div class="col-md-6">
-                                <input name="grand_amount" class="form-control text-right" id="grand_amount" placeholder="Grand Total" required readonly>
-                                </div>
-
-                            </div>
-
                             <div class="row g-3">
 
                                 <div class="col-md-12">                                 
