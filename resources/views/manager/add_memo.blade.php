@@ -80,7 +80,6 @@
                             <div class="row g-3">
 
                                 <div class="col-md-12">                                 
-                                        <button type="button" onclick="getValues()" class="btn btn-info">Calculate Total</button>   
                                         <button type="submit" class="btn btn-primary">Add Memo</button>                                 
                                 </div>
 
