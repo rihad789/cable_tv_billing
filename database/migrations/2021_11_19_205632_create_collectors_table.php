@@ -15,7 +15,7 @@ class CreateCollectorsTable extends Migration
     {
         Schema::create('collectors', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->double('amount')->default(0);
             $table->boolean('is_settled')->default(false);
             $table->string('day');
