@@ -81,6 +81,7 @@ class MemoController extends Controller
 
         $memoProducts=DB::table("memos")->Join("users", function($join){$join->on("users.id", "=", "memos.buyer_id");})
         ->select("memos.id", "memos.memo_no", "memos.products_total", "memos.grand_amount", "memos.creation_date", "users.first_name", "users.last_name")
+        ->where('memos.memo_no',$id)
         ->first();
         
         

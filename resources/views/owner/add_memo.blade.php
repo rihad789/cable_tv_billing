@@ -2,7 +2,7 @@
 
 @section('meta')
 
-<title>Subscriber | {{ $website_name }}</title>
+<title>Add Memo | {{ $website_name }}</title>
 
 <meta name="description" content="Metro Bangla Operator">
 @endsection
@@ -11,7 +11,7 @@
 
 <div class="card">
     <div class="card-header py-3">
-        <h6 class="mb-0">Add Subscriber</h6>
+        <h6 class="mb-0">Add Memo</h6>
     </div>
     <div class="card-body">
         <div class="row">
