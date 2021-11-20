@@ -78,7 +78,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6 text-end">
-                                                <a href="javascript:;">Forgot Password?</a>
+                                            <a href="{{ url('/forgot-password') }}"><i class="bi bi-check2-circle"></i>Forgot Password?</a>
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
@@ -108,7 +108,7 @@
     <!--end wrapper-->
 
     <!-- Bootstrap bundle JS -->
-    <script src="assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
     <!--plugins-->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
