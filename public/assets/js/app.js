@@ -112,7 +112,8 @@ $(function() {
 	})
 
 
-
-
+	$('#dataTables').DataTable({responsive: true,pageLength: 10,ordering: false,lengthChange: true,dom: 'Blfrtip',
+		buttons: ['copyHtml5','excelHtml5','pdfHtml5','print']
+	});
 
 });

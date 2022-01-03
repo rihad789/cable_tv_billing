@@ -12,7 +12,9 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "santigarcor/laratrust": "^6.3",
-        "spatie/laravel-backup": "^7.7"
+        "spatie/laravel-backup": "^7.7",
+        "spatie/laravel-permission": "^5.4",
+        "symfony/swiftmailer-bundle": "^3.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

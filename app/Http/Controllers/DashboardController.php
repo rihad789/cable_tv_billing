@@ -18,15 +18,15 @@ class DashboardController extends Controller
 
         if (Auth::user()->hasRole('owner')) {
             
-            return redirect('owner');
+            return redirect('dashboard');
         }
         else if (Auth::user()->hasRole('manager')) {
             
-            return redirect('manager');
+            return redirect('dashboard');
         }
         elseif (Auth::user()->hasRole('employee')) {
             
-            return redirect('employee');
+            return redirect('subscriber/search');
         }
     }
 }
